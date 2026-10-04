@@ -1,0 +1,15 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your gift card · {{ shop.name }}</title>{{ 'pilo.css' | asset_url | stylesheet_tag }}</head>
+<body>
+  <section class="sec sec--light banner"><div class="wrap banner__inner">
+    <span class="wordmark">{{ shop.name }}</span>
+    <h1 class="sec__h">{{ gift_card.initial_value | money }} gift card</h1>
+    <p>Code: <strong>{{ gift_card.code | format_code }}</strong></p>
+    {%- if gift_card.expired -%}<p>This gift card has expired.</p>{%- endif -%}
+    <p>Balance: {{ gift_card.balance | money }}</p>
+    <a class="btn btn--accent" href="{{ shop.url }}">Shop now</a>
+  </div></section>
+</body>
+</html>

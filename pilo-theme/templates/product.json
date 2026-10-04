@@ -1,0 +1,267 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "sticky_bar": true,
+        "sticky_label": "Order now"
+      },
+      "blocks": {
+        "b1": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Orthopedic contour pillow"
+          }
+        },
+        "b2": {
+          "type": "title",
+          "settings": {
+            "title": "",
+            "subtitle": "Cervical-support memory foam pillow for neck pain relief"
+          }
+        },
+        "b3": {
+          "type": "price",
+          "settings": {
+            "note": "Free delivery across Lebanon · Pay on delivery"
+          }
+        },
+        "b4": {
+          "type": "text",
+          "settings": {
+            "use_description": false,
+            "text": "<p>Pilo is engineered to keep your neck and spine in neutral alignment while you sleep. Its contoured, high-density memory foam supports the natural curve of your cervical spine and doesn't flatten overnight. Wake up aligned, not aching.</p>"
+          }
+        },
+        "b5": {
+          "type": "benefits",
+          "settings": {
+            "items": "Cervical alignment | contour supports the neck's natural curve for back and side sleepers\nWon't bottom out | high-density foam keeps its shape all night\nCooling cover | breathable fabric for humid Lebanese summers\nRemovable & washable | OEKO-TEX® certified cover"
+          }
+        },
+        "b6": {
+          "type": "buy",
+          "settings": {}
+        },
+        "b7": {
+          "type": "trust",
+          "settings": {}
+        },
+        "b8": {
+          "type": "specs",
+          "settings": {
+            "heading": "Technical specifications",
+            "rows": "Foam|High-density adaptive (viscoelastic) memory foam, pure white\nProfile|Dual-height ergonomic contour\nCover|Cooling-tech fabric, OEKO-TEX® certified\nCover design|Black top with white side panels\nCover care|Removable, machine-washable (cold, gentle)\nFoam care|Spot clean only. Do not wash\nAdjustment period|3–7 nights is typical",
+            "open": false
+          }
+        },
+        "b9": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Which side should I use?",
+            "content": "<p><strong>Side sleepers:</strong> higher contour. <strong>Back sleepers:</strong> lower contour. Not sure? Start with the lower side and switch if your head tilts down toward the mattress.</p>"
+          }
+        },
+        "b10": {
+          "type": "accordion",
+          "settings": {
+            "heading": "The 3–7 night adjustment period",
+            "content": "<p>Ergonomic pillows hold your neck in a position it may not be used to. Mild awareness in the neck muscles for the first few nights is normal. Most people settle in within a week.</p>"
+          }
+        },
+        "b11": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Delivery & Cash on Delivery",
+            "content": "<p>Free delivery to all of Lebanon. Beirut & Mount Lebanon: usually 1–2 business days; other regions: 2–4. Pay cash or Whish Money on delivery. We confirm every order on WhatsApp before dispatch.</p>"
+          }
+        },
+        "b12": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Care instructions",
+            "content": "<p>Machine-wash the cover cold on a gentle cycle and air dry. Never wash the foam; spot clean only. Air the pillow for 24–48h after unboxing.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12"
+      ]
+    },
+    "biomechanics": {
+      "type": "pilo-biomechanics",
+      "settings": {}
+    },
+    "layers": {
+      "type": "pilo-layers",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "layer",
+          "settings": {
+            "title": "Cooling-tech cover",
+            "text": "Breathable, removable, machine-washable. OEKO-TEX® certified."
+          }
+        },
+        "b2": {
+          "type": "layer",
+          "settings": {
+            "title": "High-density adaptive memory foam",
+            "text": "Pure white foam that contours, then holds."
+          }
+        },
+        "b3": {
+          "type": "layer",
+          "settings": {
+            "title": "Dual-height contour",
+            "text": "Two heights for side and back sleepers."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "reviews": {
+      "type": "pilo-reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "pilo-faq",
+      "settings": {},
+      "blocks": {
+        "b1": {
+          "type": "group",
+          "settings": {
+            "title": "The pillow"
+          }
+        },
+        "b2": {
+          "type": "question",
+          "settings": {
+            "question": "Is it normal for Pilo to feel firm or strange at first?",
+            "answer": "<p>Yes. Your neck has adapted to years of unsupported sleep. Most people need <strong>3–7 nights</strong> to adjust to an ergonomic pillow, and you may notice your neck muscles as they adapt to a neutral position. Give it at least a week; that's why every Pilo comes with a 30-night trial.</p>"
+          }
+        },
+        "b3": {
+          "type": "question",
+          "settings": {
+            "question": "Which side of the pillow should I use?",
+            "answer": "<p><strong>Side sleepers:</strong> use the higher side. It fills the gap between your shoulder and ear.<br><strong>Back sleepers:</strong> use the lower side. Your chin shouldn't tilt toward your chest, and your head shouldn't tip back.</p>"
+          }
+        },
+        "b4": {
+          "type": "question",
+          "settings": {
+            "question": "Will Pilo fix my neck pain?",
+            "answer": "<p>Pilo is designed to support healthy cervical alignment while you sleep, which many people find reduces morning stiffness. It is not a medical device or treatment. If you have persistent or severe pain, please consult a doctor or physiotherapist.</p>"
+          }
+        },
+        "b5": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a smell when I open it?",
+            "answer": "<p>New memory foam can have a light, harmless “new” scent for 24–48 hours. Remove the packaging and let it air in a ventilated room.</p>"
+          }
+        },
+        "b6": {
+          "type": "question",
+          "settings": {
+            "question": "Will it make me hot?",
+            "answer": "<p>The cover uses a breathable cooling fabric, made with Lebanon's humid summers in mind.</p>"
+          }
+        },
+        "b7": {
+          "type": "group",
+          "settings": {
+            "title": "Care"
+          }
+        },
+        "b8": {
+          "type": "question",
+          "settings": {
+            "question": "How do I wash it?",
+            "answer": "<p>Unzip and machine-wash the <strong>cover only</strong> on a cold (30°C max), gentle cycle, then air dry. Do <strong>not</strong> wash or soak the foam. Spot-clean it with a damp cloth and keep it away from direct sun and heaters.</p>"
+          }
+        },
+        "b9": {
+          "type": "group",
+          "settings": {
+            "title": "Delivery & payment in Lebanon"
+          }
+        },
+        "b10": {
+          "type": "question",
+          "settings": {
+            "question": "Do you deliver everywhere in Lebanon?",
+            "answer": "<p>Yes, we deliver to every governorate. Beirut and Mount Lebanon orders usually arrive in 1–2 business days, other regions in 2–4 business days.</p>"
+          }
+        },
+        "b11": {
+          "type": "question",
+          "settings": {
+            "question": "How does Cash on Delivery work?",
+            "answer": "<p>Place your order online and pay the courier in cash when Pilo arrives. No card needed.</p>"
+          }
+        },
+        "b12": {
+          "type": "question",
+          "settings": {
+            "question": "Can I pay with Whish Money?",
+            "answer": "<p>Yes. Choose Whish Money at checkout and we'll send you the payment details on WhatsApp.</p>"
+          }
+        },
+        "b13": {
+          "type": "question",
+          "settings": {
+            "question": "Will you contact me before delivery?",
+            "answer": "<p>Yes. We confirm every order on WhatsApp or by phone before dispatch, and the courier calls before arriving.</p>"
+          }
+        },
+        "b14": {
+          "type": "question",
+          "settings": {
+            "question": "What if Pilo isn't right for me?",
+            "answer": "<p>Contact us within 30 nights of delivery and we'll arrange a pickup for a refund or exchange. See our refund policy for the full conditions.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "biomechanics",
+    "layers",
+    "reviews",
+    "faq"
+  ]
+}

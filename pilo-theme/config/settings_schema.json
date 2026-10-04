@@ -1,0 +1,32 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Pilo Clinical",
+    "theme_version": "1.0.0",
+    "theme_author": "Pilo",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/"
+  },
+  {
+    "name": "Colours",
+    "settings": [
+      { "type": "color", "id": "color_ink", "label": "Ink (dark)", "default": "#0E0E0E" },
+      { "type": "color", "id": "color_paper", "label": "Paper (light)", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_accent", "label": "Accent", "default": "#2BB3A3" },
+      { "type": "color", "id": "color_accent_ink", "label": "Text on accent", "default": "#04221F" },
+      { "type": "color", "id": "color_alert", "label": "Alert (bad posture)", "default": "#E5484D" },
+      { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 14 }
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "settings": [
+      { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number", "info": "International format, e.g. +961 70 123 456. Leave blank to hide the chat button." },
+      { "type": "text", "id": "whatsapp_message", "label": "Pre-filled message", "default": "Hi Pilo! I have a question about the pillow." }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [{ "type": "image_picker", "id": "favicon", "label": "Favicon image" }]
+  }
+]
