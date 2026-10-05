@@ -1,10 +1,37 @@
 <footer class="ftr">
   <div class="wrap ftr__grid">
     <div class="ftr__brand">
-      <span class="wordmark">{{ section.settings.wordmark | default: shop.name }}</span>
+      <a href="{{ routes.root_url }}" class="ftr__logo" aria-label="{{ shop.name }} home">
+        {%- if section.settings.logo != blank -%}
+          {%- if section.settings.logo_white -%}{%- assign logo_class = 'ftr__logo-img is-white' -%}{%- else -%}{%- assign logo_class = 'ftr__logo-img' -%}{%- endif -%}
+          {{ section.settings.logo | image_url: width: 480 | image_tag: width: section.settings.logo_width, loading: 'lazy', alt: shop.name, class: logo_class }}
+        {%- elsif section.settings.wordmark != blank -%}
+          <span class="wordmark">{{ section.settings.wordmark }}</span>
+        {%- endif -%}
+      </a>
       {%- if section.settings.tagline != blank -%}<p>{{ section.settings.tagline }}</p>{%- endif -%}
-      {%- if settings.whatsapp_number != blank -%}
-        <a class="ftr__wa" href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener">{% render 'icon', icon: 'whatsapp' %} {{ settings.whatsapp_number }}</a>
+
+      {%- liquid
+        assign has_social = false
+        if section.settings.instagram != blank or section.settings.facebook != blank or section.settings.tiktok != blank
+          assign has_social = true
+        endif
+      -%}
+      {%- if has_social or settings.whatsapp_number != blank -%}
+        <ul class="social" role="list">
+          {%- if section.settings.instagram != blank -%}
+            <li><a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="{{ shop.name }} on Instagram">{% render 'icon', icon: 'instagram' %}</a></li>
+          {%- endif -%}
+          {%- if section.settings.facebook != blank -%}
+            <li><a href="{{ section.settings.facebook }}" target="_blank" rel="noopener" aria-label="{{ shop.name }} on Facebook">{% render 'icon', icon: 'facebook' %}</a></li>
+          {%- endif -%}
+          {%- if section.settings.tiktok != blank -%}
+            <li><a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener" aria-label="{{ shop.name }} on TikTok">{% render 'icon', icon: 'tiktok' %}</a></li>
+          {%- endif -%}
+          {%- if settings.whatsapp_number != blank and section.settings.show_whatsapp -%}
+            <li><a href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener" aria-label="Chat with {{ shop.name }} on WhatsApp">{% render 'icon', icon: 'whatsapp' %}</a></li>
+          {%- endif -%}
+        </ul>
       {%- endif -%}
     </div>
     {%- if section.settings.menu != blank -%}
@@ -29,6 +56,9 @@
         {%- assign pays = section.settings.pay_methods | split: ',' -%}
         {%- for p in pays -%}<li>{{ p | strip }}</li>{%- endfor -%}
       </ul>
+      {%- if settings.whatsapp_number != blank -%}
+        <a class="ftr__wa" href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener">{% render 'icon', icon: 'whatsapp' %} {{ settings.whatsapp_number }}</a>
+      {%- endif -%}
     </div>
   </div>
   <div class="wrap ftr__base">
@@ -41,8 +71,18 @@
   "name": "Footer",
   "class": "section-footer",
   "settings": [
-    { "type": "text", "id": "wordmark", "label": "Text logo", "default": "PILO" },
-    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Orthopedic contour sleep, engineered in detail. Made for Lebanon." },
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo image" },
+    { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 10, "unit": "px", "default": 120 },
+    { "type": "checkbox", "id": "logo_white", "label": "Show logo in white", "default": true, "info": "Turns a dark logo white so it stands out on the dark footer. Untick if your logo is already light or you want its original colours." },
+    { "type": "text", "id": "wordmark", "label": "Text logo (used if no image)" },
+    { "type": "text", "id": "tagline", "label": "Tagline" },
+    { "type": "header", "content": "Social media" },
+    { "type": "url", "id": "instagram", "label": "Instagram link", "info": "e.g. https://instagram.com/yourpage" },
+    { "type": "url", "id": "facebook", "label": "Facebook link", "info": "e.g. https://facebook.com/yourpage" },
+    { "type": "url", "id": "tiktok", "label": "TikTok link" },
+    { "type": "checkbox", "id": "show_whatsapp", "label": "Show WhatsApp icon", "default": true, "info": "Uses the number in Theme settings → WhatsApp." },
+    { "type": "header", "content": "Menus & payment" },
     { "type": "link_list", "id": "menu", "label": "Menu 1", "default": "footer" },
     { "type": "link_list", "id": "menu_2", "label": "Menu 2" },
     { "type": "text", "id": "pay_heading", "label": "Payment heading", "default": "Pay your way" },

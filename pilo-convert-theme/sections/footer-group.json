@@ -5,8 +5,20 @@
     "footer": {
       "type": "footer",
       "settings": {
+        "logo": "shopify://shop_images/Copy_of_logo-01.png",
+        "logo_width": 120,
+        "logo_white": true,
+        "wordmark": "",
+        "tagline": "",
+        "instagram": "",
+        "facebook": "",
+        "tiktok": "",
+        "show_whatsapp": true,
         "menu": "footer",
-        "tagline": "Orthopedic support for necks that work 9 to 5. Made for Lebanon."
+        "menu_2": "",
+        "pay_heading": "Pay your way",
+        "pay_methods": "Cash on Delivery, Whish Money",
+        "disclaimer": "Pilo is a sleep-support product, not a medical device or treatment. For persistent or severe pain, consult a doctor or physiotherapist."
       }
     }
   },

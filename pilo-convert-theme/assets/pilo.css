@@ -367,3 +367,13 @@ h1,h2,h3,.wordmark{font-family:"Space Grotesk",Manrope,system-ui,sans-serif;font
 .vid__media video{width:100%;aspect-ratio:9/16;object-fit:cover}
 .vid__ph{aspect-ratio:9/16;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);border:2px dashed var(--line);border-radius:var(--radius)}
 .home-buy .pdp{border-bottom:1px solid var(--line)}
+
+/* Footer logo & social */
+.ftr__logo{display:inline-flex;text-decoration:none;opacity:1}
+.ftr__logo-img{height:auto;max-width:100%}
+.ftr__logo-img.is-white{filter:brightness(0) invert(1)}
+.social{display:flex!important;flex-wrap:wrap;gap:10px!important;margin-top:20px!important}
+.social a{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.28);color:var(--c-paper);opacity:1;transition:background .2s,color .2s,border-color .2s}
+.social a:hover{background:var(--c-accent);border-color:var(--c-accent);color:var(--c-accent-ink)}
+.social .icon{width:20px;height:20px}
+.ftr__pay .ftr__wa{margin-top:16px}

@@ -5,7 +5,8 @@
       "settings": {
         "gallery_badge": "30-night trial",
         "sticky_bar": true,
-        "sticky_label": "Order now"
+        "sticky_label": "Order now",
+        "product": ""
       },
       "blocks": {
         "b1": {
@@ -256,10 +257,42 @@
     "reviews": {
       "type": "pilo-reviews",
       "settings": {
-        "eyebrow": "Reviews",
-        "heading": "Desk workers, reporting back.",
+        "eyebrow": "",
+        "heading": "Reviews",
         "empty_text": "We've just launched. Sleep on it for 30 nights, then tell us how your mornings feel."
-      }
+      },
+      "blocks": {
+        "judge_me_reviews_review_snippet_widget_VgXVUz": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "reviews_selection": "product",
+            "products": [
+              "pilo-1-0"
+            ],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "min_star_rating": "inherit",
+            "show_review_media": true,
+            "max_reviews": 5,
+            "review_length": "medium",
+            "text_size": "medium",
+            "max_width": 1100,
+            "max_image_size": "small",
+            "arrows_visibility": "always_shown",
+            "transition_speed": 5,
+            "corner_styling": "inherit",
+            "text_color": "",
+            "card_color": "",
+            "stars_color": "",
+            "arrows_color": "",
+            "arrows_background_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_snippet_widget_VgXVUz"
+      ]
     },
     "faq": {
       "type": "pilo-faq",
@@ -355,13 +388,6 @@
             "question": "Will you contact me before delivery?",
             "answer": "<p>Yes. We confirm every order on WhatsApp or by phone before dispatch, and the courier calls before arriving.</p>"
           }
-        },
-        "b14": {
-          "type": "question",
-          "settings": {
-            "question": "What if Pilo isn't right for me?",
-            "answer": "<p>Contact us within 30 nights of delivery and we'll arrange a pickup for a refund or exchange. See our refund policy for the full conditions.</p>"
-          }
         }
       },
       "block_order": [
@@ -377,8 +403,7 @@
         "b10",
         "b11",
         "b12",
-        "b13",
-        "b14"
+        "b13"
       ]
     }
   },
