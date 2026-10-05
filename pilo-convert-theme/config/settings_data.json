@@ -1,5 +1,26 @@
 {
-  "current": "Default",
+  "current": {
+    "color_ink": "#0E0E0E",
+    "color_paper": "#FFFFFF",
+    "color_accent": "#2BB3A3",
+    "color_accent_ink": "#04221F",
+    "color_alert": "#C2413A",
+    "radius": 14,
+    "whatsapp_number": "+961 78 953 771",
+    "whatsapp_message": "",
+    "color_soft": "#F3F4F3",
+    "color_detail": "#0F6B60",
+    "color_detail_dark": "#2BB3A3",
+    "favicon": "shopify://shop_images/Untitled_design_1.png",
+    "content_for_index": [],
+    "blocks": {
+      "7924418359578431505": {
+        "type": "shopify://apps/seoant-ai-seo/blocks/seoant-core/8e57283b-dcb0-4f7b-a947-fb5c57a0d59d",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
   "presets": {
     "Default": {
       "color_ink": "#0E0E0E",

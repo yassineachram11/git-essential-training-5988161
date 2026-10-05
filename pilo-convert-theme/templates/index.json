@@ -4,7 +4,7 @@
       "type": "main-product",
       "settings": {
         "product": "pilo-1-0",
-        "gallery_badge": "30-night trial",
+        "gallery_badge": "",
         "sticky_bar": true,
         "sticky_label": "Order now"
       },
@@ -47,7 +47,7 @@
             "whatsapp_label": "Order on WhatsApp",
             "whatsapp_message": "Hi Pilo! I'd like to order the [pack]. My name and address are:",
             "add_label": "or add to cart",
-            "reassure": "Pay cash or Whish on delivery | 30-night trial | Free delivery"
+            "reassure": "Pay Wish or cash on delivery  | Free delivery"
           }
         },
         "b6": {
@@ -77,8 +77,8 @@
         "b9": {
           "type": "accordion",
           "settings": {
-            "heading": "Delivery, payment & trial",
-            "content": "<p>Free delivery to all of Lebanon. Beirut &amp; Mount Lebanon usually 1–2 business days, other regions 2–4. Pay cash or Whish Money when it arrives. We confirm every order on WhatsApp first. Not right for you after 30 nights? We'll pick it up.</p>"
+            "heading": "Delivery, payment",
+            "content": "<p>Free delivery to all of Lebanon. Beirut & Mount Lebanon usually 1–2 business days, other regions 2–4. Pay Whish Money or cash when it arrives.&nbsp;</p>"
           }
         },
         "b10": {
@@ -264,7 +264,8 @@
         "gap": 36,
         "collapse": 55,
         "show_numbers": true,
-        "art_position": "left"
+        "art_position": "left",
+        "text": ""
       },
       "blocks": {
         "layer1": {

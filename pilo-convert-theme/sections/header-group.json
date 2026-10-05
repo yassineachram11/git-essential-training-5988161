@@ -11,12 +11,6 @@
             "text": "🇱🇧 Free delivery across Lebanon · Cash on Delivery"
           }
         },
-        "m2": {
-          "type": "message",
-          "settings": {
-            "text": "30-night trial: if your neck doesn't love it, we'll pick it up"
-          }
-        },
         "m3": {
           "type": "message",
           "settings": {
@@ -26,7 +20,6 @@
       },
       "block_order": [
         "m1",
-        "m2",
         "m3"
       ]
     },
@@ -34,7 +27,11 @@
       "type": "header",
       "settings": {
         "product": "pilo-1-0",
-        "cta_label": "Order now"
+        "cta_label": "Order now",
+        "logo": "shopify://shop_images/Copy_of_logo-01.png",
+        "logo_width": 110,
+        "wordmark": "PILO",
+        "menu": ""
       }
     }
   },
