@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{% if request.locale.iso_code == 'ar' %}rtl{% else %}ltr{% endif %}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#0E0E0E">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {%- endif -%}
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+    {% render 'meta-tags' %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --c-ink: {{ settings.color_ink }};
+        --c-paper: {{ settings.color_paper }};
+        --c-accent: {{ settings.color_accent }};
+        --c-accent-ink: {{ settings.color_accent_ink }};
+        --c-alert: {{ settings.color_alert }};
+        --c-detail: {{ settings.color_detail }};
+        --c-detail-dark: {{ settings.color_detail_dark }};
+        --soft: {{ settings.color_soft }};
+        --radius: {{ settings.radius }}px;
+      }
+    </style>
+    {{ 'pilo.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'pilo.js' | asset_url }}" defer></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ template.name }}">
+    <a class="skip-link" href="#MainContent">Skip to content</a>
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {%- if settings.whatsapp_number != blank -%}
+      <a class="wa-float" href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}?text={{ settings.whatsapp_message | url_encode }}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+        {% render 'icon', icon: 'whatsapp' %}
+      </a>
+    {%- endif -%}
+  </body>
+</html>

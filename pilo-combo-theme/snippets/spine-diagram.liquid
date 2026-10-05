@@ -1,0 +1,36 @@
+{%- comment -%}
+  Side-sleeper alignment illustration.
+  Usage: {% render 'spine-diagram', state: 'bad' %} or state: 'good'
+{%- endcomment -%}
+{%- if state == 'good' -%}
+  {%- assign head_y = 105 -%}
+  {%- assign tone = 'var(--c-detail)' -%}
+{%- else -%}
+  {%- assign head_y = 124 -%}
+  {%- assign tone = 'var(--c-alert)' -%}
+{%- endif -%}
+<svg class="spine-svg" viewBox="0 0 320 180" role="img" aria-label="{% if state == 'good' %}Neck and spine held in a straight line on a contour pillow{% else %}Neck bending downward on a flat, collapsed pillow{% endif %}">
+  <rect x="0" y="150" width="320" height="30" rx="4" class="sd-mattress"/>
+  {%- if state == 'good' -%}
+    <path d="M52 150 V136 Q60 128 78 131 Q100 136 120 128 Q132 116 146 118 Q156 122 158 136 V150 Z" class="sd-pillow-cover"/>
+    <path d="M52 136 Q60 128 78 131 Q100 136 120 128 Q132 116 146 118 Q156 122 158 136" class="sd-pillow-edge"/>
+  {%- else -%}
+    <path d="M48 150 V145 Q100 141 160 145 V150 Z" class="sd-pillow-flat"/>
+  {%- endif -%}
+  <rect x="165" y="60" width="150" height="90" rx="40" class="sd-body"/>
+  <path d="M120 {{ head_y | minus: 12 }} L170 92 L170 118 L120 {{ head_y | plus: 12 }} Z" class="sd-body"/>
+  <circle cx="100" cy="{{ head_y }}" r="29" class="sd-body"/>
+  <line x1="60" y1="105" x2="310" y2="105" class="sd-ref"/>
+  <polyline points="300,105 255,105 210,105 175,105 {% if state == 'good' %}140,105 115,105{% else %}142,111 118,120{% endif %}" fill="none" stroke="{{ tone }}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  {%- for x in (0..5) -%}
+    {%- assign vx = x | times: 25 | plus: 180 -%}
+    <rect x="{{ vx | minus: 4 }}" y="99" width="8" height="12" rx="2" fill="{{ tone }}"/>
+  {%- endfor -%}
+  {%- if state == 'good' -%}
+    <rect x="137" y="99" width="8" height="12" rx="2" fill="{{ tone }}"/>
+    <rect x="152" y="99" width="8" height="12" rx="2" fill="{{ tone }}"/>
+  {%- else -%}
+    <rect x="138" y="104" width="8" height="12" rx="2" fill="{{ tone }}" transform="rotate(-18 142 110)"/>
+    <rect x="153" y="100" width="8" height="12" rx="2" fill="{{ tone }}" transform="rotate(-12 157 106)"/>
+  {%- endif -%}
+</svg>

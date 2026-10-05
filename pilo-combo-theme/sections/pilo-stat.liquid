@@ -1,0 +1,27 @@
+<section class="sec sec--{{ section.settings.scheme }}">
+  <div class="wrap stat">
+    <p class="stat__n">{{ section.settings.number }}{% if section.settings.unit != blank %}<small>{{ section.settings.unit }}</small>{% endif %}</p>
+    <div>
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="sec__h">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="sec__sub rte">{{ section.settings.text }}</div>{%- endif -%}
+      {%- if section.settings.source != blank -%}<p class="stat__src">{{ section.settings.source }}</p>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Big stat",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "dark", "options": [{ "value": "light", "label": "Light" }, { "value": "soft", "label": "Soft" }, { "value": "dark", "label": "Dark" }] },
+    { "type": "text", "id": "number", "label": "Number", "default": "27" },
+    { "type": "text", "id": "unit", "label": "Unit", "default": "kg" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "text", "id": "source", "label": "Source / footnote", "info": "Always cite where a number comes from." }
+  ],
+  "presets": [{ "name": "Big stat" }]
+}
+{% endschema %}

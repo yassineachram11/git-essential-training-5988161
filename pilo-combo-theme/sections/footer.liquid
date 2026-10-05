@@ -1,0 +1,53 @@
+<footer class="ftr">
+  <div class="wrap ftr__grid">
+    <div class="ftr__brand">
+      <span class="wordmark">{{ section.settings.wordmark | default: shop.name }}</span>
+      {%- if section.settings.tagline != blank -%}<p>{{ section.settings.tagline }}</p>{%- endif -%}
+      {%- if settings.whatsapp_number != blank -%}
+        <a class="ftr__wa" href="https://wa.me/{{ settings.whatsapp_number | remove: '+' | remove: ' ' }}" target="_blank" rel="noopener">{% render 'icon', icon: 'whatsapp' %} {{ settings.whatsapp_number }}</a>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.menu != blank -%}
+      <nav aria-label="Footer">
+        <h2 class="ftr__h">{{ section.settings.menu.title }}</h2>
+        <ul>
+          {%- for link in section.settings.menu.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+    {%- if section.settings.menu_2 != blank -%}
+      <nav aria-label="Policies">
+        <h2 class="ftr__h">{{ section.settings.menu_2.title }}</h2>
+        <ul>
+          {%- for link in section.settings.menu_2.links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+    <div class="ftr__pay">
+      <h2 class="ftr__h">{{ section.settings.pay_heading }}</h2>
+      <ul class="pay-pills">
+        {%- assign pays = section.settings.pay_methods | split: ',' -%}
+        {%- for p in pays -%}<li>{{ p | strip }}</li>{%- endfor -%}
+      </ul>
+    </div>
+  </div>
+  <div class="wrap ftr__base">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.disclaimer }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Text logo", "default": "PILO" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Orthopedic contour sleep, engineered in detail. Made for Lebanon." },
+    { "type": "link_list", "id": "menu", "label": "Menu 1", "default": "footer" },
+    { "type": "link_list", "id": "menu_2", "label": "Menu 2" },
+    { "type": "text", "id": "pay_heading", "label": "Payment heading", "default": "Pay your way" },
+    { "type": "text", "id": "pay_methods", "label": "Payment methods (comma separated)", "default": "Cash on Delivery, Whish Money" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Pilo is a sleep-support product, not a medical device or treatment. For persistent or severe pain, consult a doctor or physiotherapist." }
+  ]
+}
+{% endschema %}

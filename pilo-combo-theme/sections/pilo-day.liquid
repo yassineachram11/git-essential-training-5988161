@@ -1,0 +1,42 @@
+<section class="sec sec--{{ section.settings.scheme }}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor }}"{% endif %}>
+  <div class="wrap">
+    <header class="sec__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="sec__h">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="sec__sub rte">{{ section.settings.text }}</div>{%- endif -%}
+    </header>
+    <ol class="notes" role="list">
+      {%- for block in section.blocks -%}
+        <li class="note{% if block.settings.highlight %} note--pilo{% endif %}" {{ block.shopify_attributes }}>
+          <span class="note__time">{{ block.settings.time }}</span>
+          <h3 class="note__h">{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+          {%- if block.settings.label != blank -%}<span class="note__strain">{{ block.settings.label }}</span>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Day timeline",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "soft", "options": [{ "value": "light", "label": "Light" }, { "value": "soft", "label": "Soft" }, { "value": "dark", "label": "Dark" }] },
+    { "type": "text", "id": "anchor", "label": "Anchor ID" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Your neck's working day" },
+    { "type": "richtext", "id": "text", "label": "Text" }
+  ],
+  "blocks": [
+    { "type": "moment", "name": "Moment", "settings": [
+      { "type": "text", "id": "time", "label": "Time", "default": "09:00" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Moment" },
+      { "type": "textarea", "id": "text", "label": "Text" },
+      { "type": "text", "id": "label", "label": "Small label" },
+      { "type": "checkbox", "id": "highlight", "label": "Highlight (sticky-note yellow)", "default": false }
+    ] }
+  ],
+  "presets": [{ "name": "Day timeline" }]
+}
+{% endschema %}

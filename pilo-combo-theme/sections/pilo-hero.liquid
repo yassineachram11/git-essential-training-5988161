@@ -1,0 +1,68 @@
+{%- assign p = section.settings.product -%}
+{%- liquid
+  assign img = section.settings.image
+  if img == blank and p != blank
+    assign img = p.featured_image
+  endif
+  assign cta_url = section.settings.cta_link
+  if cta_url == blank and p != blank
+    assign cta_url = p.url
+  endif
+-%}
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="hero__h">{{ section.settings.heading }}</h1>
+      <div class="hero__sub rte">{{ section.settings.subheading }}</div>
+      {%- if p != blank and section.settings.show_price -%}
+        <p class="hero__price">
+          <span class="muted">{{ section.settings.price_prefix }}</span>
+          <strong>{{ p.price_min | money }}</strong>
+        </p>
+      {%- endif -%}
+      <div class="hero__ctas">
+        {%- if cta_url != blank -%}<a class="btn btn--accent btn--lg" href="{{ cta_url }}">{{ section.settings.cta_label }}</a>{%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}<a class="btn btn--ghost btn--lg" href="{{ section.settings.cta2_link }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <ul class="ticks">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>{% render 'icon', icon: 'check' %}{{ block.settings.text }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    <div class="hero__media">
+      {%- if img != blank -%}
+        {{ img | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 990px) 50vw, 100vw', widths: '480, 720, 960, 1200, 1400', alt: img.alt | default: 'Pilo contour pillow' }}
+      {%- else -%}
+        {% render 'layers-diagram' %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pilo hero",
+  "class": "section-hero",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "image_picker", "id": "image", "label": "Image (defaults to product image)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Orthopedic contour pillow" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Your neck was never meant to bend like that." },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Pilo is a contour memory foam pillow engineered to hold your cervical spine in neutral alignment all night, so you wake up without the stiffness.</p>" },
+    { "type": "checkbox", "id": "show_price", "label": "Show starting price", "default": true },
+    { "type": "text", "id": "price_prefix", "label": "Price prefix", "default": "From" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Order now · Pay on delivery" },
+    { "type": "url", "id": "cta_link", "label": "Button link (overrides product)" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button label", "default": "How it works" },
+    { "type": "text", "id": "cta2_link", "label": "Secondary button link", "default": "#biomechanics" }
+  ],
+  "blocks": [
+    { "type": "tick", "name": "Trust tick", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Free delivery in Lebanon" }] }
+  ],
+  "presets": [{ "name": "Pilo hero" }]
+}
+{% endschema %}

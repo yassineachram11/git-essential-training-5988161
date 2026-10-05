@@ -1,0 +1,22 @@
+<section class="sec sec--light">
+  <div class="wrap wrap--narrow">
+    <h1 class="sec__h">Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+      <label class="visually-hidden" for="q">Search</label>
+      <input id="q" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search">
+      <button class="btn btn--accent" type="submit">Search</button>
+    </form>
+    {%- if search.performed -%}
+      <ul class="search__results">
+        {%- for item in search.results -%}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {%- else -%}
+          <li>No results for “{{ search.terms }}”.</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

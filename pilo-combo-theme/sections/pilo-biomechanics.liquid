@@ -1,0 +1,38 @@
+<section class="sec sec--soft" id="{{ section.settings.anchor | default: 'biomechanics' }}">
+  <div class="wrap">
+    <header class="sec__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="sec__h">{{ section.settings.heading }}</h2>
+      <div class="sec__sub rte">{{ section.settings.text }}</div>
+    </header>
+    <div class="compare-diag">
+      <figure class="diag diag--bad">
+        {% render 'spine-diagram', state: 'bad' %}
+        <figcaption><span class="tag tag--bad">{% render 'icon', icon: 'x' %}{{ section.settings.bad_label }}</span>{{ section.settings.bad_text }}</figcaption>
+      </figure>
+      <figure class="diag diag--good">
+        {% render 'spine-diagram', state: 'good' %}
+        <figcaption><span class="tag tag--good">{% render 'icon', icon: 'check' %}{{ section.settings.good_label }}</span>{{ section.settings.good_text }}</figcaption>
+      </figure>
+    </div>
+    <p class="fineprint">{{ section.settings.note }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Biomechanics diagram",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "biomechanics" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The biomechanics of sleep" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Engineered around the natural curve of your spine." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Your cervical spine has a natural inward curve called lordosis. Pilo's contour cradles it: a raised neck roll supports the curve, while a lower central zone lets your head rest at a neutral angle.</p>" },
+    { "type": "text", "id": "bad_label", "label": "Left label", "default": "Standard pillow" },
+    { "type": "text", "id": "bad_text", "label": "Left caption", "default": "Collapses under the weight of your head. The neck bends and the muscles brace all night." },
+    { "type": "text", "id": "good_label", "label": "Right label", "default": "Pilo contour" },
+    { "type": "text", "id": "good_text", "label": "Right caption", "default": "Fills the gap between shoulder and head. Neck and spine rest in one straight line." },
+    { "type": "text", "id": "note", "label": "Footnote", "default": "Illustration for explanation purposes." }
+  ],
+  "presets": [{ "name": "Biomechanics diagram" }]
+}
+{% endschema %}
