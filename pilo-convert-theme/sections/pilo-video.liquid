@@ -1,0 +1,32 @@
+{%- if section.settings.video != blank or request.design_mode -%}
+<section class="sec sec--{{ section.settings.scheme }}">
+  <div class="wrap vid">
+    <div class="vid__copy">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="sec__h">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<div class="sec__sub rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+    <div class="vid__media">
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '1080x' }}
+      {%- else -%}
+        <div class="vid__ph">Upload a 10–20s vertical video here (e.g. pressing the foam and watching it slowly recover). This section is hidden on the live site until a video is added.</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Video demo",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "light", "options": [{ "value": "light", "label": "Light" }, { "value": "soft", "label": "Soft" }, { "value": "dark", "label": "Dark" }] },
+    { "type": "video", "id": "video", "label": "Video" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "See it in 10 seconds" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Press it. Watch it <strong>come back.</strong>" },
+    { "type": "richtext", "id": "text", "label": "Text" }
+  ],
+  "presets": [{ "name": "Video demo" }]
+}
+{% endschema %}

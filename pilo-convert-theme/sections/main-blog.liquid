@@ -1,0 +1,16 @@
+<section class="sec sec--light">
+  <div class="wrap wrap--narrow">
+    <h1 class="sec__h">{{ blog.title }}</h1>
+    {%- paginate blog.articles by 10 -%}
+      <ul class="posts">
+        {%- for article in blog.articles -%}
+          <li><a href="{{ article.url }}"><h2>{{ article.title }}</h2></a><p class="muted">{{ article.published_at | date: '%B %d, %Y' }}</p><p>{{ article.excerpt_or_content | strip_html | truncate: 180 }}</p></li>
+        {%- endfor -%}
+      </ul>
+      {%- if paginate.pages > 1 -%}<nav class="pager">{{ paginate | default_pagination }}</nav>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

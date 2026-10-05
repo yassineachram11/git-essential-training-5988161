@@ -1,0 +1,40 @@
+<section class="sec sec--light" id="positions">
+  <div class="wrap">
+    <header class="sec__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h2 class="sec__h">{{ section.settings.heading }}</h2>
+    </header>
+    <div class="tabs" data-tabs>
+      <div class="tabs__list" role="tablist">
+        {%- for block in section.blocks -%}
+          <button class="tabs__btn" role="tab" id="tab-{{ block.id }}" aria-controls="panel-{{ block.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %}>{{ block.settings.label }}</button>
+        {%- endfor -%}
+      </div>
+      {%- for block in section.blocks -%}
+        <div class="tabs__panel" role="tabpanel" id="panel-{{ block.id }}" aria-labelledby="tab-{{ block.id }}"{% unless forloop.first %} hidden{% endunless %} {{ block.shopify_attributes }}>
+          <p class="tabs__side"><span class="pill pill--{{ block.settings.verdict }}">{{ block.settings.side }}</span></p>
+          <div class="rte">{{ block.settings.text }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sleep positions",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Sleep position guide" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One pillow. Engineered for how you sleep." }
+  ],
+  "blocks": [
+    { "type": "position", "name": "Position", "settings": [
+      { "type": "text", "id": "label", "label": "Tab label", "default": "Back sleeper" },
+      { "type": "text", "id": "side", "label": "Recommendation", "default": "Use the lower contour" },
+      { "type": "select", "id": "verdict", "label": "Recommendation style", "default": "good", "options": [{ "value": "good", "label": "Recommended" }, { "value": "warn", "label": "Caution" }] },
+      { "type": "richtext", "id": "text", "label": "Text" }
+    ] }
+  ],
+  "presets": [{ "name": "Sleep positions" }]
+}
+{% endschema %}
