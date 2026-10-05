@@ -126,9 +126,17 @@ p{margin:0 0 1em}
 .ly-num-t{fill:var(--on-detail);font:800 12px Manrope,sans-serif;text-anchor:middle}
 .ly-guide{stroke:var(--detail);stroke-width:1.5;stroke-dasharray:3 5;fill:none}
 .lay{transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.js .layers-svg:not(.is-in) .lay--1{transform:translateY(60px)}
-.js .layers-svg:not(.is-in) .lay--3{transform:translateY(-60px)}
-@media(prefers-reduced-motion:reduce){.lay{transition:none}.js .layers-svg .lay{transform:none!important}}
+.lay{transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .25s}
+.js .layers-svg:not(.is-in) .lay{transform:translateY(var(--collapse,0px))}
+.layers-svg.is-focus .lay:not(.is-hot){opacity:.28}
+@media(prefers-reduced-motion:reduce){.lay{transition:opacity .25s}.js .layers-svg .lay{transform:none!important}}
+.layers__img{width:100%;height:auto;border-radius:var(--radius)}
+@media(min-width:990px){.layers--flip .layers__art{order:2}}
+.layer-list li{border-radius:12px;padding:8px;margin:-8px;transition:background .2s;outline-offset:2px}
+.layer-list li.is-hot{background:rgba(127,127,127,.12)}
+.layer-list__img{flex:none;width:48px;height:48px;border-radius:12px;object-fit:cover}
+.layer-list__t{color:var(--muted);font-size:.95rem}
+.layer-list__t p{margin:0}
 .layer-list{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:20px}
 .layer-list li{display:flex;gap:16px}
 .layer-list__n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--detail);color:var(--on-detail);display:grid;place-items:center;font-weight:800}

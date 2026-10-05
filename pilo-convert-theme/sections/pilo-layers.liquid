@@ -1,15 +1,94 @@
-<section class="sec sec--dark" id="layers">
-  <div class="wrap layers">
-    <div class="layers__art">{% render 'layers-diagram' %}</div>
+{%- comment -%}
+  Exploded view built from the section's "Layer" blocks.
+  Each block draws one slab (top face, left side, front side) stacked top to bottom,
+  with its own colours, thickness and flat/contour shape. Optionally replace the
+  drawing with an uploaded image.
+{%- endcomment -%}
+{%- liquid
+  assign gap = section.settings.gap
+  assign headroom = 26
+  assign depth = 44
+  assign total = headroom
+  for block in section.blocks
+    assign total = total | plus: depth | plus: block.settings.thickness
+    unless forloop.last
+      assign total = total | plus: gap
+    endunless
+  endfor
+  assign total = total | plus: 14
+  assign mid = total | divided_by: 2.0
+-%}
+<section class="sec sec--{{ section.settings.scheme }}" id="{{ section.settings.anchor | default: 'layers' }}">
+  <div class="wrap layers{% if section.settings.art_position == 'right' %} layers--flip{% endif %}">
+    <div class="layers__art">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 50vw, 100vw', class: 'layers__img', alt: section.settings.image.alt | default: 'Exploded view of the pillow layers' }}
+      {%- elsif section.blocks.size > 0 -%}
+        <svg class="layers-svg" viewBox="0 0 340 {{ total | ceil }}" role="img" aria-label="Exploded view: {% for block in section.blocks %}{{ block.settings.title | escape }}{% unless forloop.last %}, {% endunless %}{% endfor %}">
+          {%- comment -%} Guides first so they sit underneath the layers {%- endcomment -%}
+          {%- assign y = headroom -%}
+          {%- for block in section.blocks -%}
+            {%- assign h = depth | plus: block.settings.thickness -%}
+            {%- unless forloop.last -%}
+              {%- assign g1 = y | plus: h | plus: 4 -%}
+              {%- assign g2 = y | plus: h | plus: gap | minus: 4 -%}
+              <path d="M175 {{ g1 }} V{{ g2 }}" class="ly-guide"/>
+            {%- endunless -%}
+            {%- assign y = y | plus: h | plus: gap -%}
+          {%- endfor -%}
+          {%- comment -%} Paint bottom layer first so upper layers overlap it when assembled {%- endcomment -%}
+          {%- assign cursor = total | minus: 14 -%}
+          {%- for block in section.blocks reversed -%}
+            {%- liquid
+              assign t = block.settings.thickness
+              assign h = depth | plus: t
+              assign y = cursor | minus: h
+              assign cursor = y | minus: gap
+              assign center = h | divided_by: 2.0 | plus: y
+              assign collapse = mid | minus: center | times: section.settings.collapse | divided_by: 100.0 | round
+              assign bottom = depth | plus: t
+              assign stroke = block.settings.stroke_color
+              assign n = forloop.rindex
+            -%}
+            <g transform="translate(0 {{ y }})">
+              <g class="lay" data-layer="{{ n }}" style="--collapse: {{ collapse }}px">
+                {%- if block.settings.shape == 'contour' -%}
+                  <path d="M40 0 Q80 -18 120 -2 Q160 14 200 -2 Q222 -12 230 0 L300 {{ depth }} Q290 32 270 40 Q230 58 190 42 Q150 26 110 {{ depth }} Z" fill="{{ block.settings.top_color }}" stroke="{{ stroke }}" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M40 0 L110 {{ depth }} L110 {{ bottom }} L40 {{ t }} Z" fill="{{ block.settings.side_color }}" stroke="{{ stroke }}" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M40 0 L110 {{ depth }} L110 {{ bottom }} L40 {{ t }} Z" fill="#000" opacity=".07"/>
+                  <path d="M110 {{ depth }} Q150 26 190 42 Q230 58 270 40 Q290 32 300 {{ depth }} L300 {{ bottom }} L110 {{ bottom }} Z" fill="{{ block.settings.side_color }}" stroke="{{ stroke }}" stroke-width="1.5" stroke-linejoin="round"/>
+                {%- else -%}
+                  <path d="M40 0 L230 0 L300 {{ depth }} L110 {{ depth }} Z" fill="{{ block.settings.top_color }}" stroke="{{ stroke }}" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M40 0 L110 {{ depth }} L110 {{ bottom }} L40 {{ t }} Z" fill="{{ block.settings.side_color }}" stroke="{{ stroke }}" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M40 0 L110 {{ depth }} L110 {{ bottom }} L40 {{ t }} Z" fill="#000" opacity=".07"/>
+                  <path d="M110 {{ depth }} L300 {{ depth }} L300 {{ bottom }} L110 {{ bottom }} Z" fill="{{ block.settings.side_color }}" stroke="{{ stroke }}" stroke-width="1.5" stroke-linejoin="round"/>
+                {%- endif -%}
+                {%- if section.settings.show_numbers -%}
+                  <circle cx="318" cy="22" r="11" class="ly-num"/>
+                  <text x="318" y="26.5" class="ly-num-t">{{ n }}</text>
+                {%- endif -%}
+              </g>
+            </g>
+          {%- endfor -%}
+        </svg>
+      {%- endif -%}
+    </div>
     <div class="layers__copy">
       {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       <h2 class="sec__h">{{ section.settings.heading }}</h2>
       {%- if section.settings.text != blank -%}<div class="sec__sub rte">{{ section.settings.text }}</div>{%- endif -%}
-      <ol class="layer-list">
+      <ol class="layer-list" data-layer-list>
         {%- for block in section.blocks -%}
-          <li {{ block.shopify_attributes }}>
-            <span class="layer-list__n">{{ forloop.index }}</span>
-            <div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div>
+          <li data-layer="{{ forloop.index }}" tabindex="0" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', class: 'layer-list__img', alt: '' }}
+            {%- else -%}
+              <span class="layer-list__n">{{ forloop.index }}</span>
+            {%- endif -%}
+            <div>
+              <h3>{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}<div class="layer-list__t rte">{{ block.settings.text }}</div>{%- endif -%}
+            </div>
           </li>
         {%- endfor -%}
       </ol>
@@ -20,17 +99,47 @@
 {% schema %}
 {
   "name": "Exploded layers",
+  "max_blocks": 6,
   "settings": [
+    { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "dark", "options": [{ "value": "light", "label": "Light" }, { "value": "soft", "label": "Soft" }, { "value": "dark", "label": "Dark" }] },
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "layers" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Built layer by layer" },
-    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Structure you can feel. Support that doesn't quit." },
-    { "type": "richtext", "id": "text", "label": "Text" }
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Structure you can feel. <strong>Support that doesn't quit.</strong>" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "select", "id": "art_position", "label": "Drawing position (desktop)", "default": "left", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }] },
+    { "type": "header", "content": "Drawing" },
+    { "type": "paragraph", "content": "The drawing is built from your Layer blocks, top to bottom. Add, remove or drag blocks to change it." },
+    { "type": "range", "id": "gap", "label": "Space between layers", "min": 16, "max": 80, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "collapse", "label": "Assemble animation strength", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 55, "info": "Layers start stacked together and spread apart when scrolled into view. 0 = no animation." },
+    { "type": "checkbox", "id": "show_numbers", "label": "Show layer numbers", "default": true },
+    { "type": "image_picker", "id": "image", "label": "Replace drawing with an image", "info": "Optional. Upload your own exploded-view render to use instead of the drawing. The layer list stays." }
   ],
   "blocks": [
-    { "type": "layer", "name": "Layer", "settings": [
-      { "type": "text", "id": "title", "label": "Title", "default": "Layer" },
-      { "type": "textarea", "id": "text", "label": "Text" }
-    ] }
+    {
+      "type": "layer",
+      "name": "Layer",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "New layer" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>What this layer does for you.</p>" },
+        { "type": "image_picker", "id": "image", "label": "List thumbnail (optional)", "info": "A close-up photo of this material. Replaces the number in the list." },
+        { "type": "header", "content": "Drawing" },
+        { "type": "select", "id": "shape", "label": "Shape", "default": "flat", "options": [{ "value": "flat", "label": "Flat" }, { "value": "contour", "label": "Contour (wave)" }] },
+        { "type": "range", "id": "thickness", "label": "Thickness", "min": 6, "max": 60, "step": 2, "unit": "px", "default": 16 },
+        { "type": "color", "id": "top_color", "label": "Top colour", "default": "#161616" },
+        { "type": "color", "id": "side_color", "label": "Side colour", "default": "#F4F4F4" },
+        { "type": "color", "id": "stroke_color", "label": "Outline colour", "default": "#5C5C5C" }
+      ]
+    }
   ],
-  "presets": [{ "name": "Exploded layers" }]
+  "presets": [
+    {
+      "name": "Exploded layers",
+      "blocks": [
+        { "type": "layer", "settings": { "title": "Cooling-tech cover", "shape": "flat", "thickness": 16, "top_color": "#161616", "side_color": "#F4F4F4", "stroke_color": "#5C5C5C" } },
+        { "type": "layer", "settings": { "title": "Memory foam core", "shape": "contour", "thickness": 30, "top_color": "#FFFFFF", "side_color": "#F6F7F7", "stroke_color": "#C9CECC" } },
+        { "type": "layer", "settings": { "title": "Zip-off cover base", "shape": "flat", "thickness": 16, "top_color": "#161616", "side_color": "#F4F4F4", "stroke_color": "#5C5C5C" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

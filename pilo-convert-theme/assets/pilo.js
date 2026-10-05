@@ -24,6 +24,25 @@
     svgs.forEach((s) => s.classList.add('is-in'));
   }
 
+  // Exploded layers: highlight a layer when its list item is hovered/focused
+  document.querySelectorAll('[data-layer-list]').forEach((list) => {
+    const svg = list.closest('.layers')?.querySelector('.layers-svg');
+    const items = list.querySelectorAll('li[data-layer]');
+    const set = (n) => {
+      if (svg) {
+        svg.classList.toggle('is-focus', !!n);
+        svg.querySelectorAll('.lay').forEach((g) => g.classList.toggle('is-hot', g.dataset.layer === n));
+      }
+      items.forEach((li) => li.classList.toggle('is-hot', li.dataset.layer === n));
+    };
+    items.forEach((li) => {
+      li.addEventListener('mouseenter', () => set(li.dataset.layer));
+      li.addEventListener('focus', () => set(li.dataset.layer));
+      li.addEventListener('mouseleave', () => set(null));
+      li.addEventListener('blur', () => set(null));
+    });
+  });
+
   // Tabs
   document.querySelectorAll('[data-tabs]').forEach((tabs) => {
     const btns = [...tabs.querySelectorAll('[role=tab]')];

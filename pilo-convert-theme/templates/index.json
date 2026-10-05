@@ -258,35 +258,56 @@
       "type": "pilo-layers",
       "settings": {
         "eyebrow": "Exploded view",
-        "heading": "Structure you can feel. <strong>Support that doesn't quit.</strong>"
+        "heading": "Structure you can feel. <strong>Support that doesn't quit.</strong>",
+        "scheme": "dark",
+        "anchor": "layers",
+        "gap": 36,
+        "collapse": 55,
+        "show_numbers": true,
+        "art_position": "left"
       },
       "blocks": {
-        "b1": {
+        "layer1": {
           "type": "layer",
           "settings": {
             "title": "Cooling-tech cover",
-            "text": "Breathable, removable and machine-washable. OEKO-TEX® certified, in black with white side panels."
+            "text": "<p>Breathable, removable and machine-washable. OEKO-TEX® certified, in black with white side panels.</p>",
+            "shape": "flat",
+            "thickness": 16,
+            "top_color": "#161616",
+            "side_color": "#F4F4F4",
+            "stroke_color": "#5C5C5C"
           }
         },
-        "b2": {
+        "layer2": {
           "type": "layer",
           "settings": {
-            "title": "High-density adaptive memory foam",
-            "text": "Pure white, uniform foam that softens to your shape with body heat and pressure, then holds it, without bottoming out."
+            "title": "High-density memory foam core",
+            "text": "<p>Pure white, uniform foam with a dual-height contour: a higher neck roll for side sleepers, a lower one for back sleepers. Softens to your shape, then holds it without bottoming out.</p>",
+            "shape": "contour",
+            "thickness": 30,
+            "top_color": "#FFFFFF",
+            "side_color": "#F6F7F7",
+            "stroke_color": "#C9CECC"
           }
         },
-        "b3": {
+        "layer3": {
           "type": "layer",
           "settings": {
-            "title": "Dual-height contour profile",
-            "text": "A higher neck roll for side sleepers and a lower one for back sleepers, both shaped to keep the cervical curve supported."
+            "title": "Zip-off cover base",
+            "text": "<p>The cover unzips fully so you can machine-wash it. The foam stays protected; spot clean only.</p>",
+            "shape": "flat",
+            "thickness": 16,
+            "top_color": "#161616",
+            "side_color": "#F4F4F4",
+            "stroke_color": "#5C5C5C"
           }
         }
       },
       "block_order": [
-        "b1",
-        "b2",
-        "b3"
+        "layer1",
+        "layer2",
+        "layer3"
       ]
     },
     "benefits": {
