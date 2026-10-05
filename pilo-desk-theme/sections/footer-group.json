@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "menu": "footer",
+        "tagline": "For necks that work 9 to 5. Made for Lebanon."
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

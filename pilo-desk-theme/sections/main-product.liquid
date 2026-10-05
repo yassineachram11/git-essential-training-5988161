@@ -1,0 +1,240 @@
+{%- assign current = product.selected_or_first_available_variant -%}
+<section class="pdp" data-product data-section="{{ section.id }}">
+  <div class="wrap pdp__grid">
+    <div class="pdp__gallery">
+      <div class="gallery" data-gallery>
+        <div class="gallery__main">
+          {%- for media in product.media -%}
+            <div class="gallery__slide{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}"{% unless forloop.first %} hidden{% endunless %}>
+              {%- case media.media_type -%}
+                {%- when 'image' -%}
+                  {%- if forloop.first -%}{%- assign ld = 'eager' -%}{%- else -%}{%- assign ld = 'lazy' -%}{%- endif -%}
+                  {{ media | image_url: width: 1400 | image_tag: loading: ld, sizes: '(min-width: 990px) 55vw, 100vw', widths: '480, 720, 960, 1200, 1400', alt: media.alt | default: product.title }}
+                {%- when 'video' -%}
+                  {{ media | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true }}
+                {%- else -%}
+                  {{ media | media_tag }}
+              {%- endcase -%}
+            </div>
+          {%- else -%}
+            <div class="gallery__slide is-active">{% render 'layers-diagram' %}</div>
+          {%- endfor -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="gallery__thumbs" role="list">
+            {%- for media in product.media -%}
+              <button type="button" class="gallery__thumb{% if forloop.first %} is-active{% endif %}" data-thumb="{{ media.id }}" aria-label="Show image {{ forloop.index }}" role="listitem">
+                {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="pdp__info">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            {% render block %}
+
+          {%- when 'eyebrow' -%}
+            <p class="eyebrow" {{ block.shopify_attributes }}>{{ block.settings.text }}</p>
+
+          {%- when 'title' -%}
+            <h1 class="pdp__title" {{ block.shopify_attributes }}>{{ block.settings.title | default: product.title }}</h1>
+            {%- if block.settings.subtitle != blank -%}<p class="pdp__subtitle">{{ block.settings.subtitle }}</p>{%- endif -%}
+
+          {%- when 'price' -%}
+            <div class="pdp__price" {{ block.shopify_attributes }} data-price-wrap>
+              <span class="price" data-price>{{ current.price | money }}</span>
+              <s class="price--compare" data-compare{% unless current.compare_at_price > current.price %} hidden{% endunless %}>{{ current.compare_at_price | money }}</s>
+              <span class="price--save" data-save{% unless current.compare_at_price > current.price %} hidden{% endunless %}>Save {{ current.compare_at_price | minus: current.price | money }}</span>
+              {%- if block.settings.note != blank -%}<p class="pdp__price-note">{{ block.settings.note }}</p>{%- endif -%}
+            </div>
+
+          {%- when 'text' -%}
+            <div class="pdp__text rte" {{ block.shopify_attributes }}>
+              {%- if block.settings.use_description -%}{{ product.description }}{%- else -%}{{ block.settings.text }}{%- endif -%}
+            </div>
+
+          {%- when 'benefits' -%}
+            <ul class="benefits" {{ block.shopify_attributes }}>
+              {%- assign lines = block.settings.items | newline_to_br | split: '<br />' -%}
+              {%- for line in lines -%}
+                {%- assign parts = line | strip | split: '|' -%}
+                {%- if parts.size > 0 -%}
+                  <li>{% render 'icon', icon: 'check' %}<span><strong>{{ parts[0] | strip }}</strong>{% if parts[1] %} &mdash; {{ parts[1] | strip }}{% endif %}</span></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+
+          {%- when 'buy' -%}
+            <div class="buy" {{ block.shopify_attributes }}>
+              {%- form 'product', product, class: 'buy__form', data-product-form: '', novalidate: 'novalidate' -%}
+                <input type="hidden" name="id" value="{{ current.id }}" data-variant-id>
+                {%- unless product.has_only_default_variant -%}
+                  <fieldset class="packs">
+                    <legend class="packs__legend">{{ block.settings.picker_label | default: product.options.first }}</legend>
+                    {%- for variant in product.variants -%}
+                      {%- liquid
+                        assign count = variant.title | split: '-' | first | strip | plus: 0
+                        if count < 1
+                          assign count = 1
+                        endif
+                        assign per = variant.price | divided_by: count
+                        assign pid = section.id | append: '-v' | append: variant.id
+                      -%}
+                      <label class="pack{% unless variant.available %} is-sold{% endunless %}" for="{{ pid }}">
+                        <input type="radio" id="{{ pid }}" name="pilo-variant" value="{{ variant.id }}"
+                          data-price="{{ variant.price | money }}"
+                          data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                          data-save="{% if variant.compare_at_price > variant.price %}Save {{ variant.compare_at_price | minus: variant.price | money }}{% endif %}"
+                          data-available="{{ variant.available }}"
+                          {% if variant.id == current.id %}checked{% endif %}{% unless variant.available %} disabled{% endunless %}>
+                        <span class="pack__body">
+                          <span class="pack__name">
+                            {{ variant.title }}
+                            {%- if forloop.index == block.settings.popular_index -%}<em class="pack__badge">{{ block.settings.popular_label }}</em>{%- endif -%}
+                          </span>
+                          {%- if count > 1 -%}<span class="pack__per">{{ per | money }} per pillow</span>{%- else -%}<span class="pack__per">{{ block.settings.single_note }}</span>{%- endif -%}
+                        </span>
+                        <span class="pack__price">
+                          {{ variant.price | money }}
+                          {%- if variant.compare_at_price > variant.price -%}<s>{{ variant.compare_at_price | money }}</s>{%- endif -%}
+                        </span>
+                      </label>
+                    {%- endfor -%}
+                  </fieldset>
+                {%- endunless -%}
+
+                <div class="buy__btns">
+                  <button type="submit" name="return_to" value="/checkout" class="btn btn--accent btn--lg btn--block" data-buy-now{% unless current.available %} disabled{% endunless %}>
+                    {{ block.settings.buy_now_label }}
+                  </button>
+                  <button type="submit" class="btn btn--ghost btn--block" data-add{% unless current.available %} disabled{% endunless %}>
+                    {%- if current.available -%}{{ block.settings.add_label }}{%- else -%}Sold out{%- endif -%}
+                  </button>
+                </div>
+              {%- endform -%}
+              {%- if block.settings.cod_note != blank -%}<p class="buy__cod">{% render 'icon', icon: 'cash' %}{{ block.settings.cod_note }}</p>{%- endif -%}
+            </div>
+
+          {%- when 'trust' -%}
+            <ul class="trust" {{ block.shopify_attributes }}>
+              <li>{% render 'icon', icon: 'truck' %}<span>{{ block.settings.t1 }}</span></li>
+              <li>{% render 'icon', icon: 'cash' %}<span>{{ block.settings.t2 }}</span></li>
+              <li>{% render 'icon', icon: 'moon' %}<span>{{ block.settings.t3 }}</span></li>
+              <li>{% render 'icon', icon: 'shield' %}<span>{{ block.settings.t4 }}</span></li>
+            </ul>
+
+          {%- when 'specs' -%}
+            <details class="acc" {{ block.shopify_attributes }}{% if block.settings.open %} open{% endif %}>
+              <summary>{{ block.settings.heading }}<span class="faq__plus">{% render 'icon', icon: 'plus' %}</span></summary>
+              <table class="specs">
+                <tbody>
+                  {%- assign rows = block.settings.rows | newline_to_br | split: '<br />' -%}
+                  {%- for row in rows -%}
+                    {%- assign kv = row | strip | split: '|' -%}
+                    {%- if kv.size > 1 -%}<tr><th scope="row">{{ kv[0] | strip }}</th><td>{{ kv[1] | strip }}</td></tr>{%- endif -%}
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </details>
+
+          {%- when 'accordion' -%}
+            <details class="acc" {{ block.shopify_attributes }}>
+              <summary>{{ block.settings.heading }}<span class="faq__plus">{% render 'icon', icon: 'plus' %}</span></summary>
+              <div class="acc__body rte">{{ block.settings.content }}</div>
+            </details>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if section.settings.sticky_bar -%}
+    <div class="sticky-buy" data-sticky-buy hidden>
+      <div class="sticky-buy__info">
+        <strong>{{ product.title }}</strong>
+        <span data-sticky-price>{{ current.price | money }}</span>
+      </div>
+      <button type="button" class="btn btn--accent" data-sticky-trigger>{{ section.settings.sticky_label }}</button>
+    </div>
+  {%- endif -%}
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ request.origin | append: product.url | json }},
+  {%- if product.featured_image -%}"image": [{{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }}],{%- endif -%}
+  "description": {{ product.description | strip_html | strip | json }},
+  "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+  "offers": [
+    {%- for variant in product.variants -%}
+      {
+        "@type": "Offer",
+        "name": {{ variant.title | json }},
+        {%- if variant.sku != blank -%}"sku": {{ variant.sku | json }},{%- endif -%}
+        "availability": "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price": {{ variant.price | divided_by: 100.00 | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "url": {{ request.origin | append: variant.url | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "class": "section-main-product",
+  "settings": [
+    { "type": "checkbox", "id": "sticky_bar", "label": "Show sticky buy bar on mobile", "default": true },
+    { "type": "text", "id": "sticky_label", "label": "Sticky bar button", "default": "Order now" }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "eyebrow", "name": "Eyebrow", "limit": 1, "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Orthopedic contour pillow" }] },
+    { "type": "title", "name": "Title", "limit": 1, "settings": [
+      { "type": "text", "id": "title", "label": "Title override" },
+      { "type": "text", "id": "subtitle", "label": "Subtitle" }
+    ] },
+    { "type": "price", "name": "Price", "limit": 1, "settings": [{ "type": "text", "id": "note", "label": "Note under price" }] },
+    { "type": "text", "name": "Text", "settings": [
+      { "type": "checkbox", "id": "use_description", "label": "Use product description", "default": false },
+      { "type": "richtext", "id": "text", "label": "Text" }
+    ] },
+    { "type": "benefits", "name": "Benefit list", "settings": [
+      { "type": "textarea", "id": "items", "label": "Benefits", "info": "One per line, as Title | description" }
+    ] },
+    { "type": "buy", "name": "Pack picker & buy buttons", "limit": 1, "settings": [
+      { "type": "text", "id": "picker_label", "label": "Picker label", "default": "Choose your pack" },
+      { "type": "range", "id": "popular_index", "label": "Highlight option number", "min": 0, "max": 5, "step": 1, "default": 2, "info": "0 = none" },
+      { "type": "text", "id": "popular_label", "label": "Highlight badge", "default": "Most popular" },
+      { "type": "text", "id": "single_note", "label": "Single-unit note", "default": "Try it for yourself" },
+      { "type": "text", "id": "buy_now_label", "label": "Primary button", "default": "Order now · Pay on delivery" },
+      { "type": "text", "id": "add_label", "label": "Secondary button", "default": "Add to cart" },
+      { "type": "text", "id": "cod_note", "label": "Payment note", "default": "No card needed. Pay cash or Whish Money when it arrives." }
+    ] },
+    { "type": "trust", "name": "Trust row", "limit": 1, "settings": [
+      { "type": "text", "id": "t1", "label": "Delivery", "default": "Free delivery across Lebanon" },
+      { "type": "text", "id": "t2", "label": "Payment", "default": "Cash on Delivery" },
+      { "type": "text", "id": "t3", "label": "Trial", "default": "30-night trial" },
+      { "type": "text", "id": "t4", "label": "Certification", "default": "OEKO-TEX® certified cover" }
+    ] },
+    { "type": "specs", "name": "Specifications table", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Technical specifications" },
+      { "type": "textarea", "id": "rows", "label": "Rows", "info": "One per line, as Label | value" },
+      { "type": "checkbox", "id": "open", "label": "Open by default", "default": false }
+    ] },
+    { "type": "accordion", "name": "Collapsible tab", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Collapsible tab" },
+      { "type": "richtext", "id": "content", "label": "Content" }
+    ] }
+  ]
+}
+{% endschema %}

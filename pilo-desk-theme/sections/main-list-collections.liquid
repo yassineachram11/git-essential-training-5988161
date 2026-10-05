@@ -1,0 +1,15 @@
+<section class="sec sec--light">
+  <div class="wrap">
+    <h1 class="sec__h">Collections</h1>
+    <ul class="grid-products">
+      {%- for c in collections -%}
+        <li><a class="pcard" href="{{ c.url }}">
+          {%- if c.featured_image -%}{{ c.featured_image | image_url: width: 600 | image_tag: loading: 'lazy' }}{%- endif -%}
+          <span class="pcard__t">{{ c.title }}</span></a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

@@ -1,0 +1,11 @@
+<article class="sec sec--light">
+  <div class="wrap wrap--narrow">
+    <p class="muted">{{ article.published_at | date: '%B %d, %Y' }}</p>
+    <h1 class="sec__h">{{ article.title }}</h1>
+    {%- if article.image -%}{{ article.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</article>
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}
