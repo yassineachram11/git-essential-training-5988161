@@ -1,0 +1,18 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_ink": "#1C1915",
+      "color_paper": "#FBF8F3",
+      "color_accent": "#1C1915",
+      "color_accent_ink": "#FBF8F3",
+      "color_alert": "#B4413C",
+      "radius": 4,
+      "whatsapp_number": "",
+      "whatsapp_message": "Hi Pilo! I have a question about the pillow.",
+      "color_soft": "#F3EDE4",
+      "color_detail": "#7A5C36",
+      "color_detail_dark": "#C9A877"
+    }
+  }
+}

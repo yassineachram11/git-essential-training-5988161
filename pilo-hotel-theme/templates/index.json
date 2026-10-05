@@ -1,0 +1,413 @@
+{
+  "sections": {
+    "hero": {
+      "type": "pilo-hero",
+      "settings": {
+        "product": "pilo-1-0",
+        "eyebrow": "The Pilo Sleep Collection",
+        "heading": "Hotel-grade sleep. Every night, at home.",
+        "subheading": "<p>That first morning in a five-star suite, when you wake up rested, light, with nothing aching. Pilo brings that feeling home with a sculpted memory foam pillow that holds you in perfect alignment from lights-out to sunrise.</p>",
+        "show_price": true,
+        "price_prefix": "From",
+        "cta_label": "Reserve yours · Pay on delivery",
+        "cta2_label": "Discover Pilo",
+        "cta2_link": "#ritual"
+      },
+      "blocks": {
+        "b1": {
+          "type": "tick",
+          "settings": {
+            "text": "Complimentary delivery across Lebanon"
+          }
+        },
+        "b2": {
+          "type": "tick",
+          "settings": {
+            "text": "30-night home trial"
+          }
+        },
+        "b3": {
+          "type": "tick",
+          "settings": {
+            "text": "OEKO-TEX® certified"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "ritual": {
+      "type": "pilo-icon-grid",
+      "settings": {
+        "scheme": "light",
+        "anchor": "ritual",
+        "eyebrow": "The morning after",
+        "heading": "Wake up like you're on holiday.",
+        "text": "<p>Great hotels don't just give you a soft pillow. They give you a pillow that <em>holds</em> you. Pilo was made to give you that feeling every night.</p>"
+      },
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "icon": "moon",
+            "title": "Deeper, quieter nights",
+            "text": "<p>A sculpted shape that stays put, so you stop turning, folding and punching your pillow at 3am.</p>"
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "icon": "spine",
+            "title": "Weightless mornings",
+            "text": "<p>Your head, neck and shoulders rest in one calm line, so you wake up without stiffness.</p>"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "icon": "snow",
+            "title": "Cool, crisp linen feel",
+            "text": "<p>A breathable cooling cover that stays fresh through Lebanese summers.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "craft": {
+      "type": "pilo-layers",
+      "settings": {
+        "eyebrow": "Crafted in layers",
+        "heading": "Quietly engineered. Beautifully finished."
+      },
+      "blocks": {
+        "b1": {
+          "type": "layer",
+          "settings": {
+            "title": "The cover",
+            "text": "A cool-touch, breathable fabric in deep black with crisp white side panels. Removable, machine-washable, OEKO-TEX® certified."
+          }
+        },
+        "b2": {
+          "type": "layer",
+          "settings": {
+            "title": "The core",
+            "text": "Pure white, high-density memory foam that softens to your shape, then holds it all night, without sinking flat."
+          }
+        },
+        "b3": {
+          "type": "layer",
+          "settings": {
+            "title": "The silhouette",
+            "text": "Two sculpted heights: the higher for side sleepers, the lower for back sleepers. Simply turn it to choose."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "science": {
+      "type": "pilo-biomechanics",
+      "settings": {
+        "anchor": "science",
+        "eyebrow": "Why it feels different",
+        "heading": "Luxury you can feel. Engineering you can't see.",
+        "text": "<p>Softness alone isn't comfort. A pillow that collapses lets your head drop and your neck tense through the night. Pilo's contour fills the space under your neck, so your whole body can let go.</p>",
+        "bad_label": "An ordinary pillow",
+        "bad_text": "Flattens within minutes. Your neck bends and your muscles hold on all night.",
+        "good_label": "Pilo",
+        "good_text": "Holds its shape. Your neck and spine rest in one effortless line.",
+        "note": "Illustration for explanation purposes."
+      }
+    },
+    "positions": {
+      "type": "pilo-positions",
+      "settings": {
+        "eyebrow": "Made for how you sleep",
+        "heading": "Find your side."
+      },
+      "blocks": {
+        "b1": {
+          "type": "position",
+          "settings": {
+            "label": "Side sleeper",
+            "side": "The higher side",
+            "verdict": "good",
+            "text": "<p>The fuller side fills the space between your shoulder and ear, so you sink in without sinking down.</p>"
+          }
+        },
+        "b2": {
+          "type": "position",
+          "settings": {
+            "label": "Back sleeper",
+            "side": "The lower side",
+            "verdict": "good",
+            "text": "<p>The gentler side cradles your head and supports the curve of your neck, without pushing your chin forward.</p>"
+          }
+        },
+        "b3": {
+          "type": "position",
+          "settings": {
+            "label": "Stomach sleeper",
+            "side": "Not our recommendation",
+            "verdict": "warn",
+            "text": "<p>Stomach sleeping turns your neck for hours, and no pillow can fully undo that. Many guests use Pilo to ease into sleeping on their side.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "gift": {
+      "type": "pilo-banner",
+      "settings": {
+        "scheme": "soft",
+        "icon": "moon",
+        "heading": "One for you. One for someone you love.",
+        "text": "<p>The Pilo Pair and Pilo Trio come at a better price per pillow. A thoughtful gift for parents, partners and anyone who wakes up tired.</p>",
+        "product": "pilo-1-0",
+        "cta_label": "Shop the Pair",
+        "cta_link": "/products/pilo-1-0?variant=65971302924637",
+        "fineprint": "Ideal for Mother's Day, Eid, Christmas and housewarmings."
+      }
+    },
+    "compare": {
+      "type": "pilo-comparison",
+      "settings": {
+        "eyebrow": "The difference",
+        "heading": "Not all comfort is created equal.",
+        "col_1": "Pilo",
+        "col_2": "Ordinary pillow",
+        "col_3": "Down pillow"
+      },
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "feature": "Keeps its shape until morning",
+            "us": "yes",
+            "b": "no",
+            "c": "no"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "feature": "Sculpted neck support",
+            "us": "yes",
+            "b": "no",
+            "c": "no"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "feature": "Two heights in one",
+            "us": "yes",
+            "b": "no",
+            "c": "no"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "feature": "Removable, washable cover",
+            "us": "yes",
+            "b": "partial",
+            "c": "partial"
+          }
+        },
+        "b5": {
+          "type": "row",
+          "settings": {
+            "feature": "Cool-touch fabric",
+            "us": "yes",
+            "b": "no",
+            "c": "no"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ]
+    },
+    "reviews": {
+      "type": "pilo-reviews",
+      "settings": {
+        "eyebrow": "Guest book",
+        "heading": "Notes from our first guests.",
+        "empty_text": "We've only just opened our doors. Be among the first to write in our guest book after your 30 nights."
+      }
+    },
+    "trial": {
+      "type": "pilo-banner",
+      "settings": {
+        "scheme": "light",
+        "icon": "shield",
+        "heading": "Your 30-night stay is on us.",
+        "text": "<p>Like any great hotel bed, Pilo takes a few nights to feel like yours. Sleep on it for 30 nights. If it isn't right, we'll collect it from your door.</p>",
+        "product": "pilo-1-0",
+        "cta_label": "Begin your trial"
+      }
+    },
+    "faq": {
+      "type": "pilo-faq",
+      "settings": {
+        "eyebrow": "Concierge",
+        "heading": "Everything you'd ask at the front desk."
+      },
+      "blocks": {
+        "b1": {
+          "type": "group",
+          "settings": {
+            "title": "The pillow"
+          }
+        },
+        "b2": {
+          "type": "question",
+          "settings": {
+            "question": "Is it normal for Pilo to feel firm or strange at first?",
+            "answer": "<p>Yes. Your neck has adapted to years of unsupported sleep. Most people need <strong>3–7 nights</strong> to adjust to an ergonomic pillow, and you may notice your neck muscles as they adapt to a neutral position. Give it at least a week; that's why every Pilo comes with a 30-night trial.</p>"
+          }
+        },
+        "b3": {
+          "type": "question",
+          "settings": {
+            "question": "Which side of the pillow should I use?",
+            "answer": "<p><strong>Side sleepers:</strong> use the higher side. It fills the gap between your shoulder and ear.<br><strong>Back sleepers:</strong> use the lower side. Your chin shouldn't tilt toward your chest, and your head shouldn't tip back.</p>"
+          }
+        },
+        "b4": {
+          "type": "question",
+          "settings": {
+            "question": "Will Pilo fix my neck pain?",
+            "answer": "<p>Pilo is designed to support healthy cervical alignment while you sleep, which many people find reduces morning stiffness. It is not a medical device or treatment. If you have persistent or severe pain, please consult a doctor or physiotherapist.</p>"
+          }
+        },
+        "b5": {
+          "type": "question",
+          "settings": {
+            "question": "Is there a smell when I open it?",
+            "answer": "<p>New memory foam can have a light, harmless “new” scent for 24–48 hours. Remove the packaging and let it air in a ventilated room.</p>"
+          }
+        },
+        "b6": {
+          "type": "question",
+          "settings": {
+            "question": "Will it make me hot?",
+            "answer": "<p>The cover uses a breathable cooling fabric, made with Lebanon's humid summers in mind.</p>"
+          }
+        },
+        "b7": {
+          "type": "group",
+          "settings": {
+            "title": "Care"
+          }
+        },
+        "b8": {
+          "type": "question",
+          "settings": {
+            "question": "How do I wash it?",
+            "answer": "<p>Unzip and machine-wash the <strong>cover only</strong> on a cold (30°C max), gentle cycle, then air dry. Do <strong>not</strong> wash or soak the foam. Spot-clean it with a damp cloth and keep it away from direct sun and heaters.</p>"
+          }
+        },
+        "b9": {
+          "type": "group",
+          "settings": {
+            "title": "Delivery & payment in Lebanon"
+          }
+        },
+        "b10": {
+          "type": "question",
+          "settings": {
+            "question": "Do you deliver everywhere in Lebanon?",
+            "answer": "<p>Yes, we deliver to every governorate. Beirut and Mount Lebanon orders usually arrive in 1–2 business days, other regions in 2–4 business days.</p>"
+          }
+        },
+        "b11": {
+          "type": "question",
+          "settings": {
+            "question": "How does Cash on Delivery work?",
+            "answer": "<p>Place your order online and pay the courier in cash when Pilo arrives. No card needed.</p>"
+          }
+        },
+        "b12": {
+          "type": "question",
+          "settings": {
+            "question": "Can I pay with Whish Money?",
+            "answer": "<p>Yes. Choose Whish Money at checkout and we'll send you the payment details on WhatsApp.</p>"
+          }
+        },
+        "b13": {
+          "type": "question",
+          "settings": {
+            "question": "Will you contact me before delivery?",
+            "answer": "<p>Yes. We confirm every order on WhatsApp or by phone before dispatch, and the courier calls before arriving.</p>"
+          }
+        },
+        "b14": {
+          "type": "question",
+          "settings": {
+            "question": "What if Pilo isn't right for me?",
+            "answer": "<p>Contact us within 30 nights of delivery and we'll arrange a pickup for a refund or exchange. See our refund policy for the full conditions.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14"
+      ]
+    },
+    "final": {
+      "type": "pilo-banner",
+      "settings": {
+        "scheme": "dark",
+        "heading": "Tonight, check in to better sleep.",
+        "product": "pilo-1-0",
+        "cta_label": "Reserve yours · Pay on delivery",
+        "fineprint": "Complimentary delivery across Lebanon · Cash on Delivery · Whish Money"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "ritual",
+    "craft",
+    "science",
+    "positions",
+    "gift",
+    "compare",
+    "reviews",
+    "trial",
+    "faq",
+    "final"
+  ]
+}

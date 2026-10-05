@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "menu": "footer",
+        "tagline": "Hotel-grade sleep, every night at home. Designed for Lebanon."
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

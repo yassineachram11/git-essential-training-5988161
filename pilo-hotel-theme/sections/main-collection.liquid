@@ -1,0 +1,18 @@
+<section class="sec sec--light">
+  <div class="wrap">
+    <h1 class="sec__h">{{ collection.title }}</h1>
+    {%- paginate collection.products by 12 -%}
+      <ul class="grid-products">
+        {%- for p in collection.products -%}
+          <li>{% render 'product-card', product: p %}</li>
+        {%- else -%}
+          <li>No products found.</li>
+        {%- endfor -%}
+      </ul>
+      {%- if paginate.pages > 1 -%}<nav class="pager">{{ paginate | default_pagination }}</nav>{%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

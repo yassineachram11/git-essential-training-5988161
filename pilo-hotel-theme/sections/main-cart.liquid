@@ -1,0 +1,48 @@
+<section class="sec sec--light">
+  <div class="wrap wrap--narrow">
+    <h1 class="sec__h">Your bag</h1>
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" class="cart" novalidate>
+        <ul class="cart__lines">
+          {%- for item in cart.items -%}
+            <li class="cart__line">
+              {%- if item.image -%}<a href="{{ item.url }}" class="cart__img">{{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: item.title }}</a>{%- endif -%}
+              <div class="cart__meta">
+                <a href="{{ item.url }}" class="cart__title">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}<p class="muted">{{ item.variant.title }}</p>{%- endunless -%}
+                <p>{{ item.final_price | money }}</p>
+              </div>
+              <div class="cart__qty">
+                <label class="visually-hidden" for="qty-{{ forloop.index }}">Quantity</label>
+                <input id="qty-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+                <a href="{{ item.url_to_remove }}" class="cart__remove">Remove</a>
+              </div>
+              <p class="cart__total">{{ item.final_line_price | money }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="cart__foot">
+          <p class="cart__subtotal">Subtotal <strong>{{ cart.total_price | money_with_currency }}</strong></p>
+          <p class="muted">{{ section.settings.note }}</p>
+          <div class="cart__btns">
+            <button type="submit" name="update" class="btn btn--ghost">Update</button>
+            <button type="submit" name="checkout" class="btn btn--accent btn--lg">{{ section.settings.checkout_label }}</button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <p>Your bag is empty.</p>
+      <a class="btn btn--accent" href="{{ routes.all_products_collection_url }}">Shop Pilo</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "text", "id": "checkout_label", "label": "Checkout button", "default": "Checkout · Pay on delivery" },
+    { "type": "text", "id": "note", "label": "Note", "default": "Free delivery across Lebanon. We'll confirm your order on WhatsApp before dispatch." }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+<header class="hdr" data-sticky-header>
+  <div class="wrap hdr__inner">
+    <a href="{{ routes.root_url }}" class="hdr__logo" aria-label="{{ shop.name }} home">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 300 | image_tag: width: section.settings.logo_width, loading: 'eager', alt: shop.name }}
+      {%- else -%}
+        <span class="wordmark">{{ section.settings.wordmark | default: shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="hdr__nav" aria-label="Primary">
+        <ul>
+          {%- for link in section.settings.menu.links -%}
+            <li><a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    <div class="hdr__actions">
+      {%- liquid
+        assign cta_url = section.settings.cta_link
+        if cta_url == blank and section.settings.product != blank
+          assign cta_url = section.settings.product.url
+        endif
+      -%}
+      {%- if section.settings.cta_label != blank and cta_url != blank -%}
+        <a class="btn btn--sm btn--accent hdr__cta" href="{{ cta_url }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+      <a class="hdr__cart" href="{{ routes.cart_url }}" aria-label="Cart ({{ cart.item_count }})">
+        {% render 'icon', icon: 'cart' %}
+        <span class="hdr__count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo image" },
+    { "type": "range", "id": "logo_width", "label": "Logo width", "min": 60, "max": 240, "step": 10, "unit": "px", "default": 110 },
+    { "type": "text", "id": "wordmark", "label": "Text logo (used if no image)", "default": "PILO" },
+    { "type": "link_list", "id": "menu", "label": "Menu" },
+    { "type": "product", "id": "product", "label": "Product for header button" },
+    { "type": "text", "id": "cta_label", "label": "Header button label", "default": "Order now" },
+    { "type": "url", "id": "cta_link", "label": "Header button link (overrides product)" }
+  ]
+}
+{% endschema %}
