@@ -2,21 +2,42 @@
   "current": {
     "color_ink": "#0E0E0E",
     "color_paper": "#FFFFFF",
-    "color_accent": "#2BB3A3",
+    "color_soft": "#F3F4F3",
+    "color_accent": "#2bb3a3",
     "color_accent_ink": "#04221F",
+    "color_detail": "#0F6B60",
+    "color_detail_dark": "#2BB3A3",
     "color_alert": "#C2413A",
     "radius": 14,
     "whatsapp_number": "+961 78 953 771",
     "whatsapp_message": "",
-    "color_soft": "#F3F4F3",
-    "color_detail": "#0F6B60",
-    "color_detail_dark": "#2BB3A3",
     "favicon": "shopify://shop_images/Untitled_design_1.png",
     "content_for_index": [],
     "blocks": {
       "7924418359578431505": {
         "type": "shopify://apps/seoant-ai-seo/blocks/seoant-core/8e57283b-dcb0-4f7b-a947-fb5c57a0d59d",
         "disabled": false,
+        "settings": {}
+      },
+      "11217270075389280597": {
+        "type": "shopify://apps/wakilni/blocks/cart-drawer-embed/019bd62d-09c4-7750-87a5-1f0a01e0c14d",
+        "disabled": true,
+        "settings": {
+          "api_endpoint": "https://api.wakilni.com/api/areas/names",
+          "label": "Please select the Delivery Area for faster delivery",
+          "placeholder": "Search for your delivery area...",
+          "error_message": "Please select a delivery area to continue",
+          "mandatory": true
+        }
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "5091004626459974968": {
+        "type": "shopify://apps/moose-whatsapp/blocks/whatsapp/b77db749-c44a-4265-8135-8b842af1b111",
+        "disabled": true,
         "settings": {}
       }
     }

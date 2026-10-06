@@ -47,7 +47,7 @@
             "whatsapp_label": "Order on WhatsApp",
             "whatsapp_message": "Hi Pilo! I'd like to order the [pack]. My name and address are:",
             "add_label": "or add to cart",
-            "reassure": "Pay Wish or cash on delivery  | Free delivery"
+            "reassure": "Pay Whish or cash on delivery | Free delivery"
           }
         },
         "b6": {
@@ -194,7 +194,8 @@
         "eyebrow": "See it in 10 seconds",
         "heading": "Press it. Watch it <strong>come back.</strong>",
         "text": "<p>High-density memory foam recovers slowly and evenly. That's why it holds your neck all night instead of flattening under it.</p>"
-      }
+      },
+      "disabled": true
     },
     "expect": {
       "type": "pilo-day",
@@ -202,7 +203,7 @@
         "scheme": "light",
         "anchor": "what-to-expect",
         "eyebrow": "What to expect",
-        "heading": "Your first <strong>30 nights</strong> with Pilo.",
+        "heading": "Your first <strong>nights</strong> with Pilo.",
         "text": "<p>A supportive pillow changes how your neck rests, so it takes a few nights to settle in. Here's what's normal.</p>"
       },
       "blocks": {
@@ -239,10 +240,10 @@
         "b4": {
           "type": "moment",
           "settings": {
-            "time": "Night 30",
-            "title": "Your call",
-            "text": "Love it? Keep it. If not, message us and we'll arrange a pickup.",
-            "label": "Risk-free",
+            "time": "Night 7+",
+            "title": "Settled in",
+            "text": "Pilo just feels like your pillow now, holding your neck in line every night.",
+            "label": "Off duty",
             "highlight": true
           }
         }
@@ -471,22 +472,50 @@
     "reviews": {
       "type": "pilo-reviews",
       "settings": {
-        "eyebrow": "Reviews",
-        "heading": "Desk workers, reporting back.",
-        "empty_text": "We've just launched. Sleep on it for 30 nights, then tell us how your mornings feel."
-      }
-    },
-    "trial": {
-      "type": "pilo-banner",
-      "settings": {
-        "scheme": "soft",
-        "icon": "moon",
-        "heading": "Sleep on it for 30 nights. Literally.",
-        "text": "<p>Ergonomic pillows take 3–7 nights to adjust to, and that's normal. If Pilo isn't right for you after 30 nights, we'll arrange a pickup.</p>",
-        "product": "pilo-1-0",
-        "cta_label": "Start your 30 nights",
-        "cta_link": "#buy"
-      }
+        "eyebrow": "",
+        "heading": "Reviews",
+        "empty_text": "We've just launched. Be one of the first to tell us how your mornings feel."
+      },
+      "blocks": {
+        "judge_me_reviews_cards_carousel_g4MD7w": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "all",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#F9F9F9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_g4MD7w"
+      ]
     },
     "faq": {
       "type": "pilo-faq",
@@ -505,7 +534,7 @@
           "type": "question",
           "settings": {
             "question": "Is it normal for Pilo to feel firm or strange at first?",
-            "answer": "<p>Yes. Your neck has adapted to years of unsupported sleep. Most people need <strong>3–7 nights</strong> to adjust to an ergonomic pillow, and you may notice your neck muscles as they adapt to a neutral position. Give it at least a week; that's why every Pilo comes with a 30-night trial.</p>"
+            "answer": "<p>Yes. Your neck has adapted to years of unsupported sleep. Most people need <strong>3–7 nights</strong> to adjust to an ergonomic pillow, and you may notice your neck muscles as they adapt to a neutral position. Give it at least a week.</p>"
           }
         },
         "b3": {
@@ -586,8 +615,8 @@
         "b14": {
           "type": "question",
           "settings": {
-            "question": "What if Pilo isn't right for me?",
-            "answer": "<p>Contact us within 30 nights of delivery and we'll arrange a pickup for a refund or exchange. See our refund policy for the full conditions.</p>"
+            "question": "What is your return policy?",
+            "answer": "<p>For health and hygiene reasons, Pilo can only be returned if it is unopened, unused and in its original sealed packaging. Questions before you order? Message us on WhatsApp.</p>"
           }
         }
       },
@@ -633,7 +662,6 @@
     "positions",
     "team",
     "reviews",
-    "trial",
     "faq",
     "final"
   ]

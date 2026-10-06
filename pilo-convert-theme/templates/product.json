@@ -3,18 +3,15 @@
     "main": {
       "type": "main-product",
       "settings": {
-        "gallery_badge": "30-night trial",
+        "gallery_badge": "",
         "sticky_bar": true,
         "sticky_label": "Order now",
         "product": ""
       },
       "blocks": {
-        "b1": {
-          "type": "rating",
-          "settings": {
-            "label": "reviews",
-            "fallback": "New in Lebanon · Be one of our first reviewers"
-          }
+        "judge_me_reviews_preview_badge_K633LA": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
         },
         "b2": {
           "type": "title",
@@ -47,7 +44,7 @@
             "whatsapp_label": "Order on WhatsApp",
             "whatsapp_message": "Hi Pilo! I'd like to order the [pack]. My name and address are:",
             "add_label": "or add to cart",
-            "reassure": "Pay cash or Whish on delivery | 30-night trial | Free delivery"
+            "reassure": "Pay Whish or cash on delivery | Free delivery"
           }
         },
         "b6": {
@@ -77,8 +74,8 @@
         "b9": {
           "type": "accordion",
           "settings": {
-            "heading": "Delivery, payment & trial",
-            "content": "<p>Free delivery to all of Lebanon. Beirut &amp; Mount Lebanon usually 1–2 business days, other regions 2–4. Pay cash or Whish Money when it arrives. We confirm every order on WhatsApp first. Not right for you after 30 nights? We'll pick it up.</p>"
+            "heading": "Delivery & payment",
+            "content": "<p>Free delivery to all of Lebanon. Beirut &amp; Mount Lebanon usually 1–2 business days, other regions 2–4. Pay cash or Whish Money when it arrives. We confirm every order on WhatsApp first.</p>"
           }
         },
         "b10": {
@@ -91,7 +88,7 @@
         }
       },
       "block_order": [
-        "b1",
+        "judge_me_reviews_preview_badge_K633LA",
         "b2",
         "b3",
         "b4",
@@ -194,7 +191,8 @@
         "eyebrow": "See it in 10 seconds",
         "heading": "Press it. Watch it <strong>come back.</strong>",
         "text": "<p>High-density memory foam recovers slowly and evenly. That's why it holds your neck all night instead of flattening under it.</p>"
-      }
+      },
+      "disabled": true
     },
     "expect": {
       "type": "pilo-day",
@@ -202,7 +200,7 @@
         "scheme": "light",
         "anchor": "what-to-expect",
         "eyebrow": "What to expect",
-        "heading": "Your first <strong>30 nights</strong> with Pilo.",
+        "heading": "Your first <strong>nights</strong> with Pilo.",
         "text": "<p>A supportive pillow changes how your neck rests, so it takes a few nights to settle in. Here's what's normal.</p>"
       },
       "blocks": {
@@ -239,10 +237,10 @@
         "b4": {
           "type": "moment",
           "settings": {
-            "time": "Night 30",
-            "title": "Your call",
-            "text": "Love it? Keep it. If not, message us and we'll arrange a pickup.",
-            "label": "Risk-free",
+            "time": "Night 7+",
+            "title": "Settled in",
+            "text": "Pilo just feels like your pillow now, holding your neck in line every night.",
+            "label": "Off duty",
             "highlight": true
           }
         }
@@ -259,7 +257,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "Reviews",
-        "empty_text": "We've just launched. Sleep on it for 30 nights, then tell us how your mornings feel."
+        "empty_text": "We've just launched. Be one of the first to tell us how your mornings feel."
       },
       "blocks": {
         "judge_me_reviews_review_snippet_widget_VgXVUz": {
@@ -311,7 +309,7 @@
           "type": "question",
           "settings": {
             "question": "Is it normal for Pilo to feel firm or strange at first?",
-            "answer": "<p>Yes. Your neck has adapted to years of unsupported sleep. Most people need <strong>3–7 nights</strong> to adjust to an ergonomic pillow, and you may notice your neck muscles as they adapt to a neutral position. Give it at least a week; that's why every Pilo comes with a 30-night trial.</p>"
+            "answer": "<p>Yes. Your neck has adapted to years of unsupported sleep. Most people need <strong>3–7 nights</strong> to adjust to an ergonomic pillow, and you may notice your neck muscles as they adapt to a neutral position. Give it at least a week.</p>"
           }
         },
         "b3": {
@@ -388,6 +386,13 @@
             "question": "Will you contact me before delivery?",
             "answer": "<p>Yes. We confirm every order on WhatsApp or by phone before dispatch, and the courier calls before arriving.</p>"
           }
+        },
+        "b14": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>For health and hygiene reasons, Pilo can only be returned if it is unopened, unused and in its original sealed packaging. Questions before you order? Message us on WhatsApp.</p>"
+          }
         }
       },
       "block_order": [
@@ -403,7 +408,8 @@
         "b10",
         "b11",
         "b12",
-        "b13"
+        "b13",
+        "b14"
       ]
     }
   },
