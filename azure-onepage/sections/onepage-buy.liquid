@@ -1,0 +1,351 @@
+{%- comment -%}
+  One-page buy box: the product page's buy box, placeable on the homepage.
+  Same markup, classes and scripts as main-product.liquid (bundle.js,
+  stock-level.js, theme.js cart/gallery/quantity), so it looks and behaves
+  identically, but reads its product from a section setting.
+{%- endcomment -%}
+{%- liquid
+  assign p = section.settings.product | default: product
+  if p != blank
+    assign current_variant = p.selected_or_first_available_variant
+  endif
+-%}
+
+{{ 'product-page.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'bundle.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  #{{ section.settings.anchor | default: 'buy' }} { scroll-margin-top: {{ section.settings.scroll_offset }}px; }
+  {%- if section.settings.heading != blank -%}
+  .onepage-buy__head { text-align: center; max-width: 720px; margin: 0 auto var(--space-xl, 40px); }
+  .onepage-buy__head .eyebrow { display: inline-block; margin-bottom: 8px; }
+  {%- endif -%}
+  .onepage-buy__note { margin-top: 12px; font-size: .9em; opacity: .8; text-align: center; }
+  {%- comment -%} The hero's sticky button points here; hide it while the buy box itself is on screen. {%- endcomment -%}
+  body.onepage-buy-in-view [data-hero-cta] { opacity: 0 !important; pointer-events: none !important; transform: translateY(120%) !important; }
+</style>
+
+<section id="{{ section.settings.anchor | default: 'buy' }}" class="section product-page product-page--{{ section.settings.background_style }}">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="onepage-buy__head reveal reveal--up">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    {%- if p == blank -%}
+      <p class="onepage-buy__note">Choose a product for this section in the theme editor.</p>
+    {%- else -%}
+    <div class="product" data-onepage-buy>
+      <div class="product__media reveal reveal--up" data-gallery>
+        <div class="product__media-main">
+          {%- if p.featured_media -%}
+            <img
+              src="{{ p.featured_media | image_url: width: 1200 }}"
+              alt="{{ p.featured_media.alt | escape }}"
+              width="{{ p.featured_media.width }}"
+              height="{{ p.featured_media.height }}"
+              loading="lazy"
+              data-gallery-main
+            >
+          {%- else -%}
+            {{ 'product-apparel-1' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+
+        {%- if p.media.size > 1 -%}
+          <ul class="product__thumbs" role="list">
+            {%- for media in p.media -%}
+              <li>
+                <button
+                  type="button"
+                  class="product__thumb{% if forloop.first %} is-active{% endif %}"
+                  data-gallery-thumb
+                  aria-label="{{ 'products.product.view_image' | t: index: forloop.index }}"
+                >
+                  <img
+                    src="{{ media | image_url: width: 200 }}"
+                    data-full="{{ media | image_url: width: 1200 }}"
+                    alt="{{ media.alt | escape }}"
+                    loading="lazy"
+                    width="200"
+                    height="200"
+                  >
+                </button>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="product__info reveal reveal--up" style="--reveal-delay: 100ms;">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+
+            {%- when 'title' -%}
+              <h2 class="product__title" {{ block.shopify_attributes }}>{{ block.settings.title | default: p.title }}</h2>
+              {%- if block.settings.subtitle != blank -%}
+                <p class="product__description" style="margin-top:4px;">{{ block.settings.subtitle }}</p>
+              {%- endif -%}
+
+            {%- when 'price' -%}
+              <div class="product__price" {{ block.shopify_attributes }}>
+                {%- render 'price', product: p, variant: current_variant -%}
+              </div>
+
+            {%- when 'description' -%}
+              {%- if p.description != blank -%}
+                <div class="product__description rte" {{ block.shopify_attributes }}>{{ p.description }}</div>
+              {%- endif -%}
+
+            {%- when 'text' -%}
+              <div class="product__description rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+            {%- when 'bundle' -%}
+              {%- unless p.has_only_default_variant -%}
+                {%- liquid
+                  assign baseline = 0
+                  assign best_per = 0
+                  assign best_id = 0
+                  for v in p.variants
+                    assign u = v.title | split: 'x' | first | times: 1
+                    if u < 1
+                      assign u = v.title | split: '-' | first | times: 1
+                    endif
+                    if u < 1
+                      assign u = 1
+                    endif
+                    assign per = v.price | divided_by: u
+                    if per > baseline
+                      assign baseline = per
+                    endif
+                    if best_per == 0 or per < best_per
+                      assign best_per = per
+                      assign best_id = v.id
+                    endif
+                  endfor
+                -%}
+                <div class="bundle" data-bundle-picker {{ block.shopify_attributes }}>
+                  {%- if block.settings.heading != blank -%}
+                    <span class="variant-group__label">{{ block.settings.heading }}</span>
+                  {%- endif -%}
+                  {%- for v in p.variants -%}
+                    {%- liquid
+                      assign units = v.title | split: 'x' | first | times: 1
+                      if units < 1
+                        assign units = v.title | split: '-' | first | times: 1
+                      endif
+                      if units < 1
+                        assign units = 1
+                      endif
+                      assign each = v.price | divided_by: units
+                      assign full = baseline | times: units
+                      assign save = full | minus: v.price
+                      assign row_badge = ''
+                      if units > 1 and save > 0 and v.id == best_id
+                        assign row_badge = block.settings.badge
+                      endif
+                      assign selected = false
+                      if v.id == current_variant.id
+                        assign selected = true
+                      endif
+                    -%}
+                    {%- render 'bundle-option',
+                          variant: v, label: v.title, note: '', badge: row_badge,
+                          units: units, each: each, save: save, override: '',
+                          selected: selected, style: block.settings.savings_style,
+                          show_unit: block.settings.show_unit_price,
+                          section_id: section.id, attrs: '' -%}
+                  {%- endfor -%}
+                </div>
+              {%- endunless -%}
+
+            {%- when 'buy_buttons' -%}
+              {%- liquid
+                assign add_label = block.settings.add_label
+                if add_label == blank
+                  assign add_label = 'products.product.add_to_cart' | t
+                endif
+                assign sold_label = 'products.product.sold_out' | t
+                assign buy_class = 'product__buy-wrap'
+                if block.settings.full_width
+                  assign buy_class = buy_class | append: ' product__buy-wrap--full'
+                endif
+              -%}
+              {{ 'buy-buttons.css' | asset_url | stylesheet_tag }}
+              {%- if block.settings.show_buy_now -%}<script src="{{ 'buy-now.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+              {%- if block.settings.show_stock -%}<script src="{{ 'stock-level.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+              <div
+                class="{{ buy_class }}"
+                style="--buy-radius: {{ block.settings.radius }}px;{% if block.settings.add_bg != blank %} --buy-add-bg: {{ block.settings.add_bg }}; --buy-add-bg-hover: {{ block.settings.add_bg | color_darken: 8 }};{% endif %}"
+                {{ block.shopify_attributes }}
+              >
+                {%- form 'product', p, data-product-form: true -%}
+                  <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+                  {%- if block.settings.show_stock -%}
+                    {%- render 'stock-level',
+                          product: p,
+                          variant: current_variant,
+                          threshold: block.settings.stock_threshold,
+                          in_label: block.settings.stock_in_label,
+                          low_label: block.settings.stock_low_label,
+                          out_label: block.settings.stock_out_label,
+                          backorder_label: block.settings.stock_backorder_label -%}
+                  {%- endif -%}
+                  <div class="product__buy">
+                    {%- if block.settings.show_quantity -%}
+                      <div class="qty">
+                        <button type="button" data-qty-change="down" aria-label="{{ 'sections.cart.decrease' | t }}">−</button>
+                        <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'sections.cart.quantity' | t }}">
+                        <button type="button" data-qty-change="up" aria-label="{{ 'sections.cart.increase' | t }}">+</button>
+                      </div>
+                    {%- else -%}
+                      <input type="hidden" name="quantity" value="1">
+                    {%- endif -%}
+                    <button type="submit" class="btn btn--primary btn--add btn--lg" data-add-to-cart {% unless current_variant.available %}disabled{% endunless %}>
+                      {%- if current_variant.available -%}{{ add_label }}{%- else -%}{{ sold_label }}{%- endif -%}
+                    </button>
+                  </div>
+                  {%- if block.settings.show_buy_now and current_variant.available -%}
+                    <button type="button" class="btn btn--buy-now btn--lg" data-buy-now>{{ block.settings.buy_now_label | default: 'Buy it now' }}</button>
+                  {%- endif -%}
+                  {%- if block.settings.show_dynamic_checkout -%}
+                    <div class="product__checkout-divider"><span>{{ 'products.product.or' | t }}</span></div>
+                    {{ form | payment_button }}
+                  {%- endif -%}
+                {%- endform -%}
+              </div>
+
+            {%- when 'trust' -%}
+              {%- liquid
+                assign meta_class = 'product__meta'
+                if block.settings.layout == 'plain'
+                  assign meta_class = meta_class | append: ' product__meta--plain'
+                elsif block.settings.layout == 'grid'
+                  assign meta_class = meta_class | append: ' product__meta--grid'
+                endif
+                if block.settings.icon_style == 'plain'
+                  assign meta_class = meta_class | append: ' product__meta--icons-plain'
+                endif
+              -%}
+              <div class="{{ meta_class }}" {{ block.shopify_attributes }}>
+                {%- for b in section.blocks -%}
+                  {%- if b.type == 'trust_item' -%}
+                    {%- render 'trust-item', icon: b.settings.icon, text: b.settings.text, note: b.settings.note, attrs: b.shopify_attributes -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+
+            {%- when 'trust_item' -%}
+              {%- comment -%} Drawn by the trust block above. {%- endcomment -%}
+
+            {%- when 'collapsible' -%}
+              <div class="accordion" style="margin-top: var(--space-lg);" {{ block.shopify_attributes }}>
+                <div class="accordion__item">
+                  <button type="button" class="accordion__toggle" data-toggle aria-expanded="false">
+                    {{ block.settings.heading }}
+                    {%- render 'icon', name: 'chevron-down' -%}
+                  </button>
+                  <div class="accordion__panel"><div><div class="accordion__panel-inner rte">{{ block.settings.content }}</div></div></div>
+                </div>
+              </div>
+
+            {%- when '@app' -%}
+              {% render block %}
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var box = document.querySelector('[data-onepage-buy]');
+    if (!box || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (entries) {
+      document.body.classList.toggle('onepage-buy-in-view', entries[0].isIntersecting);
+    }, { threshold: 0.15 }).observe(box);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Buy box (one page)",
+  "tag": "div",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "buy", "info": "Link to this section with /#buy (e.g. from the hero button)." },
+    { "type": "range", "id": "scroll_offset", "label": "Space above when scrolled to", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 88, "info": "Keeps the sticky header from covering the buy box." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    {
+      "type": "select", "id": "background_style", "label": "Background",
+      "options": [
+        { "value": "none", "label": "White" },
+        { "value": "gradient", "label": "Soft blue wash" },
+        { "value": "tint", "label": "Flat surface" }
+      ],
+      "default": "gradient"
+    }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    { "type": "title", "name": "Title", "limit": 1, "settings": [
+      { "type": "text", "id": "title", "label": "Title override", "info": "Leave empty to use the product title." },
+      { "type": "text", "id": "subtitle", "label": "Subtitle" }
+    ] },
+    { "type": "price", "name": "Price", "limit": 1 },
+    { "type": "description", "name": "Product description", "limit": 1 },
+    { "type": "text", "name": "Text", "settings": [{ "type": "richtext", "id": "text", "label": "Text" }] },
+    { "type": "bundle", "name": "Bundle selector", "limit": 1, "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Choose your pack" },
+      { "type": "select", "id": "savings_style", "label": "Show savings as", "options": [
+        { "value": "amount", "label": "Amount saved" }, { "value": "percent", "label": "Percent saved" }, { "value": "none", "label": "Don't show savings" }
+      ], "default": "amount" },
+      { "type": "checkbox", "id": "show_unit_price", "label": "Show per-unit price on multi-packs", "default": true },
+      { "type": "text", "id": "badge", "label": "Badge on the best-value pack", "default": "Best value" }
+    ] },
+    { "type": "buy_buttons", "name": "Buy buttons", "limit": 1, "settings": [
+      { "type": "checkbox", "id": "show_quantity", "label": "Show quantity selector", "default": true },
+      { "type": "checkbox", "id": "show_stock", "label": "Show stock line", "default": true },
+      { "type": "range", "id": "stock_threshold", "label": "Call it low stock at or below", "min": 1, "max": 50, "step": 1, "unit": "pcs", "default": 10 },
+      { "type": "text", "id": "stock_in_label", "label": "In stock wording", "default": "In stock, ready to ship" },
+      { "type": "text", "id": "stock_low_label", "label": "Low stock wording", "default": "Only [count] left" },
+      { "type": "text", "id": "stock_out_label", "label": "Out of stock wording", "default": "Out of stock" },
+      { "type": "text", "id": "stock_backorder_label", "label": "Backorder wording", "default": "Available on backorder" },
+      { "type": "text", "id": "add_label", "label": "Add to cart label" },
+      { "type": "checkbox", "id": "show_buy_now", "label": "Show a Buy now button", "default": false },
+      { "type": "text", "id": "buy_now_label", "label": "Buy now label", "default": "Buy it now" },
+      { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show Shopify's dynamic checkout button", "default": true },
+      { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+      { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 8 },
+      { "type": "color", "id": "add_bg", "label": "Add to cart background" }
+    ] },
+    { "type": "trust", "name": "Trust points", "limit": 1, "settings": [
+      { "type": "select", "id": "layout", "label": "Layout", "options": [
+        { "value": "card", "label": "Boxed" }, { "value": "plain", "label": "Plain list" }, { "value": "grid", "label": "Two columns" }
+      ], "default": "card" },
+      { "type": "select", "id": "icon_style", "label": "Icon style", "options": [
+        { "value": "soft", "label": "Tinted circle" }, { "value": "plain", "label": "Plain icon" }
+      ], "default": "soft" }
+    ] },
+    { "type": "trust_item", "name": "Trust point", "settings": [
+      { "type": "select", "id": "icon", "label": "Icon", "options": [
+        { "value": "truck", "label": "Delivery" }, { "value": "clock", "label": "Clock" }, { "value": "shield", "label": "Guarantee" },
+        { "value": "refresh", "label": "Returns" }, { "value": "check", "label": "Tick" }, { "value": "lock", "label": "Secure" },
+        { "value": "leaf", "label": "Sustainable" }, { "value": "spark", "label": "Quality" }, { "value": "star", "label": "Rated" }
+      ], "default": "truck" },
+      { "type": "text", "id": "text", "label": "Text", "default": "Free delivery across Lebanon" },
+      { "type": "text", "id": "note", "label": "Small note" }
+    ] },
+    { "type": "collapsible", "name": "Collapsible row", "settings": [
+      { "type": "text", "id": "heading", "label": "Heading", "default": "Delivery and payment" },
+      { "type": "richtext", "id": "content", "label": "Content" }
+    ] }
+  ],
+  "presets": [{ "name": "Buy box (one page)", "blocks": [{ "type": "title" }, { "type": "price" }, { "type": "bundle" }, { "type": "buy_buttons" }] }]
+}
+{% endschema %}

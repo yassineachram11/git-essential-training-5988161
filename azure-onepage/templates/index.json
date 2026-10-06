@@ -1,0 +1,638 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "t1": {
+          "type": "trust",
+          "settings": {
+            "icon": "truck",
+            "text": "Free delivery, 1–5 days"
+          }
+        },
+        "t2": {
+          "type": "trust",
+          "settings": {
+            "icon": "spark",
+            "text": "OEKO-TEX certified fabric"
+          }
+        },
+        "t3": {
+          "type": "trust",
+          "settings": {
+            "icon": "shield",
+            "text": "Cash on delivery"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "layout": "banner",
+        "color_scheme": "dark",
+        "eyebrow": "",
+        "heading": "The Science of <em>Perfect Sleep</em>.",
+        "subheading": "<p>Adaptive memory foam that contours in seconds and holds its shape until morning. Neutral neck alignment, back or side.</p>",
+        "price": "",
+        "price_note": "",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy",
+        "button_label_2": "",
+        "button_link_2": "",
+        "sticky_cta": true,
+        "sticky_cta_label": "Order now · Pay on delivery",
+        "video": "shopify://files/videos/pilo-hero-clean.mp4",
+        "video_fit": "cover",
+        "video_ratio": "16 / 9",
+        "video_zoom": 100,
+        "image_position": "right",
+        "mobile_layout": "side",
+        "mobile_banner_media": "below",
+        "mobile_media_position": "left",
+        "mobile_media_width": 30,
+        "mobile_custom_video": false,
+        "mobile_video_ratio": "1 / 1",
+        "mobile_video_fit": "cover",
+        "mobile_video_zoom": 85,
+        "min_height": 620,
+        "overlay_opacity": 50,
+        "text_color": "light",
+        "show_badge": false,
+        "badge_title": "4.9 out of 5",
+        "badge_text": "from 2,400+ reviews"
+      }
+    },
+    "buy": {
+      "type": "onepage-buy",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "",
+            "subtitle": "The contour pillow that keeps your neck aligned all night."
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "bundle": {
+          "type": "bundle",
+          "settings": {
+            "heading": "Choose your pack",
+            "savings_style": "amount",
+            "show_unit_price": true,
+            "badge": "Best value"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity": true,
+            "show_stock": true,
+            "stock_threshold": 10,
+            "stock_in_label": "In stock",
+            "stock_low_label": "Only [count] left",
+            "stock_out_label": "Out of stock",
+            "stock_backorder_label": "Available on backorder",
+            "add_label": "",
+            "show_buy_now": false,
+            "buy_now_label": "Buy it now",
+            "show_dynamic_checkout": true,
+            "full_width": false,
+            "radius": 8,
+            "add_bg": "#385e88"
+          }
+        },
+        "trust": {
+          "type": "trust",
+          "settings": {
+            "layout": "card",
+            "icon_style": "soft"
+          }
+        },
+        "ti1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free delivery across Lebanon  1-5 days",
+            "note": ""
+          }
+        },
+        "ti2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "check",
+            "text": "Cash on delivery available",
+            "note": ""
+          }
+        },
+        "ti3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "spark",
+            "text": "OEKO-TEX certified fabric",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "bundle",
+        "buy_buttons",
+        "trust",
+        "ti1",
+        "ti2",
+        "ti3"
+      ],
+      "settings": {
+        "product": "pilo-1-0",
+        "anchor": "buy",
+        "scroll_offset": 88,
+        "eyebrow": "",
+        "heading": "",
+        "background_style": "gradient"
+      }
+    },
+    "reviews": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_cards_carousel_VFC89J": {
+          "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": false,
+            "reviews_selection": "all",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "star_rating": "all",
+            "show_review_media": true,
+            "display_order": "media_first",
+            "no_image_fallback": "review_text_only",
+            "max_reviews": 20,
+            "review_length": "medium",
+            "text_size": "medium",
+            "image_ratio": "1",
+            "reviews_shown": 4,
+            "show_reviewer_name": true,
+            "show_product_name": true,
+            "hide_arrows_mobile": true,
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "text_color": "#000000",
+            "card_color": "#f9f9f9",
+            "stars_color": "",
+            "arrows_color": "#000000",
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_cards_carousel_VFC89J"
+      ],
+      "settings": {}
+    },
+    "value-props": {
+      "type": "value-props",
+      "blocks": {
+        "v1": {
+          "type": "item",
+          "settings": {
+            "icon": "refresh",
+            "title": "Washable Cover",
+            "text": "The cooling cover zips off and goes straight in the machine."
+          }
+        },
+        "v2": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free & Fast Shipping",
+            "text": "Free delivery on every order, typically within 1–5 days."
+          }
+        },
+        "v3": {
+          "type": "item",
+          "settings": {
+            "icon": "spark",
+            "title": "OEKO-TEX certified fabric",
+            "text": "Adaptive contour foam and a breathable, durable cooling cover."
+          }
+        },
+        "v4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "7/7 Support",
+            "text": "Our team is reachable every day of the week."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "heading": "Why Pilo ?",
+        "background": "#f8fafc"
+      }
+    },
+    "who-is-it-for": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_t8lwbt8lwbt8lwbt_6477d86f-0538-446d-815b-77a392ca4581.png",
+        "image_position": "right",
+        "eyebrow": "Who is it for",
+        "heading": "Who is it for?",
+        "text": "<p>If you're tired of waking up with a stiff neck, suffer from migraines, or spend your days hunched over a desk, Pilo is your solution.</p>",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy"
+      }
+    },
+    "sequence": {
+      "type": "scroll-sequence",
+      "settings": {
+        "base_image_url": "https://cdn.shopify.com/s/files/1/1088/3822/4221/files/ezgif-frame-",
+        "image_suffix": ".jpg?v=1788509549",
+        "start_frame": 1,
+        "end_frame": 28,
+        "frame_digits": 3,
+        "frame_width": "1600",
+        "scroll_height": 250,
+        "smoothing": 12,
+        "crossfade": true,
+        "eyebrow": "Inside Pilo",
+        "heading": "Engineered Layer by Layer",
+        "text": "<p>Discover the ergonomic core and breathable materials designed for restorative sleep.</p>",
+        "text_alignment": "center",
+        "alt_text": "The Pilo 1.0 pillow separating into its ergonomic core and breathable cover layers.",
+        "show_hint": true,
+        "hint_text": "Scroll",
+        "max_width": 850,
+        "canvas_height": 60,
+        "background": "#ffffff"
+      }
+    },
+    "comparison": {
+      "type": "comparison-slider",
+      "settings": {
+        "before_image": "shopify://shop_images/watermark-removed-Gemini_Generated_Image_n3ua8zn3ua8zn3ua.png",
+        "before_label": "Normal pillow",
+        "after_image": "shopify://shop_images/image1.png",
+        "after_label": "Pilo 1.0",
+        "eyebrow": "See the difference",
+        "heading": "Normal pillow vs Pilo 1.0",
+        "text": "Drag the handle to see what proper cervical support changes.",
+        "slider_label": "Drag to compare a normal pillow with the Pilo 1.0",
+        "image_ratio": "landscape",
+        "max_width": 900,
+        "show_hint": true,
+        "background": "#ffffff"
+      }
+    },
+    "comparison_table": {
+      "type": "comparison-table",
+      "blocks": {
+        "row_ndMYX3": {
+          "type": "row",
+          "settings": {
+            "label": "Adaptive contour foam",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_9LMV7f": {
+          "type": "row",
+          "settings": {
+            "label": "OEKO-TEX® STANDARD 100 certified",
+            "note": "Every component lab tested for harmful substances",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_JXjyh7": {
+          "type": "row",
+          "settings": {
+            "label": "Cover zips off and machine washes",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_iTUQY4": {
+          "type": "row",
+          "settings": {
+            "label": "Works for back and side sleepers",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_mNg7a3": {
+          "type": "row",
+          "settings": {
+            "label": "Delivered across Lebanon in 1–5 days",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "no",
+            "theirs_note": "Often weeks by post"
+          }
+        }
+      },
+      "block_order": [
+        "row_ndMYX3",
+        "row_9LMV7f",
+        "row_JXjyh7",
+        "row_iTUQY4",
+        "row_mNg7a3"
+      ],
+      "settings": {
+        "eyebrow": "How we compare",
+        "heading": "Pilo 1.0 vs other ergonomic pillows",
+        "text": "<p>Plenty of pillows claim ergonomic support. Here is what you actually get, and where the category is split.</p>",
+        "mine_label": "Pilo 1.0",
+        "theirs_label": "Most ergonomic pillows",
+        "footnote": "",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy",
+        "max_width": 820,
+        "background": "#ffffff"
+      }
+    },
+    "how_to_use": {
+      "type": "how-to-use",
+      "blocks": {
+        "step_9W6FQE": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-1-open-the-box.mp4",
+            "title": "Open the box",
+            "text": "<p>Your Pilo ships compressed and sealed, so the box is smaller than you expect. Slide it out and cut the tape.</p>"
+          }
+        },
+        "step_fXi9FC": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-2-unwrap-it.mp4",
+            "title": "Unwrap the pillow",
+            "text": "<p>Cut the seal and let it breathe. It takes a few seconds to expand to full shape.</p>"
+          }
+        },
+        "step_ChqiE6": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-3-sleep-on-it.mp4",
+            "title": "Sleep on it",
+            "text": "<p>Give it three nights. Your neck needs a few to unlearn the old pillow.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_9W6FQE",
+        "step_fXi9FC",
+        "step_ChqiE6"
+      ],
+      "name": "How to use",
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "Three steps to a better night.",
+        "text": "",
+        "media_ratio": "1 / 1",
+        "show_numbers": true,
+        "mobile_display": "swipe",
+        "background": "#ffffff",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy"
+      }
+    },
+    "specs": {
+      "type": "specs-table",
+      "blocks": {
+        "g1": {
+          "type": "group",
+          "settings": {
+            "title": "Construction"
+          }
+        },
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Fill",
+            "value": "Adaptive contour memory foam",
+            "note": ""
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Cover",
+            "value": "Breathable cooling cover, zips off",
+            "note": ""
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Certification",
+            "value": "OEKO-TEX® STANDARD 100",
+            "note": ""
+          }
+        },
+        "g2": {
+          "type": "group",
+          "settings": {
+            "title": "Fit"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Sleeping position",
+            "value": "Back and side",
+            "note": ""
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Dimensions",
+            "value": "40x16x16",
+            "note": ""
+          }
+        },
+        "r7": {
+          "type": "row",
+          "settings": {
+            "label": "Weight",
+            "value": "1.1 kg",
+            "note": ""
+          }
+        },
+        "g3": {
+          "type": "group",
+          "settings": {
+            "title": "Care and delivery"
+          }
+        },
+        "r8": {
+          "type": "row",
+          "settings": {
+            "label": "Washing",
+            "value": "Cover is machine washable",
+            "note": ""
+          }
+        },
+        "r9": {
+          "type": "row",
+          "settings": {
+            "label": "Delivery",
+            "value": "Free across Lebanon, 1–5 days",
+            "note": ""
+          }
+        },
+        "r10": {
+          "type": "row",
+          "settings": {
+            "label": "Returns",
+            "value": "Unopened and sealed only",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "r1",
+        "r2",
+        "r3",
+        "g2",
+        "r4",
+        "r5",
+        "r7",
+        "g3",
+        "r8",
+        "r9",
+        "r10"
+      ],
+      "settings": {
+        "eyebrow": "The details",
+        "heading": "Specifications",
+        "text": "",
+        "collapsible": "group",
+        "toggle_label": "Specifications",
+        "open_first": false,
+        "columns": "1",
+        "label_width": 4,
+        "max_width": 860,
+        "background": "#ffffff",
+        "footnote": ""
+      }
+    },
+    "designed": {
+      "type": "rich-text",
+      "settings": {
+        "eyebrow": "Protect your neck",
+        "heading": "Designed for your neck.",
+        "text": "<p>Experience perfect alignment with adaptive contour foam that relieves neck tension. Wrapped in a breathable cooling cover, the Pilo 1.0 keeps you comfortable and supported all night long. Free delivery across Lebanon, and you can pay cash on delivery.</p>",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "When will I get my order?",
+            "answer": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location (between 1–5 days).</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "How much does shipping cost?",
+            "answer": "<p>It's FREE!</p>"
+          }
+        },
+        "q_cod": {
+          "type": "question",
+          "settings": {
+            "question": "Can I pay cash on delivery?",
+            "answer": "<p>Yes. Choose cash on delivery when you order and pay the courier when your Pilo arrives. No card needed.</p>"
+          }
+        },
+        "q_adjust": {
+          "type": "question",
+          "settings": {
+            "question": "Is it normal for it to feel different at first?",
+            "answer": "<p>Yes. A contour pillow holds your neck in a position it may not be used to. Give it three nights; most people settle in within a week.</p>"
+          }
+        },
+        "question_tB3gYX": {
+          "type": "question",
+          "settings": {
+            "question": "What does OEKO-TEX® certified mean?",
+            "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q_cod",
+        "q_adjust",
+        "question_tB3gYX"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "FAQ",
+        "open_first": false,
+        "enable_schema": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "buy",
+    "reviews",
+    "value-props",
+    "who-is-it-for",
+    "sequence",
+    "comparison",
+    "comparison_table",
+    "how_to_use",
+    "specs",
+    "designed",
+    "faq"
+  ]
+}
