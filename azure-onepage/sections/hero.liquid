@@ -11,6 +11,9 @@
   if section.settings.layout == 'banner' and section.settings.text_color == 'light'
     assign modifier = ' hero--light-text'
   endif
+  if section.settings.layout == 'banner' and section.settings.overlay_style == 'spotlight'
+    assign modifier = modifier | append: ' hero--overlay-spotlight'
+  endif
 
   comment
     The dark treatment is appended rather than assigned, so it can combine
@@ -195,16 +198,33 @@
             </a>
           {%- endif -%}
           {%- if section.settings.button_label_2 != blank -%}
-            <a href="{{ section.settings.button_link_2 }}" class="btn btn--secondary btn--lg">
-              {{ section.settings.button_label_2 }}
-            </a>
+            {%- if section.settings.button_link_2 contains 'wa.me' or section.settings.button_link_2 contains 'whatsapp' -%}
+              <a href="{{ section.settings.button_link_2 }}" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">
+                <svg class="btn__wa-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.2 1.3 3.4c.2.2 2.3 3.5 5.6 4.9 2.8 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+                {{ section.settings.button_label_2 }}
+              </a>
+            {%- else -%}
+              <a href="{{ section.settings.button_link_2 }}" class="btn btn--secondary btn--lg">
+                {{ section.settings.button_label_2 }}
+              </a>
+            {%- endif -%}
           {%- endif -%}
         </div>
       {%- endif -%}
 
-      {%- if section.blocks.size > 0 -%}
+      {%- assign steps = section.blocks | where: 'type', 'step' -%}
+      {%- if steps.size > 0 -%}
+        <ol class="hero__steps reveal reveal--up" style="--reveal-delay: 260ms;" role="list">
+          {%- for block in steps -%}
+            <li class="hero__step" {{ block.shopify_attributes }}><span class="hero__step-n" aria-hidden="true">{{ forloop.index }}</span>{{ block.settings.text }}</li>
+          {%- endfor -%}
+        </ol>
+      {%- endif -%}
+
+      {%- assign trust_blocks = section.blocks | where: 'type', 'trust' -%}
+      {%- if trust_blocks.size > 0 -%}
         <div class="hero__trust reveal reveal--up" style="--reveal-delay: 300ms;">
-          {%- for block in section.blocks -%}
+          {%- for block in trust_blocks -%}
             <div class="hero__trust-item" {{ block.shopify_attributes }}>
               {%- render 'icon', name: block.settings.icon -%}
               <span>{{ block.settings.text }}</span>
@@ -379,7 +399,8 @@
     {
       "type": "url",
       "id": "button_link_2",
-      "label": "Secondary button link"
+      "label": "Secondary button link",
+      "info": "A WhatsApp link turns this into a green WhatsApp button. Use https://wa.me/ followed by your number with country code and no + or spaces, e.g. https://wa.me/96170123456"
     },
     {
       "type": "header",
@@ -642,6 +663,17 @@
     },
     {
       "type": "select",
+      "id": "overlay_style",
+      "label": "Overlay shape (banner layout)",
+      "options": [
+        { "value": "flat", "label": "Even — darkens the whole video" },
+        { "value": "spotlight", "label": "Spotlight — dark behind the text, brighter edges" }
+      ],
+      "default": "flat",
+      "info": "Spotlight uses the overlay strength above for the centre and fades out towards the edges."
+    },
+    {
+      "type": "select",
       "id": "text_color",
       "label": "Text color (banner layout)",
       "options": [
@@ -674,6 +706,18 @@
     }
   ],
   "blocks": [
+    {
+      "type": "step",
+      "name": "Ordering step",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Numbered steps shown under the buttons, e.g. Order online → We confirm on WhatsApp → Pay when it arrives."
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "Order online" }
+      ]
+    },
     {
       "type": "trust",
       "name": "Trust point",

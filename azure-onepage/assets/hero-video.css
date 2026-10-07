@@ -193,6 +193,96 @@
 }
 
 /* --------------------------------------------------------------------------
+   Offer hero: spotlight overlay, WhatsApp button, ordering steps
+   -------------------------------------------------------------------------- */
+
+/* Spotlight: full strength behind the centred copy, easing off towards the
+   edges so the footage stays bright. The mobile full screen rules further
+   down replace this with their own bottom fade. */
+.hero--banner.hero--overlay-spotlight .hero__overlay {
+  background: radial-gradient(
+    ellipse 58% 68% at 50% 52%,
+    rgba(15, 23, 42, var(--hero-overlay-opacity, 0.5)) 0%,
+    rgba(15, 23, 42, calc(var(--hero-overlay-opacity, 0.5) * 0.75)) 45%,
+    rgba(15, 23, 42, calc(var(--hero-overlay-opacity, 0.5) * 0.3)) 100%
+  );
+}
+
+/* Over footage, a white primary button stands out more than brand blue. */
+.hero--banner.hero--light-text .hero__buttons .btn--primary {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--color-text);
+}
+
+.hero--banner.hero--light-text .hero__buttons .btn--primary:hover:not([disabled]) {
+  background: var(--color-primary-soft, #EAF0F7);
+  border-color: var(--color-primary-soft, #EAF0F7);
+  color: var(--color-text);
+}
+
+.btn--whatsapp {
+  background: #25D366;
+  border: 1px solid #25D366;
+  color: #0B3B1F;
+}
+
+.btn--whatsapp:hover {
+  background: #1fbe5b;
+  border-color: #1fbe5b;
+  color: #0B3B1F;
+}
+
+.btn__wa-icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+}
+
+.hero--banner.hero--light-text .hero__price-amount {
+  font-size: var(--text-xl);
+}
+
+.hero__steps {
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.hero--banner .hero__steps { justify-content: center; }
+
+.hero__step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.hero__step-n {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  flex: none;
+}
+
+.hero--banner.hero--light-text .hero__steps { color: #ffffff; }
+
+.hero--banner.hero--light-text .hero__step-n {
+  background: #ffffff;
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
    Mobile full screen banner (below 750px)
    Keeps the desktop look: video behind the text, but sized for a tall phone
    screen, copy anchored to the bottom over a dark fade, thumb-reach button.
@@ -238,9 +328,33 @@
   }
 
   .hero--mobile-fullscreen .hero__content {
+    position: relative;
     width: 100%;
     max-width: none;
     margin-inline: 0;
+  }
+
+  /* A dark backdrop that grows with the copy, so the text always sits on
+     dark however many lines, buttons and steps it has. */
+  .hero--mobile-fullscreen .hero__content::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -96px;
+    bottom: calc(var(--space-xl) * -1);
+    left: calc(var(--page-gutter, 1.25rem) * -1);
+    right: calc(var(--page-gutter, 1.25rem) * -1);
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0) 0,
+      rgba(15, 23, 42, var(--hero-m-fade, 0.85)) 96px,
+      rgb(15, 23, 42) 100%
+    );
+    pointer-events: none;
+  }
+
+  .hero--mobile-fullscreen .hero__buttons .btn {
+    padding-block: 0.875rem;
   }
 
   .hero--mobile-fullscreen .hero__title {
@@ -273,10 +387,44 @@
     color: var(--color-text);
   }
 
+  .hero--mobile-fullscreen .hero__price {
+    justify-content: flex-start;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero--mobile-fullscreen .hero__buttons {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .hero--banner.hero--mobile-fullscreen .hero__steps {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
+    font-size: var(--text-xs);
+  }
+
+  .hero--mobile-fullscreen .hero__step {
+    gap: 0.35rem;
+    line-height: 1.2;
+  }
+
+  .hero--mobile-fullscreen .hero__step-n {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
   .hero--mobile-fullscreen .hero__trust {
     justify-content: flex-start;
     margin-top: var(--space-md);
   }
+}
+
+/* Short phones: drop the description so the pillow stays in view; the
+   heading and price line already carry the message. */
+@media screen and (max-width: 749px) and (max-height: 720px) {
+  .hero--mobile-fullscreen .hero__subtitle { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

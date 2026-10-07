@@ -2,20 +2,43 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "step1": {
+          "type": "step",
+          "settings": {
+            "text": "Order online"
+          }
+        },
+        "step2": {
+          "type": "step",
+          "settings": {
+            "text": "We confirm on WhatsApp"
+          }
+        },
+        "step3": {
+          "type": "step",
+          "settings": {
+            "text": "Pay when it arrives"
+          }
+        }
+      },
+      "block_order": [
+        "step1",
+        "step2",
+        "step3"
+      ],
       "settings": {
         "layout": "banner",
         "color_scheme": "dark",
         "eyebrow": "",
-        "heading": "The Science of <em>Perfect Sleep</em>.",
-        "subheading": "<p>Adaptive memory foam that contours in seconds and holds its shape until morning. Neutral neck alignment, back or side.</p>",
-        "price": "",
-        "price_note": "",
+        "heading": "Wake up without <em>neck pain.</em>",
+        "subheading": "<p>The contour memory foam pillow that keeps your neck aligned all night, for back and side sleepers.</p>",
+        "price": "From $80",
+        "price_note": "Free delivery · Pay on delivery",
         "button_label": "Choose your pack",
         "button_link": "/#buy",
-        "button_label_2": "",
-        "button_link_2": "",
+        "button_label_2": "Ask us on WhatsApp",
+        "button_link_2": "https://wa.me/96178953771?text=Hi%20Pilo!%20I%20have%20a%20question%20about%20the%20pillow.",
         "sticky_cta": true,
         "sticky_cta_label": "Order now · Pay on delivery",
         "video": "shopify://files/videos/pilo-hero-clean.mp4",
@@ -38,10 +61,11 @@
         "badge_title": "4.9 out of 5",
         "badge_text": "from 2,400+ reviews",
         "mobile_video_focus": "50% 50%",
-        "mobile_hero_height": 85,
+        "mobile_hero_height": 90,
         "mobile_fullscreen_zoom": 100,
         "mobile_fade": 85,
-        "mobile_video_height": 70
+        "mobile_video_height": 70,
+        "overlay_style": "spotlight"
       }
     },
     "buy": {
