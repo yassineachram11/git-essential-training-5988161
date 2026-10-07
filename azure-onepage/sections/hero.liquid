@@ -33,6 +33,15 @@
   endif
 
   comment
+    Banner layout on mobile: 'fullscreen' keeps the video behind the text like
+    desktop, fills most of the phone screen, and moves the copy to the bottom
+    over a dark fade so the top of the footage stays clear.
+  endcomment
+  if section.settings.layout == 'banner' and section.settings.mobile_banner_media == 'fullscreen'
+    assign modifier = modifier | append: ' hero--mobile-fullscreen'
+  endif
+
+  comment
     Mobile: 'side' keeps text and media beside each other below 750px
     instead of stacking them.
   endcomment
@@ -90,6 +99,11 @@
     --hero-video-zoom: {{ section.settings.video_zoom | divided_by: 100.0 }};
     {% unless section.settings.video_ratio == 'auto' %}--hero-video-ratio: {{ section.settings.video_ratio }};{% endunless %}
     --hero-mobile-media-width: {{ section.settings.mobile_media_width }}%;
+    --hero-m-h: {{ section.settings.mobile_hero_height }};
+    --hero-m-focus: {{ section.settings.mobile_video_focus }};
+    --hero-m-zoom: {{ section.settings.mobile_fullscreen_zoom | divided_by: 100.0 }};
+    --hero-m-fade: {{ section.settings.mobile_fade | divided_by: 100.0 }};
+    --hero-m-video-h: {{ section.settings.mobile_video_height }}%;
     {%- if section.settings.mobile_custom_video -%}
       --hero-video-fit-m: {{ section.settings.mobile_video_fit }};
       --hero-video-zoom-m: {{ section.settings.mobile_video_zoom | divided_by: 100.0 }};
@@ -472,10 +486,67 @@
       "label": "Mobile video placement",
       "options": [
         { "value": "background", "label": "Behind the text (background)" },
+        { "value": "fullscreen", "label": "Full screen behind the text, text at the bottom" },
         { "value": "below", "label": "Under the text" }
       ],
       "default": "background",
-      "info": "Banner layout only. 'Under the text' drops the video below the copy on phones."
+      "info": "Banner layout only. 'Full screen' keeps the desktop look on phones: the video fills the screen and the text sits at the bottom over a dark fade. 'Under the text' drops the video below the copy."
+    },
+    {
+      "type": "select",
+      "id": "mobile_video_focus",
+      "label": "Full screen: part of the video to keep in view",
+      "options": [
+        { "value": "15% 50%", "label": "Left" },
+        { "value": "35% 50%", "label": "Centre-left" },
+        { "value": "50% 50%", "label": "Centre" },
+        { "value": "65% 50%", "label": "Centre-right" },
+        { "value": "85% 50%", "label": "Right" }
+      ],
+      "default": "50% 50%",
+      "info": "A wide video is cropped on a tall phone screen. Pick where the product sits in your footage."
+    },
+    {
+      "type": "range",
+      "id": "mobile_hero_height",
+      "label": "Full screen: height",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85,
+      "info": "Share of the phone screen the hero fills. Below 100% lets the next section peek in, which invites scrolling."
+    },
+    {
+      "type": "range",
+      "id": "mobile_video_height",
+      "label": "Full screen: video height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70,
+      "info": "How much of the hero the video covers from the top. The rest fades to dark so the text never sits on the product. 100% puts the text straight over the video."
+    },
+    {
+      "type": "range",
+      "id": "mobile_fullscreen_zoom",
+      "label": "Full screen: video zoom",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "mobile_fade",
+      "label": "Full screen: darkness behind the text",
+      "min": 40,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 85
     },
     {
       "type": "select",

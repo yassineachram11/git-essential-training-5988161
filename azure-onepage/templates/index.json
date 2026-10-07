@@ -24,7 +24,7 @@
         "video_zoom": 100,
         "image_position": "right",
         "mobile_layout": "side",
-        "mobile_banner_media": "below",
+        "mobile_banner_media": "fullscreen",
         "mobile_media_position": "left",
         "mobile_media_width": 30,
         "mobile_custom_video": false,
@@ -36,7 +36,12 @@
         "text_color": "light",
         "show_badge": false,
         "badge_title": "4.9 out of 5",
-        "badge_text": "from 2,400+ reviews"
+        "badge_text": "from 2,400+ reviews",
+        "mobile_video_focus": "50% 50%",
+        "mobile_hero_height": 85,
+        "mobile_fullscreen_zoom": 100,
+        "mobile_fade": 85,
+        "mobile_video_height": 70
       }
     },
     "buy": {
