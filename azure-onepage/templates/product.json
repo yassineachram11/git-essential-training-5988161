@@ -77,7 +77,7 @@
             "layout": "card",
             "icon_style": "soft",
             "item_1": "Free delivery across Lebanon  1-5 days",
-            "item_2": "Cash on delivery available",
+            "item_2": "Pay cash on delivery or with Whish Money",
             "item_3": "OEKO-TEX certified fabric"
           }
         },
@@ -93,7 +93,7 @@
           "type": "trust_item",
           "settings": {
             "icon": "check",
-            "text": "Cash on delivery available",
+            "text": "Pay cash on delivery or with Whish Money",
             "note": ""
           }
         },
