@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Footer",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "text": "<p><strong>Follow us</strong></p>",
+            "show_social": true
+          }
+        },
+        "menu-1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "menu-2": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer"
+          }
+        },
+        "menu-3": {
+          "type": "menu",
+          "settings": {
+            "heading": "Legal",
+            "menu": "policies"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Join the list",
+            "text": "",
+            "disclaimer": "Unsubscribe any time. We never share your email."
+          }
+        }
+      },
+      "block_order": [
+        "brand",
+        "menu-1",
+        "menu-2",
+        "menu-3",
+        "newsletter"
+      ],
+      "settings": {
+        "color_background": "#485868",
+        "color_heading": "#f1f5f9",
+        "color_text": "#c7d2de",
+        "color_accent": "#ffffff",
+        "color_accent_contrast": "#2c3845",
+        "color_border": "#3a4857",
+        "color_input_background": "#ffffff",
+        "color_input_text": "#2c3845",
+        "color_button_background": "#edf2f8",
+        "color_button_text": "#2c3845",
+        "show_top_border": true,
+        "padding_top": 72,
+        "padding_bottom": 0,
+        "columns_desktop": "4",
+        "wide_first_column": true,
+        "columns_mobile": "2",
+        "policy_menu": "policies",
+        "show_payment_icons": false
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

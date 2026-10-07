@@ -76,7 +76,7 @@
             "heading": "",
             "layout": "card",
             "icon_style": "soft",
-            "item_1": "Free delivery across Lebanon  1-5 days",
+            "item_1": "Free delivery across Lebanon · 1–5 days",
             "item_2": "Pay cash on delivery or with Whish Money",
             "item_3": "OEKO-TEX certified fabric"
           }
@@ -85,7 +85,7 @@
           "type": "trust_item",
           "settings": {
             "icon": "truck",
-            "text": "Free delivery across Lebanon  1-5 days",
+            "text": "Free delivery across Lebanon · 1–5 days",
             "note": ""
           }
         },
@@ -272,7 +272,7 @@
           "type": "row",
           "settings": {
             "label": "Dimensions",
-            "value": "40x16x16",
+            "value": "40 × 16 × 16 cm",
             "note": ""
           }
         },
@@ -400,7 +400,7 @@
           "type": "question",
           "settings": {
             "question": "When will I get my order?",
-            "answer": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location (between 1–5 days).</p>"
+            "answer": "<p>We confirm every order by phone or WhatsApp, then send it out. Delivery takes 1–5 days depending on where you are in Lebanon.</p>"
           }
         },
         "question_hG7Xdb": {

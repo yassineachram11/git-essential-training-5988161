@@ -47,9 +47,7 @@
         "overlay_opacity": 50,
         "overlay_style": "spotlight",
         "text_color": "light",
-        "show_badge": false,
-        "badge_title": "4.9 out of 5",
-        "badge_text": "from 2,400+ reviews"
+        "show_badge": false
       }
     },
     "buy": {
@@ -105,7 +103,7 @@
           "type": "trust_item",
           "settings": {
             "icon": "truck",
-            "text": "Free delivery across Lebanon  1-5 days",
+            "text": "Free delivery across Lebanon · 1–5 days",
             "note": ""
           }
         },
@@ -232,7 +230,7 @@
         "v4"
       ],
       "settings": {
-        "heading": "Why Pilo ?",
+        "heading": "Why Pilo?",
         "background": "#f8fafc"
       }
     },
@@ -242,7 +240,7 @@
         "image": "shopify://shop_images/Gemini_Generated_Image_t8lwbt8lwbt8lwbt_6477d86f-0538-446d-815b-77a392ca4581.png",
         "image_position": "right",
         "eyebrow": "Who is it for",
-        "heading": "Who is it for?",
+        "heading": "Made for stiff necks and long desk days.",
         "text": "<p>If you wake up with a stiff neck or spend your days at a desk, Pilo was made for you.</p>",
         "button_label": "Choose your pack",
         "button_link": "/#buy"
@@ -463,7 +461,7 @@
           "type": "question",
           "settings": {
             "question": "When will I get my order?",
-            "answer": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location (between 1–5 days).</p>"
+            "answer": "<p>We confirm every order by phone or WhatsApp, then send it out. Delivery takes 1–5 days depending on where you are in Lebanon.</p>"
           }
         },
         "q3": {

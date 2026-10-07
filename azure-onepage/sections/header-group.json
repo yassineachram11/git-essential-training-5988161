@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "FREE SHIPPING ALL OVER LEBANON — DELIVERED IN 1-5 DAYS",
+        "announcement_link": "",
+        "announcement_icon": "truck",
+        "announcement_background": "#2c3845",
+        "announcement_text_color": "#ffffff",
+        "show_countdown": false,
+        "countdown_label": "Launching in",
+        "countdown_date": "2026-10-14",
+        "countdown_hour": 9,
+        "countdown_expired_text": "We're live — shop Pilo 1.0 now",
+        "countdown_link": "",
+        "countdown_cta": "",
+        "color_background": "#485868",
+        "color_text": "#edf2f8",
+        "color_accent": "#ffffff",
+        "color_border": "#3a4857",
+        "color_badge_background": "#edf2f8",
+        "color_badge_text": "#2c3845",
+        "sticky_background": "#485868",
+        "sticky_opacity": 92,
+        "header_height": 72,
+        "show_bottom_border": true,
+        "menu": "main-menu",
+        "logo_position": "left",
+        "sticky_header": true,
+        "show_search": false,
+        "show_account": false
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}
