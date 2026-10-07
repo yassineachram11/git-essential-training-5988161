@@ -42,6 +42,24 @@
   min-height: var(--hero-min-height, 620px);
 }
 
+/* The video carries a transform (zoom / reveal), which paints it above an
+   unpositioned overlay, so the "Image overlay" darkening never showed. Lift
+   the overlay and the copy explicitly so they always sit over the footage. */
+.hero--banner .hero__overlay {
+  position: relative;
+  z-index: 1;
+}
+
+.hero--banner .hero__inner {
+  z-index: 2;
+}
+
+/* With the darkening now visible, the primary blue accent in the heading
+   is too dark to read over the footage; use a light tint of it instead. */
+.hero--banner.hero--light-text .hero__title em {
+  color: #C9D8EA;
+}
+
 /* --------------------------------------------------------------------------
    Mobile (below 750px)
    -------------------------------------------------------------------------- */
@@ -207,11 +225,8 @@
     transform: scale(var(--hero-m-zoom, 1));
   }
 
-  /* The video carries a transform, which paints it above an unpositioned
-     overlay; lift the overlay and the copy explicitly so the fade shows. */
+  /* Clear over the product, dark behind the copy. */
   .hero--banner.hero--mobile-fullscreen .hero__overlay {
-    position: relative;
-    z-index: 1;
     background: linear-gradient(
       180deg,
       rgba(15, 23, 42, 0) 0%,
@@ -221,8 +236,6 @@
       rgb(15, 23, 42) 100%
     );
   }
-
-  .hero--banner.hero--mobile-fullscreen .hero__inner { z-index: 2; }
 
   .hero--mobile-fullscreen .hero__content {
     width: 100%;
