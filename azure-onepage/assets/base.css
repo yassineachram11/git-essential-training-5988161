@@ -258,6 +258,7 @@ hr {
 }
 
 .btn:active { transform: translateY(0) scale(0.98); }
+.btn svg { width: 18px; height: 18px; flex: none; }
 
 .btn[disabled],
 .btn[aria-disabled="true"] {
