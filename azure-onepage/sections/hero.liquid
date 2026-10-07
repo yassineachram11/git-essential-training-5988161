@@ -1,0 +1,645 @@
+{%- liquid
+  assign layout_class = 'hero--split'
+  if section.settings.layout == 'banner'
+    assign layout_class = 'hero--banner'
+  endif
+
+  assign modifier = ''
+  if section.settings.layout == 'split' and section.settings.image_position == 'left'
+    assign modifier = ' hero--image-left'
+  endif
+  if section.settings.layout == 'banner' and section.settings.text_color == 'light'
+    assign modifier = ' hero--light-text'
+  endif
+
+  comment
+    The dark treatment is appended rather than assigned, so it can combine
+    with an image-left split. The banner layout already has its own light-text
+    path over the photo, so this applies to the split layout only.
+  endcomment
+  if section.settings.layout == 'split' and section.settings.color_scheme == 'dark'
+    assign modifier = modifier | append: ' hero--dark'
+  endif
+
+  comment
+    Banner layout on mobile: 'below' lifts the video out from behind the text
+    and drops it underneath, so the copy sits on the page rather than over it.
+  endcomment
+  if section.settings.layout == 'banner' and section.settings.mobile_banner_media == 'below'
+    assign modifier = modifier | append: ' hero--mobile-unbanner'
+    if section.settings.mobile_custom_video and section.settings.mobile_video_ratio == 'auto'
+      assign modifier = modifier | append: ' hero--mobile-auto-ratio'
+    endif
+  endif
+
+  comment
+    Mobile: 'side' keeps text and media beside each other below 750px
+    instead of stacking them.
+  endcomment
+  if section.settings.layout == 'split' and section.settings.mobile_layout == 'side'
+    assign modifier = modifier | append: ' hero--mobile-side'
+    if section.settings.mobile_media_position == 'left'
+      assign modifier = modifier | append: ' hero--mobile-media-left'
+    endif
+  endif
+
+  comment
+    A separate mobile video is swapped in on one <video> element rather than
+    rendering two, so phones never download the desktop file.
+  endcomment
+  comment
+    sources is ordered lowest quality first, so 'first' would hand desktop a
+    480p rendition. Take the largest mp4 for desktop, and for mobile the
+    largest that is still no wider than 720px, since the phone column is only
+    a few hundred pixels across and the whole point is to save mobile data.
+  endcomment
+  assign desktop_mp4 = section.settings.video.sources | where: 'format', 'mp4' | sort: 'width'
+  assign desktop_src = desktop_mp4 | last
+  assign mobile_mp4 = section.settings.mobile_video.sources | where: 'format', 'mp4' | sort: 'width'
+  assign mobile_src = mobile_mp4 | last
+  for source in mobile_mp4
+    if source.width <= 720
+      assign mobile_src = source
+    endif
+  endfor
+  assign poster_desktop = section.settings.video.preview_image | image_url: width: 1600
+  assign poster_mobile = section.settings.mobile_video.preview_image | image_url: width: 900
+  assign use_swap = false
+  if section.settings.mobile_video != blank and desktop_src != blank and mobile_src != blank
+    assign use_swap = true
+  endif
+-%}
+
+{{ 'hero-extras.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.video != blank or section.settings.mobile_layout == 'side' or section.settings.mobile_banner_media == 'below' -%}
+  {{ 'hero-video.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- if section.settings.sticky_cta and section.settings.button_label != blank -%}
+  {{ 'hero-cta.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'hero-cta.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<section
+  class="hero {{ layout_class }}{{ modifier }}"
+  style="
+    --hero-min-height: {{ section.settings.min_height }}px;
+    --hero-overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --hero-video-fit: {{ section.settings.video_fit }};
+    --hero-video-zoom: {{ section.settings.video_zoom | divided_by: 100.0 }};
+    {% unless section.settings.video_ratio == 'auto' %}--hero-video-ratio: {{ section.settings.video_ratio }};{% endunless %}
+    --hero-mobile-media-width: {{ section.settings.mobile_media_width }}%;
+    {%- if section.settings.mobile_custom_video -%}
+      --hero-video-fit-m: {{ section.settings.mobile_video_fit }};
+      --hero-video-zoom-m: {{ section.settings.mobile_video_zoom | divided_by: 100.0 }};
+      {% unless section.settings.mobile_video_ratio == 'auto' %}--hero-video-ratio-m: {{ section.settings.mobile_video_ratio }};{% endunless %}
+    {%- endif -%}
+  "
+>
+  {%- if section.settings.layout == 'banner' -%}
+    <div class="hero__bg">
+      {%- if section.settings.video != blank -%}
+        {%- if use_swap -%}
+          {%- render 'hero-video-swap',
+            desktop_src: desktop_src.url,
+            mobile_src: mobile_src.url,
+            poster_desktop: poster_desktop,
+            poster_mobile: poster_mobile,
+            class: 'reveal reveal--zoom'
+          -%}
+        {%- else -%}
+          {{
+            section.settings.video
+            | video_tag:
+              image_size: '1600x',
+              autoplay: true,
+              loop: true,
+              muted: true,
+              controls: false,
+              class: 'reveal reveal--zoom'
+          }}
+        {%- endif -%}
+      {%- elsif section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2400
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            sizes: '100vw',
+            widths: '600, 900, 1200, 1600, 2000, 2400',
+            class: 'reveal reveal--zoom',
+            alt: section.settings.image.alt | default: section.settings.heading
+        }}
+      {%- else -%}
+        <div class="hero__placeholder" style="aspect-ratio: auto; height: 100%;">
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="hero__overlay"></div>
+  {%- endif -%}
+
+  <div class="page-width hero__inner">
+    <div class="hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow reveal reveal--up">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero__title reveal reveal--up" style="--reveal-delay: 60ms;">
+          {{ section.settings.heading }}
+        </h1>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <div class="hero__subtitle reveal reveal--up" style="--reveal-delay: 140ms;">
+          {{ section.settings.subheading }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.price != blank -%}
+        <div class="hero__price reveal reveal--up" style="--reveal-delay: 180ms;">
+          <span class="hero__price-amount">{{ section.settings.price }}</span>
+          {%- if section.settings.price_note != blank -%}
+            <span class="hero__price-note">{{ section.settings.price_note }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+        <div class="hero__buttons reveal reveal--up" style="--reveal-delay: 220ms;">
+          {%- if section.settings.button_label != blank -%}
+            <a
+              href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+              class="btn btn--primary btn--lg"
+              data-hero-anchor
+            >
+              {{ section.settings.button_label }}
+              {%- render 'icon', name: 'arrow-right' -%}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 }}" class="btn btn--secondary btn--lg">
+              {{ section.settings.button_label_2 }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="hero__trust reveal reveal--up" style="--reveal-delay: 300ms;">
+          {%- for block in section.blocks -%}
+            <div class="hero__trust-item" {{ block.shopify_attributes }}>
+              {%- render 'icon', name: block.settings.icon -%}
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.layout == 'split' -%}
+      <div class="hero__media reveal reveal--right" style="--reveal-delay: 160ms;">
+        <div
+          class="hero__media-inner"
+          data-ratio="{{ section.settings.video_ratio }}"
+          {% if section.settings.mobile_custom_video %}data-ratio-mobile="{{ section.settings.mobile_video_ratio }}"{% endif %}
+        >
+          {%- if section.settings.video != blank -%}
+            {%- if use_swap -%}
+              {%- render 'hero-video-swap',
+                desktop_src: desktop_src.url,
+                mobile_src: mobile_src.url,
+                poster_desktop: poster_desktop,
+                poster_mobile: poster_mobile
+              -%}
+            {%- else -%}
+              {{
+                section.settings.video
+                | video_tag:
+                  image_size: '1200x',
+                  autoplay: true,
+                  loop: true,
+                  muted: true,
+                  controls: false
+              }}
+            {%- endif -%}
+          {%- elsif section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1400
+              | image_tag:
+                loading: 'eager',
+                fetchpriority: 'high',
+                sizes: '(min-width: 750px) 50vw, 100vw',
+                widths: '400, 600, 800, 1000, 1200, 1400',
+                alt: section.settings.image.alt | default: section.settings.heading
+            }}
+          {%- else -%}
+            <div class="hero__placeholder">
+              {{ 'lifestyle-1' | placeholder_svg_tag }}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.show_badge -%}
+          <div class="hero__badge">
+            <div class="hero__badge-stars" aria-hidden="true">
+              {%- for i in (1..5) -%}
+                {%- render 'icon', name: 'star' -%}
+              {%- endfor -%}
+            </div>
+            <div class="hero__badge-text">
+              <strong>{{ section.settings.badge_title }}</strong>
+              {{ section.settings.badge_text }}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- comment -%}
+  A copy of the primary button, fixed to the bottom of the screen. It is only
+  revealed once the real one above has scrolled away, so the two are never on
+  screen together.
+{%- endcomment -%}
+{%- if section.settings.sticky_cta and section.settings.button_label != blank -%}
+  {%- liquid
+    assign cta_label = section.settings.sticky_cta_label
+    if cta_label == blank
+      assign cta_label = section.settings.button_label
+    endif
+  -%}
+  <div class="hero-cta" data-hero-cta aria-hidden="true">
+    <a
+      href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+      class="btn btn--primary btn--lg"
+    >
+      {{ cta_label }}
+      {%- render 'icon', name: 'arrow-right' -%}
+    </a>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "split", "label": "Split — text and image side by side" },
+        { "value": "banner", "label": "Banner — full width image with overlay" }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Background",
+      "options": [
+        { "value": "light", "label": "Light — page background" },
+        { "value": "dark", "label": "Dark — solid fill, light text" }
+      ],
+      "default": "light",
+      "info": "Split layout only. The banner layout uses the image overlay below instead."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "New season"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everyday essentials, <em>elevated</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Thoughtfully designed pieces built to last. Free shipping, free returns, and a 30-day happiness guarantee.</p>"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "info": "Shown between the subheading and the buttons. Leave empty to hide the price line."
+    },
+    {
+      "type": "text",
+      "id": "price_note",
+      "label": "Price note",
+      "info": "Sits next to the price, for example \"or two for $150\"."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Secondary button",
+      "default": "Our story"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "header",
+      "content": "Sticky button"
+    },
+    {
+      "type": "paragraph",
+      "content": "Brings the primary button back along the bottom of the screen once it has scrolled out of view — a full-width bar on phones, a floating pill on desktop. It is never on screen at the same time as the real button."
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_cta",
+      "label": "Keep the primary button on screen",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "sticky_cta_label",
+      "label": "Sticky button wording",
+      "info": "Leave empty to reuse the primary button's wording."
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Plays muted and looped, with no controls. Takes priority over the image below."
+    },
+    {
+      "type": "select",
+      "id": "video_fit",
+      "label": "Video fit",
+      "options": [
+        { "value": "cover", "label": "Fill the frame (crops the edges)" },
+        { "value": "contain", "label": "Show the whole video (no cropping)" }
+      ],
+      "default": "cover",
+      "info": "Choose 'Show the whole video' if the sides or top are being cut off."
+    },
+    {
+      "type": "select",
+      "id": "video_ratio",
+      "label": "Video frame shape",
+      "options": [
+        { "value": "auto", "label": "Match the video (no cropping)" },
+        { "value": "16 / 9", "label": "Widescreen 16:9" },
+        { "value": "4 / 3", "label": "Classic 4:3" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "9 / 16", "label": "Tall 9:16" }
+      ],
+      "default": "4 / 5",
+      "info": "Split layout only. 'Match the video' is the simplest way to stop any cropping."
+    },
+    {
+      "type": "range",
+      "id": "video_zoom",
+      "label": "Video zoom",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "info": "Below 100% zooms out, above zooms in."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Use a high resolution lifestyle photo, at least 1600px wide."
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (split layout)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "Mobile",
+      "info": "Everything here applies below 750px only. Desktop is untouched."
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile layout",
+      "options": [
+        { "value": "stacked", "label": "Stacked — video under the text" },
+        { "value": "side", "label": "Side by side — video next to the text" }
+      ],
+      "default": "stacked",
+      "info": "Split layout only."
+    },
+    {
+      "type": "select",
+      "id": "mobile_banner_media",
+      "label": "Mobile video placement",
+      "options": [
+        { "value": "background", "label": "Behind the text (background)" },
+        { "value": "below", "label": "Under the text" }
+      ],
+      "default": "background",
+      "info": "Banner layout only. 'Under the text' drops the video below the copy on phones."
+    },
+    {
+      "type": "select",
+      "id": "mobile_media_position",
+      "label": "Video side",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "mobile_media_width",
+      "label": "Video column width",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "default": 45,
+      "info": "How much of the phone screen the video takes in side by side mode."
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "Mobile video",
+      "info": "Optional. A separate file for phones — a vertical cut, for example. Phones then download only this one, never the desktop file."
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_custom_video",
+      "label": "Use different video framing on mobile",
+      "default": false,
+      "info": "Off means mobile reuses the desktop fit, shape and zoom above."
+    },
+    {
+      "type": "select",
+      "id": "mobile_video_ratio",
+      "label": "Mobile frame shape",
+      "options": [
+        { "value": "auto", "label": "Match the video (no cropping)" },
+        { "value": "16 / 9", "label": "Widescreen 16:9" },
+        { "value": "4 / 3", "label": "Classic 4:3" },
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "9 / 16", "label": "Tall 9:16" }
+      ],
+      "default": "4 / 5"
+    },
+    {
+      "type": "select",
+      "id": "mobile_video_fit",
+      "label": "Mobile video fit",
+      "options": [
+        { "value": "cover", "label": "Fill the frame (crops the edges)" },
+        { "value": "contain", "label": "Show the whole video (no cropping)" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "mobile_video_zoom",
+      "label": "Mobile video zoom",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Banner layout"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height (banner layout)",
+      "min": 400,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 620
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Image overlay (banner layout)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text color (banner layout)",
+      "options": [
+        { "value": "light", "label": "Light" },
+        { "value": "dark", "label": "Dark" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "header",
+      "content": "Review badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show floating review badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_title",
+      "label": "Badge title",
+      "default": "4.9 out of 5"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "from 2,400+ reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust point",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "truck", "label": "Delivery" },
+            { "value": "shield", "label": "Guarantee" },
+            { "value": "refresh", "label": "Returns" },
+            { "value": "leaf", "label": "Sustainable" },
+            { "value": "spark", "label": "Quality" },
+            { "value": "star", "label": "Rated" }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free 2-day shipping"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "trust", "settings": { "icon": "truck", "text": "Free 2-day shipping" } },
+        { "type": "trust", "settings": { "icon": "refresh", "text": "30-day returns" } },
+        { "type": "trust", "settings": { "icon": "shield", "text": "2-year warranty" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
