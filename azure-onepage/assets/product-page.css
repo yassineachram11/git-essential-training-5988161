@@ -514,3 +514,13 @@
   color: var(--color-text);
   font-weight: 600;
 }
+
+/* Desktop: keep the photo in view while the (taller) buy column scrolls,
+   instead of leaving an empty left column. Only on screens tall enough to
+   show the photo and its thumbnails whole. */
+@media screen and (min-width: 750px) and (min-height: 760px) {
+  .product__media {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-lg));
+  }
+}
