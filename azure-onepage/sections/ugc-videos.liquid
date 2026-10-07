@@ -1,0 +1,211 @@
+{%- comment -%}
+  Customer / creator videos: vertical 9:16 cards that swipe sideways on
+  phones. Tap a card to play it with sound; only one plays at a time.
+  Renders nothing on the live site until at least one video is added.
+{%- endcomment -%}
+{%- liquid
+  assign video_count = 0
+  for block in section.blocks
+    if block.settings.video != blank
+      assign video_count = video_count | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if video_count > 0 or request.design_mode -%}
+<style>
+  #ugc-{{ section.id }} { background: {% if section.settings.background == 'surface' %}var(--color-surface){% else %}var(--color-background){% endif %}; }
+  .ugc__track {
+    display: flex;
+    gap: var(--space-md, 16px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--page-gutter, 16px);
+    padding: 4px var(--page-gutter, 16px) 12px;
+    margin-inline: calc(var(--page-gutter, 16px) * -1);
+    justify-content: safe center;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ugc__track::-webkit-scrollbar { display: none; }
+  .ugc__card {
+    position: relative;
+    flex: 0 0 min(260px, 70vw);
+    aspect-ratio: 9 / 16;
+    border-radius: var(--radius-card, 16px);
+    overflow: hidden;
+    background: #0f172a;
+    scroll-snap-align: start;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+  }
+  .ugc__card video,
+  .ugc__card .ugc__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ugc__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 6px;
+    width: 100%;
+    padding: 16px;
+    border: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.78) 0%, rgba(15, 23, 42, 0.15) 45%, rgba(15, 23, 42, 0) 70%);
+    color: #fff;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+  }
+  .ugc__card.is-playing .ugc__overlay { opacity: 0; }
+  .ugc__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%232c3845' d='M9 6.5v11l9-5.5z'/%3E%3C/svg%3E") 55% 50% / 24px no-repeat;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+  .ugc__quote { font-size: 15px; font-weight: 600; line-height: 1.35; }
+  .ugc__who { font-size: 13px; opacity: 0.85; }
+  .ugc__empty {
+    padding: 32px;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-card, 16px);
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+  .ugc__cta { margin-top: var(--space-xl, 32px); text-align: center; }
+</style>
+
+<section id="ugc-{{ section.id }}" class="section ugc" data-ugc>
+  <div class="page-width">
+    <div class="section-header text-center reveal reveal--up">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+
+    {%- if video_count == 0 -%}
+      <div class="ugc__empty">Add a Video block and pick a video to show this section. It stays hidden on your live site until then.</div>
+    {%- else -%}
+      <div class="ugc__track" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.video != blank -%}
+            {%- liquid
+              assign who = block.settings.name
+              if block.settings.handle != blank
+                if who != blank
+                  assign who = who | append: ' · ' | append: block.settings.handle
+                else
+                  assign who = block.settings.handle
+                endif
+              endif
+            -%}
+            <div class="ugc__card" role="listitem" data-ugc-card {{ block.shopify_attributes }}>
+              {%- if block.settings.poster != blank -%}
+                {{ block.settings.poster | image_url: width: 540 | image_tag: class: 'ugc__poster', loading: 'lazy', alt: '' }}
+              {%- endif -%}
+              {{ block.settings.video | video_tag: playsinline: true, preload: 'none', image_size: '540x' }}
+              <button type="button" class="ugc__overlay" data-ugc-toggle aria-label="Play video{% if who != blank %} from {{ who | escape }}{% endif %}">
+                <span class="ugc__play" aria-hidden="true"></span>
+                {%- if block.settings.quote != blank -%}<span class="ugc__quote">“{{ block.settings.quote }}”</span>{%- endif -%}
+                {%- if who != blank -%}<span class="ugc__who">{{ who }}</span>{%- endif -%}
+              </button>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank and video_count > 0 -%}
+      <div class="ugc__cta">
+        <a href="{{ section.settings.button_link | default: '/#buy' }}" class="btn btn--primary btn--lg">{{ section.settings.button_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('ugc-{{ section.id }}');
+    if (!root) return;
+
+    function stop(card) {
+      var v = card.querySelector('video');
+      if (v) v.pause();
+      card.classList.remove('is-playing');
+    }
+
+    root.addEventListener('click', function (event) {
+      var card = event.target.closest('[data-ugc-card]');
+      if (!card) return;
+      var video = card.querySelector('video');
+      if (!video) return;
+
+      if (card.classList.contains('is-playing')) { stop(card); return; }
+
+      // One at a time, across every video section on the page.
+      document.querySelectorAll('[data-ugc-card].is-playing').forEach(stop);
+      var poster = card.querySelector('.ugc__poster');
+      if (poster) poster.hidden = true;
+      video.muted = false;
+      card.classList.add('is-playing');
+      var p = video.play();
+      if (p && p.catch) p.catch(function () { card.classList.remove('is-playing'); });
+    });
+
+    root.querySelectorAll('video').forEach(function (video) {
+      video.addEventListener('ended', function () {
+        video.closest('[data-ugc-card]').classList.remove('is-playing');
+      });
+    });
+
+    // Pause when the section scrolls away.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) root.querySelectorAll('[data-ugc-card].is-playing').forEach(stop);
+        });
+      }, { threshold: 0.1 }).observe(root);
+    }
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Customer videos",
+  "tag": "div",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real customers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real people, real nights." },
+    { "type": "text", "id": "text", "label": "Text" },
+    { "type": "select", "id": "background", "label": "Background", "default": "surface", "options": [
+      { "value": "white", "label": "White" },
+      { "value": "surface", "label": "Soft grey" }
+    ] },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Choose your pack", "info": "Leave empty to hide the button." },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the order section (/#buy)." },
+    { "type": "paragraph", "content": "Upload vertical 9:16 videos, 15–30 seconds, with captions burned in. The section stays hidden on the live site until at least one video is added." }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" },
+        { "type": "text", "id": "name", "label": "Name", "info": "e.g. Rana" },
+        { "type": "text", "id": "handle", "label": "Instagram or TikTok handle", "info": "e.g. @rana.sleeps" },
+        { "type": "text", "id": "quote", "label": "Short quote", "info": "One line, shown on the card before it plays." },
+        { "type": "image_picker", "id": "poster", "label": "Cover image (optional)", "info": "Leave empty to use the video's first frame." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Customer videos" }]
+}
+{% endschema %}

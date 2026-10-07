@@ -52,6 +52,7 @@
           {%- else -%}
             {{ 'product-apparel-1' | placeholder_svg_tag }}
           {%- endif -%}
+          {%- render 'gallery-video', product: p -%}
         </div>
 
         {%- if p.media.size > 1 -%}
@@ -60,8 +61,9 @@
               <li>
                 <button
                   type="button"
-                  class="product__thumb{% if forloop.first %} is-active{% endif %}"
+                  class="product__thumb{% if forloop.first %} is-active{% endif %}{% if media.media_type == 'video' or media.media_type == 'external_video' %} product__thumb--video{% endif %}"
                   data-gallery-thumb
+                  data-media-id="{{ media.id }}"
                   aria-label="{{ 'products.product.view_image' | t: index: forloop.index }}"
                 >
                   <img

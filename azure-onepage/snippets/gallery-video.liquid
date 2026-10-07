@@ -1,0 +1,36 @@
+{%- comment -%}
+  Product videos for the gallery. Rendered inside .product__media-main; each
+  video stays hidden until its thumbnail is picked (gallery-video.js). The
+  main <img> keeps the frame's size, since theme.js swaps it to the video's
+  preview image, so the video simply fills the frame on top of it.
+
+  Usage: {%- render 'gallery-video', product: p -%}
+{%- endcomment -%}
+{%- liquid
+  assign has_video = false
+  for m in product.media
+    if m.media_type == 'video' or m.media_type == 'external_video'
+      assign has_video = true
+      break
+    endif
+  endfor
+-%}
+{%- if has_video -%}
+  {{ 'gallery-video.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'gallery-video.js' | asset_url }}" defer="defer"></script>
+  {%- for m in product.media -%}
+    {%- if m.media_type == 'video' or m.media_type == 'external_video' -%}
+      <div class="gallery-video" data-gallery-video="{{ m.id }}"{% unless m.id == product.featured_media.id %} hidden{% endunless %}>
+        {%- if m.media_type == 'video' -%}
+          {{ m | video_tag: muted: true, loop: true, playsinline: true, preload: 'none', image_size: '1200x' }}
+          <button type="button" class="gallery-video__sound" data-gallery-sound aria-pressed="false">
+            <span data-sound-off>Tap for sound</span>
+            <span data-sound-on hidden>Sound on</span>
+          </button>
+        {%- else -%}
+          {{ m | external_video_url: mute: 1, playsinline: 1, rel: 0 | external_video_tag: loading: 'lazy' }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

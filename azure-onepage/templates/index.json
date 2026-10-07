@@ -506,11 +506,25 @@
         "open_first": false,
         "enable_schema": true
       }
+    },
+    "ugc": {
+      "type": "ugc-videos",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "eyebrow": "Real customers",
+        "heading": "Real people, real nights.",
+        "text": "",
+        "background": "surface",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy"
+      }
     }
   },
   "order": [
     "hero",
     "buy",
+    "ugc",
     "reviews",
     "value-props",
     "who-is-it-for",

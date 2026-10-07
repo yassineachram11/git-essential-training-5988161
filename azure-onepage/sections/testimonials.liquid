@@ -1,0 +1,68 @@
+<section class="section" style="background: {{ section.settings.background }};">
+  <div class="page-width">
+    <div class="section-header text-center reveal reveal--up">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="testimonial-grid">
+      {%- for block in section.blocks -%}
+        <figure class="testimonial reveal reveal--up" style="--reveal-delay: {{ forloop.index0 | times: 90 }}ms;" {{ block.shopify_attributes }}>
+          <div class="testimonial__stars" aria-label="{{ block.settings.rating }} out of 5">
+            {%- for i in (1..block.settings.rating) -%}
+              {%- render 'icon', name: 'star' -%}
+            {%- endfor -%}
+          </div>
+          <blockquote class="testimonial__quote">{{ block.settings.quote }}</blockquote>
+          <figcaption class="testimonial__author">
+            {%- if block.settings.avatar != blank -%}
+              {{ block.settings.avatar | image_url: width: 80 | image_tag: loading: 'lazy', class: 'testimonial__avatar', alt: block.settings.name }}
+            {%- endif -%}
+            <div>
+              <div class="testimonial__name">{{ block.settings.name }}</div>
+              {%- if block.settings.role != blank -%}
+                <div class="testimonial__role">{{ block.settings.role }}</div>
+              {%- endif -%}
+            </div>
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What customers say" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Testimonial",
+      "limit": 6,
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Genuinely the best purchase I've made this year. The quality is obvious the moment you open the box." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Alex M." },
+        { "type": "text", "id": "role", "label": "Detail", "default": "Verified buyer" },
+        { "type": "image_picker", "id": "avatar", "label": "Photo" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [{ "type": "quote" }, { "type": "quote" }, { "type": "quote" }]
+    }
+  ]
+}
+{% endschema %}
