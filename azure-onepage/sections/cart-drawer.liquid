@@ -1,0 +1,211 @@
+<div
+  id="cart-drawer"
+  class="drawer drawer--right cart-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ 'sections.cart.title' | t }}"
+  aria-hidden="true"
+  data-section-id="{{ section.id }}"
+>
+  <div data-cart-drawer-content style="display: contents;">
+    <div class="drawer__header">
+      <span class="drawer__title">
+        {{ 'sections.cart.title' | t }}
+        <span data-cart-count-source="{{ cart.item_count }}">({{ cart.item_count }})</span>
+      </span>
+      <button type="button" class="icon-btn" data-panel-close aria-label="{{ 'accessibility.close' | t }}">
+        {%- render 'icon', name: 'close' -%}
+      </button>
+    </div>
+    {%- if cart.item_count == 0 -%}
+      <div class="drawer__body">
+        <div class="cart-empty">
+          {%- render 'icon', name: 'bag-empty' -%}
+          <h3>{{ 'sections.cart.empty' | t }}</h3>
+          <p class="text-muted">{{ 'sections.cart.empty_text' | t }}</p>
+          <a href="{{ section.settings.empty_link | default: '/#buy' }}" class="btn btn--primary" data-panel-close>
+            {{ section.settings.empty_label | default: 'Choose your pack' }}
+          </a>
+        </div>
+      </div>
+    {%- else -%}
+      <div class="drawer__body">
+        <ul class="cart-items" role="list">
+          {%- for item in cart.items -%}
+            <li class="cart-item" style="animation-delay: {{ forloop.index0 | times: 50 }}ms;">
+              <a class="cart-item__image" href="{{ item.url }}" tabindex="-1" aria-hidden="true">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '80, 160, 200', alt: item.title | escape }}
+                {%- endif -%}
+              </a>
+
+              <div class="cart-item__details">
+                <a class="cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+
+                {%- unless item.product.has_only_default_variant -%}
+                  <div class="cart-item__variant">{{ item.variant.title }}</div>
+                {%- endunless -%}
+
+                {%- if item.selling_plan_allocation -%}
+                  <div class="cart-item__variant">{{ item.selling_plan_allocation.selling_plan.name }}</div>
+                {%- endif -%}
+
+                {%- for property in item.properties -%}
+                  {%- unless property.last == blank or property.first contains '_' -%}
+                    <div class="cart-item__variant">{{ property.first }}: {{ property.last }}</div>
+                  {%- endunless -%}
+                {%- endfor -%}
+
+                <div class="cart-item__price">
+                  {%- if item.original_line_price != item.final_line_price -%}
+                    <s class="price__compare">{{ item.original_line_price | money }}</s>
+                    <span>{{ item.final_line_price | money }}</span>
+                  {%- else -%}
+                    {{ item.final_line_price | money }}
+                  {%- endif -%}
+                </div>
+
+                {%- if item.line_level_discount_allocations.size > 0 -%}
+                  {%- for discount in item.line_level_discount_allocations -%}
+                    <div class="cart-item__variant">{{ discount.discount_application.title }} (−{{ discount.amount | money }})</div>
+                  {%- endfor -%}
+                {%- endif -%}
+
+                <div class="cart-item__footer">
+                  {%- if section.settings.show_quantity -%}
+                    <div class="qty">
+                      {%- assign minus_qty = item.quantity | minus: 1 -%}
+                      {%- assign plus_qty = item.quantity | plus: 1 -%}
+                      <button
+                        type="button"
+                        data-cart-step
+                        data-line="{{ forloop.index }}"
+                        data-quantity="{{ minus_qty }}"
+                        aria-label="{{ 'sections.cart.decrease' | t }}"
+                      >−</button>
+                      <input
+                        type="number"
+                        value="{{ item.quantity }}"
+                        min="0"
+                        readonly
+                        tabindex="-1"
+                        aria-label="{{ 'sections.cart.quantity' | t }}"
+                      >
+                      <button
+                        type="button"
+                        data-cart-step
+                        data-line="{{ forloop.index }}"
+                        data-quantity="{{ plus_qty }}"
+                        aria-label="{{ 'sections.cart.increase' | t }}"
+                      >+</button>
+                    </div>
+                  {%- elsif item.quantity > 1 -%}
+                    <span class="cart-item__variant">× {{ item.quantity }}</span>
+                  {%- endif -%}
+
+                  <button type="button" class="cart-item__remove" data-cart-remove="{{ forloop.index }}">
+                    {{ 'sections.cart.remove' | t }}
+                  </button>
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="drawer__footer">
+        {%- if settings.cart_shipping_bar and settings.cart_shipping_threshold > 0 -%}
+          {%- liquid
+            assign threshold = settings.cart_shipping_threshold | times: 100
+            assign remaining = threshold | minus: cart.total_price
+            assign progress = cart.total_price | times: 100 | divided_by: threshold
+            assign remaining_money = remaining | money
+            if progress > 100
+              assign progress = 100
+            endif
+          -%}
+          <div class="shipping-bar">
+            <div class="shipping-bar__label">
+              {%- if remaining > 0 -%}
+                {{ 'sections.cart.shipping_remaining_html' | t: amount: remaining_money }}
+              {%- else -%}
+                {{ 'sections.cart.shipping_unlocked' | t }}
+              {%- endif -%}
+            </div>
+            <div class="shipping-bar__track">
+              <div class="shipping-bar__fill" style="width: {{ progress }}%;"></div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <form action="{{ routes.cart_url }}" method="post" id="cart-drawer-form">
+          {%- if settings.cart_show_note -%}
+            <div class="field">
+              <label class="field__label" for="cart-drawer-note">{{ 'sections.cart.note' | t }}</label>
+              <textarea id="cart-drawer-note" name="note" style="min-height: 80px;">{{ cart.note }}</textarea>
+            </div>
+          {%- endif -%}
+
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            {%- for discount in cart.cart_level_discount_applications -%}
+              <div class="cart-drawer__subtotal" style="font-size: var(--text-sm); color: var(--color-primary);">
+                <span>{{ discount.title }}</span>
+                <span>−{{ discount.total_allocated_amount | money }}</span>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+
+          {%- if section.settings.delivery_label != blank -%}
+            <div class="cart-drawer__delivery">
+              <span>{{ section.settings.delivery_label }}</span>
+              <span>{{ section.settings.delivery_value }}</span>
+            </div>
+          {%- endif -%}
+
+          <div class="cart-drawer__subtotal">
+            <span>{{ 'sections.cart.total' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+
+          <button type="submit" name="checkout" class="btn btn--primary btn--full btn--lg">
+            {{ section.settings.checkout_label | default: 'Complete order' }}
+          </button>
+
+          {%- if section.settings.payment_note != blank -%}
+            <p class="cart-drawer__note">{{ section.settings.payment_note }}</p>
+          {%- endif -%}
+        </form>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .cart-drawer__delivery {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .cart-drawer__delivery span:last-child { color: var(--color-primary); font-weight: 600; text-align: right; }
+  .cart-drawer .cart-drawer__note { font-size: var(--text-sm); }
+</style>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    { "type": "text", "id": "checkout_label", "label": "Checkout button", "default": "Complete order" },
+    { "type": "text", "id": "payment_note", "label": "Line under the button", "default": "Pay cash on delivery or with Whish Money" },
+    { "type": "text", "id": "delivery_label", "label": "Delivery row label", "default": "Delivery", "info": "Leave empty to hide the row." },
+    { "type": "text", "id": "delivery_value", "label": "Delivery row value", "default": "Free · 1–5 days" },
+    { "type": "checkbox", "id": "show_quantity", "label": "Show quantity buttons", "default": false, "info": "Off is recommended with packs: changing quantity multiplies the pack." },
+    { "type": "header", "content": "Empty cart" },
+    { "type": "text", "id": "empty_label", "label": "Button label", "default": "Choose your pack" },
+    { "type": "url", "id": "empty_link", "label": "Button link", "info": "Defaults to the order section on the home page (/#buy)." }
+  ]
+}
+{% endschema %}
