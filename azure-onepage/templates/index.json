@@ -406,136 +406,49 @@
         "button_link": "/#buy"
       }
     },
-    "specs": {
-      "type": "specs-table",
-      "blocks": {
-        "g1": {
-          "type": "group",
-          "settings": {
-            "title": "Construction"
-          }
-        },
-        "r1": {
-          "type": "row",
-          "settings": {
-            "label": "Fill",
-            "value": "Adaptive contour memory foam",
-            "note": ""
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "label": "Cover",
-            "value": "Breathable cooling cover, zips off",
-            "note": ""
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "label": "Certification",
-            "value": "OEKO-TEX® STANDARD 100",
-            "note": ""
-          }
-        },
-        "g2": {
-          "type": "group",
-          "settings": {
-            "title": "Fit"
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "label": "Sleeping position",
-            "value": "Back and side",
-            "note": ""
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "label": "Dimensions",
-            "value": "40x16x16",
-            "note": ""
-          }
-        },
-        "r7": {
-          "type": "row",
-          "settings": {
-            "label": "Weight",
-            "value": "1.1 kg",
-            "note": ""
-          }
-        },
-        "g3": {
-          "type": "group",
-          "settings": {
-            "title": "Care and delivery"
-          }
-        },
-        "r8": {
-          "type": "row",
-          "settings": {
-            "label": "Washing",
-            "value": "Cover is machine washable",
-            "note": ""
-          }
-        },
-        "r9": {
-          "type": "row",
-          "settings": {
-            "label": "Delivery",
-            "value": "Free across Lebanon, 1–5 days",
-            "note": ""
-          }
-        },
-        "r10": {
-          "type": "row",
-          "settings": {
-            "label": "Returns",
-            "value": "Unopened and sealed only",
-            "note": ""
-          }
-        }
-      },
-      "block_order": [
-        "g1",
-        "r1",
-        "r2",
-        "r3",
-        "g2",
-        "r4",
-        "r5",
-        "r7",
-        "g3",
-        "r8",
-        "r9",
-        "r10"
-      ],
-      "settings": {
-        "eyebrow": "The details",
-        "heading": "Specifications",
-        "text": "",
-        "collapsible": "group",
-        "toggle_label": "Specifications",
-        "open_first": false,
-        "columns": "1",
-        "label_width": 4,
-        "max_width": 860,
-        "background": "#ffffff",
-        "footnote": ""
-      }
-    },
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": {
+        "q_made": {
           "type": "question",
           "settings": {
-            "question": "What is the return policy?",
-            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
+            "question": "What is Pilo made of?",
+            "answer": "<p>An <strong>adaptive contour memory foam</strong> core inside a <strong>breathable cooling cover</strong> that zips off. The fabric is <strong>OEKO-TEX® STANDARD 100</strong> certified.</p>"
+          }
+        },
+        "q_size": {
+          "type": "question",
+          "settings": {
+            "question": "How big is it?",
+            "answer": "<p>40 × 16 × 16 cm and 1.1 kg.</p>"
+          }
+        },
+        "q_position": {
+          "type": "question",
+          "settings": {
+            "question": "Which sleeping positions is it for?",
+            "answer": "<p>Back and side sleepers.</p>"
+          }
+        },
+        "q_adjust": {
+          "type": "question",
+          "settings": {
+            "question": "Is it normal for it to feel different at first?",
+            "answer": "<p>Yes. A contour pillow holds your neck in a position it may not be used to. Give it three nights; most people settle in within a week.</p>"
+          }
+        },
+        "q_wash": {
+          "type": "question",
+          "settings": {
+            "question": "How do I wash it?",
+            "answer": "<p>Unzip the cover and put it in the washing machine. The foam core itself should not be washed.</p>"
+          }
+        },
+        "question_tB3gYX": {
+          "type": "question",
+          "settings": {
+            "question": "What does OEKO-TEX® certified mean?",
+            "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p>"
           }
         },
         "q2": {
@@ -559,28 +472,25 @@
             "answer": "<p>Two ways, no card needed: pay the courier in <strong>cash on delivery</strong>, or pay with <strong>Whish Money</strong>.</p>"
           }
         },
-        "q_adjust": {
+        "q1": {
           "type": "question",
           "settings": {
-            "question": "Is it normal for it to feel different at first?",
-            "answer": "<p>Yes. A contour pillow holds your neck in a position it may not be used to. Give it three nights; most people settle in within a week.</p>"
-          }
-        },
-        "question_tB3gYX": {
-          "type": "question",
-          "settings": {
-            "question": "What does OEKO-TEX® certified mean?",
-            "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p>"
+            "question": "What is the return policy?",
+            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
           }
         }
       },
       "block_order": [
-        "q1",
+        "q_made",
+        "q_size",
+        "q_position",
+        "q_adjust",
+        "q_wash",
+        "question_tB3gYX",
         "q2",
         "q3",
         "q_cod",
-        "q_adjust",
-        "question_tB3gYX"
+        "q1"
       ],
       "settings": {
         "eyebrow": "",
@@ -600,7 +510,6 @@
     "comparison",
     "comparison_table",
     "how_to_use",
-    "specs",
     "faq"
   ]
 }
