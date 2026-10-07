@@ -1,0 +1,443 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "judge_me_reviews_trust_badge_iJqVcR": {
+          "type": "shopify://apps/judge-me-reviews/blocks/trust_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "structure": "default",
+            "color": "default",
+            "star": "default",
+            "alignment": "center"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_WRUjdU": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "bundle": {
+          "type": "bundle",
+          "settings": {
+            "heading": "Choose your pack",
+            "savings_style": "amount",
+            "show_unit_price": true,
+            "badge": "Best value"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity": false,
+            "show_stock": true,
+            "stock_threshold": 10,
+            "stock_in_label": "In stock",
+            "stock_low_label": "Only [count] left",
+            "stock_out_label": "Out of stock",
+            "stock_backorder_label": "Available on backorder",
+            "add_label": "",
+            "soldout_label": "",
+            "show_buy_now": false,
+            "buy_now_label": "Buy it now",
+            "show_dynamic_checkout": true,
+            "size": "large",
+            "full_width": false,
+            "radius": 8,
+            "add_bg": "#385e88",
+            "add_text": "",
+            "now_bg": "",
+            "now_text": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "trust": {
+          "type": "trust",
+          "settings": {
+            "heading": "",
+            "layout": "card",
+            "icon_style": "soft",
+            "item_1": "Free 2-day shipping",
+            "item_2": "Cash on delivery available",
+            "item_3": "Covered by a 2-year warranty"
+          }
+        },
+        "trust_item_JxBhxV": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free delivery across Lebanon  1-5 days",
+            "note": ""
+          }
+        },
+        "trust_item_ePJUrT": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "check",
+            "text": "Cash on delivery available",
+            "note": ""
+          }
+        },
+        "trust_item_YyUrd3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "spark",
+            "text": "OEKO-TEX certified fabric",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_trust_badge_iJqVcR",
+        "title",
+        "judge_me_reviews_preview_badge_WRUjdU",
+        "price",
+        "bundle",
+        "buy_buttons",
+        "description",
+        "trust",
+        "trust_item_JxBhxV",
+        "trust_item_ePJUrT",
+        "trust_item_YyUrd3"
+      ],
+      "settings": {
+        "show_buy_bar": true,
+        "background_style": "none"
+      }
+    },
+    "comparison": {
+      "type": "comparison-slider",
+      "settings": {
+        "before_image": "shopify://shop_images/watermark-removed-Gemini_Generated_Image_n3ua8zn3ua8zn3ua.png",
+        "before_label": "Normal pillow",
+        "after_image": "shopify://shop_images/image1.png",
+        "after_label": "Pilo 1.0",
+        "eyebrow": "See the difference",
+        "heading": "Normal pillow vs Pilo 1.0",
+        "text": "Drag the handle to see what proper cervical support changes.",
+        "slider_label": "Drag to compare a normal pillow with the Pilo 1.0",
+        "image_ratio": "landscape",
+        "max_width": 900,
+        "show_hint": true,
+        "background": "#ffffff"
+      }
+    },
+    "comparison_table_Ain9g3": {
+      "type": "comparison-table",
+      "blocks": {
+        "row_ndMYX3": {
+          "type": "row",
+          "settings": {
+            "label": "Adaptive contour foam",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_9LMV7f": {
+          "type": "row",
+          "settings": {
+            "label": "OEKO-TEX® STANDARD 100 certified",
+            "note": "Every component lab tested for harmful substances",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_JXjyh7": {
+          "type": "row",
+          "settings": {
+            "label": "Cover zips off and machine washes",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_iTUQY4": {
+          "type": "row",
+          "settings": {
+            "label": "Works for back and side sleepers",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "partial",
+            "theirs_note": ""
+          }
+        },
+        "row_mNg7a3": {
+          "type": "row",
+          "settings": {
+            "label": "",
+            "note": "",
+            "mine": "yes",
+            "mine_note": "",
+            "theirs": "no",
+            "theirs_note": "Often weeks by post"
+          }
+        }
+      },
+      "block_order": [
+        "row_ndMYX3",
+        "row_9LMV7f",
+        "row_JXjyh7",
+        "row_iTUQY4",
+        "row_mNg7a3"
+      ],
+      "name": "Comparison table",
+      "settings": {
+        "eyebrow": "How we compare",
+        "heading": "Pilo 1.0 vs other ergonomic pillows",
+        "text": "<p>Plenty of pillows claim ergonomic support. Here is what you actually get, and where the category is split.</p>",
+        "mine_label": "Pilo 1.0",
+        "theirs_label": "Most ergonomic pillows",
+        "footnote": "",
+        "button_label": "",
+        "button_link": "",
+        "max_width": 820,
+        "background": "#ffffff"
+      }
+    },
+    "specs": {
+      "type": "specs-table",
+      "blocks": {
+        "g1": {
+          "type": "group",
+          "settings": {
+            "title": "Construction"
+          }
+        },
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Fill",
+            "value": "Adaptive contour memory foam",
+            "note": ""
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Cover",
+            "value": "Breathable cooling cover, zips off",
+            "note": ""
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Certification",
+            "value": "OEKO-TEX® STANDARD 100",
+            "note": ""
+          }
+        },
+        "g2": {
+          "type": "group",
+          "settings": {
+            "title": "Fit"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Sleeping position",
+            "value": "Back and side",
+            "note": ""
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Dimensions",
+            "value": "40x16x16",
+            "note": ""
+          }
+        },
+        "r7": {
+          "type": "row",
+          "settings": {
+            "label": "Weight",
+            "value": "1.1 kg",
+            "note": ""
+          }
+        },
+        "g3": {
+          "type": "group",
+          "settings": {
+            "title": "Care and delivery"
+          }
+        },
+        "r8": {
+          "type": "row",
+          "settings": {
+            "label": "Washing",
+            "value": "Cover is machine washable",
+            "note": ""
+          }
+        },
+        "r9": {
+          "type": "row",
+          "settings": {
+            "label": "Delivery",
+            "value": "Free across Lebanon, 1–5 days",
+            "note": ""
+          }
+        },
+        "r10": {
+          "type": "row",
+          "settings": {
+            "label": "Returns",
+            "value": "Unopened and sealed only",
+            "note": ""
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "r1",
+        "r2",
+        "r3",
+        "g2",
+        "r4",
+        "r5",
+        "r7",
+        "g3",
+        "r8",
+        "r9",
+        "r10"
+      ],
+      "settings": {
+        "eyebrow": "The details",
+        "heading": "Specifications",
+        "text": "",
+        "collapsible": "group",
+        "toggle_label": "Specifications",
+        "open_first": false,
+        "columns": "1",
+        "label_width": 4,
+        "max_width": 860,
+        "background": "#ffffff",
+        "footnote": ""
+      }
+    },
+    "17897286630ec8f0d3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_testimonials_carousel_dprnYN": {
+          "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "star_rating": "all",
+            "max_reviews": 20,
+            "quote_marks_size": "small",
+            "product_name_text_size": "small",
+            "verified_badge_style": "icon",
+            "card_height": "medium",
+            "text_size": "small",
+            "stars_size": "medium",
+            "arrows_position": "sides",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "quote_marks_style": "serif",
+            "card_color": "#f9f9f9",
+            "stars_and_quote_marks_color": "#108474",
+            "text_color": "#000000",
+            "arrows_color": "#000000",
+            "show_border": false,
+            "border_color": "#108474",
+            "show_drop_shadow": false,
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_testimonials_carousel_dprnYN"
+      ],
+      "settings": {}
+    },
+    "faq_LiwbDR": {
+      "type": "faq",
+      "blocks": {
+        "question_bhBite": {
+          "type": "question",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
+          }
+        },
+        "question_XqKWUL": {
+          "type": "question",
+          "settings": {
+            "question": "When will I get my order?",
+            "answer": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location (between 1–5 days).</p>"
+          }
+        },
+        "question_hG7Xdb": {
+          "type": "question",
+          "settings": {
+            "question": "How much does shipping cost?",
+            "answer": "<p>It's FREE!</p>"
+          }
+        },
+        "question_E3kU6p": {
+          "type": "question",
+          "settings": {
+            "question": "What does OEKO-TEX® certified mean?",
+            "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_bhBite",
+        "question_XqKWUL",
+        "question_hG7Xdb",
+        "question_E3kU6p"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "FAQ",
+        "open_first": false,
+        "enable_schema": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "comparison",
+    "comparison_table_Ain9g3",
+    "specs",
+    "17897286630ec8f0d3",
+    "faq_LiwbDR"
+  ]
+}

@@ -1,0 +1,160 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_primary": "#35608F",
+    "color_primary_hover": "#2A4C72",
+    "color_primary_soft": "#EAF0F7",
+    "color_text": "#2c3845",
+    "color_text_muted": "#5c6b7d",
+    "color_background": "#ffffff",
+    "color_surface": "#F4F6F9",
+    "color_border": "#DDE3EB",
+    "color_sale": "#dc2626",
+    "font_heading": "assistant_n6",
+    "heading_scale": 100,
+    "heading_letter_spacing": "-0.02em",
+    "heading_uppercase": false,
+    "font_body": "cabin_n4",
+    "body_scale": 16,
+    "page_width": 1280,
+    "section_spacing": 72,
+    "radius_button": 8,
+    "radius_card": 16,
+    "animations_reveal": true,
+    "animations_hover": true,
+    "animations_image_zoom": true,
+    "animation_speed": "normal",
+    "card_image_ratio": "1",
+    "card_hover_image": true,
+    "card_quick_add": true,
+    "card_vendor": false,
+    "card_sale_badge": true,
+    "cart_type": "drawer",
+    "cart_show_note": false,
+    "cart_shipping_bar": false,
+    "cart_shipping_threshold": 75,
+    "social_instagram_link": "https://www.instagram.com/shop.pilo",
+    "social_facebook_link": "",
+    "social_tiktok_link": "",
+    "social_youtube_link": "",
+    "social_x_link": "",
+    "social_pinterest_link": "",
+    "logo": "shopify://shop_images/logo-03.png",
+    "logo_width": 130,
+    "favicon": "shopify://shop_images/Untitled_design_1.png",
+    "share_image": "shopify://shop_images/Copy_of_logo-01.png",
+    "sections": {
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "7924418359578431505": {
+        "type": "shopify://apps/seoant-ai-seo/blocks/seoant-core/8e57283b-dcb0-4f7b-a947-fb5c57a0d59d",
+        "disabled": false,
+        "settings": {}
+      },
+      "5091004626459974968": {
+        "type": "shopify://apps/moose-whatsapp/blocks/whatsapp/b77db749-c44a-4265-8135-8b842af1b111",
+        "disabled": false,
+        "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": false,
+        "settings": {}
+      },
+      "1626193551103621034": {
+        "type": "shopify://apps/cod-king/blocks/app-embed/99553eb5-bf07-4ce0-9263-7e5f10cab22c",
+        "disabled": false,
+        "settings": {}
+      },
+      "15620043091132039688": {
+        "type": "shopify://apps/hoppy-trust-badges/blocks/trust_badges_icon/6e9703d9-56af-47d9-80bb-0abc8eb8c38b",
+        "disabled": true,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Azure": {
+      "color_primary": "#2563eb",
+      "color_primary_hover": "#1d4ed8",
+      "color_primary_soft": "#eff6ff",
+      "color_text": "#0f172a",
+      "color_text_muted": "#64748b",
+      "color_background": "#ffffff",
+      "color_surface": "#f8fafc",
+      "color_border": "#e2e8f0",
+      "color_sale": "#dc2626",
+      "font_heading": "assistant_n6",
+      "font_body": "assistant_n4",
+      "radius_button": 8,
+      "radius_card": 16,
+      "animation_speed": "normal"
+    },
+    "Clinical Slate": {
+      "color_primary": "#35608F",
+      "color_primary_hover": "#2A4C72",
+      "color_primary_soft": "#EAF0F7",
+      "color_text": "#2C3845",
+      "color_text_muted": "#5C6B7D",
+      "color_background": "#ffffff",
+      "color_surface": "#F4F6F9",
+      "color_border": "#DDE3EB",
+      "color_sale": "#dc2626",
+      "font_heading": "assistant_n6",
+      "font_body": "cabin_n4",
+      "radius_button": 8,
+      "radius_card": 16,
+      "animation_speed": "normal"
+    },
+    "Restorative Teal": {
+      "color_primary": "#1F7A73",
+      "color_primary_hover": "#17605A",
+      "color_primary_soft": "#E6F2F1",
+      "color_text": "#2C3845",
+      "color_text_muted": "#5C6B7D",
+      "color_background": "#ffffff",
+      "color_surface": "#F2F6F5",
+      "color_border": "#DCE5E3",
+      "color_sale": "#dc2626",
+      "font_heading": "assistant_n6",
+      "font_body": "cabin_n4",
+      "radius_button": 8,
+      "radius_card": 16,
+      "animation_speed": "normal"
+    },
+    "Night Indigo": {
+      "color_primary": "#3B4F8F",
+      "color_primary_hover": "#2E3E73",
+      "color_primary_soft": "#ECEEF8",
+      "color_text": "#1E2A3A",
+      "color_text_muted": "#5C6B7D",
+      "color_background": "#ffffff",
+      "color_surface": "#F4F5FA",
+      "color_border": "#DFE2EF",
+      "color_sale": "#dc2626",
+      "font_heading": "assistant_n6",
+      "font_body": "cabin_n4",
+      "radius_button": 8,
+      "radius_card": 16,
+      "animation_speed": "normal"
+    }
+  }
+}

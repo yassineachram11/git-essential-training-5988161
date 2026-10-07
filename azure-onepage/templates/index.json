@@ -1,9 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "layout": "banner",
         "color_scheme": "dark",
@@ -25,6 +32,11 @@
         "image_position": "right",
         "mobile_layout": "side",
         "mobile_banner_media": "fullscreen",
+        "mobile_video_focus": "50% 50%",
+        "mobile_hero_height": 90,
+        "mobile_video_height": 70,
+        "mobile_fullscreen_zoom": 100,
+        "mobile_fade": 85,
         "mobile_media_position": "left",
         "mobile_media_width": 30,
         "mobile_custom_video": false,
@@ -33,16 +45,11 @@
         "mobile_video_zoom": 85,
         "min_height": 620,
         "overlay_opacity": 50,
+        "overlay_style": "spotlight",
         "text_color": "light",
         "show_badge": false,
         "badge_title": "4.9 out of 5",
-        "badge_text": "from 2,400+ reviews",
-        "mobile_video_focus": "50% 50%",
-        "mobile_hero_height": 90,
-        "mobile_fullscreen_zoom": 100,
-        "mobile_fade": 85,
-        "mobile_video_height": 70,
-        "overlay_style": "spotlight"
+        "badge_text": "from 2,400+ reviews"
       }
     },
     "buy": {
@@ -71,7 +78,7 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_quantity": true,
+            "show_quantity": false,
             "show_stock": true,
             "stock_threshold": 10,
             "stock_in_label": "In stock",
