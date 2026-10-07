@@ -2,45 +2,22 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "blocks": {
-        "step1": {
-          "type": "step",
-          "settings": {
-            "text": "Order online"
-          }
-        },
-        "step2": {
-          "type": "step",
-          "settings": {
-            "text": "We confirm on WhatsApp"
-          }
-        },
-        "step3": {
-          "type": "step",
-          "settings": {
-            "text": "Pay when it arrives"
-          }
-        }
-      },
-      "block_order": [
-        "step1",
-        "step2",
-        "step3"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "layout": "banner",
         "color_scheme": "dark",
         "eyebrow": "",
         "heading": "Wake up without <em>neck pain.</em>",
         "subheading": "<p>The contour memory foam pillow that keeps your neck aligned all night, for back and side sleepers.</p>",
-        "price": "From $80",
-        "price_note": "Free delivery · Pay on delivery",
+        "price": "",
+        "price_note": "",
         "button_label": "Choose your pack",
         "button_link": "/#buy",
-        "button_label_2": "Ask us on WhatsApp",
-        "button_link_2": "https://wa.me/96178953771?text=Hi%20Pilo!%20I%20have%20a%20question%20about%20the%20pillow.",
+        "button_label_2": "",
+        "button_link_2": "",
         "sticky_cta": true,
-        "sticky_cta_label": "Order now · Pay on delivery",
+        "sticky_cta_label": "Order now · Cash or Whish",
         "video": "shopify://files/videos/pilo-hero-clean.mp4",
         "video_fit": "cover",
         "video_ratio": "16 / 9",
@@ -493,7 +470,7 @@
           "type": "question",
           "settings": {
             "question": "How can I pay?",
-            "answer": "<p>Two ways, no card needed: pay the courier in <strong>cash on delivery</strong>, or pay with <strong>Whish Money</strong>.</p>"
+            "answer": "<p>Two ways, no card needed: pay the courier in <strong>cash on delivery</strong>, or pay with <strong>Whish Money</strong> before delivery.</p>"
           }
         },
         "q1": {
