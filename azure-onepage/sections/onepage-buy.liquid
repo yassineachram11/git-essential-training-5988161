@@ -145,6 +145,8 @@
                       assign row_badge = ''
                       if units > 1 and save > 0 and v.id == best_id
                         assign row_badge = block.settings.badge
+                      elsif units == block.settings.popular_units and block.settings.popular_badge != blank
+                        assign row_badge = block.settings.popular_badge
                       endif
                       assign selected = false
                       if v.id == current_variant.id
@@ -306,7 +308,9 @@
         { "value": "amount", "label": "Amount saved" }, { "value": "percent", "label": "Percent saved" }, { "value": "none", "label": "Don't show savings" }
       ], "default": "amount" },
       { "type": "checkbox", "id": "show_unit_price", "label": "Show per-unit price on multi-packs", "default": true },
-      { "type": "text", "id": "badge", "label": "Badge on the best-value pack", "default": "Best value" }
+      { "type": "text", "id": "badge", "label": "Badge on the best-value pack", "default": "Best value" },
+      { "type": "text", "id": "popular_badge", "label": "Second badge", "default": "Most popular", "info": "Leave empty to hide." },
+      { "type": "range", "id": "popular_units", "label": "Second badge goes on the pack of", "min": 1, "max": 6, "step": 1, "unit": "pcs", "default": 2 }
     ] },
     { "type": "buy_buttons", "name": "Buy buttons", "limit": 1, "settings": [
       { "type": "checkbox", "id": "show_quantity", "label": "Show quantity selector", "default": true },

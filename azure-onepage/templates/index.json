@@ -70,7 +70,9 @@
             "heading": "Choose your pack",
             "savings_style": "amount",
             "show_unit_price": true,
-            "badge": "Best value"
+            "badge": "Best value",
+            "popular_badge": "Most popular",
+            "popular_units": 2
           }
         },
         "buy_buttons": {

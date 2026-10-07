@@ -104,6 +104,42 @@
             "text": "OEKO-TEX certified fabric",
             "note": ""
           }
+        },
+        "pack_1": {
+          "type": "bundle_option",
+          "settings": {
+            "variant_index": 1,
+            "label": "",
+            "note": "",
+            "badge": "",
+            "units": 1,
+            "savings_override": "",
+            "preselect": false
+          }
+        },
+        "pack_2": {
+          "type": "bundle_option",
+          "settings": {
+            "variant_index": 2,
+            "label": "",
+            "note": "",
+            "badge": "Most popular",
+            "units": 2,
+            "savings_override": "",
+            "preselect": false
+          }
+        },
+        "pack_3": {
+          "type": "bundle_option",
+          "settings": {
+            "variant_index": 3,
+            "label": "",
+            "note": "",
+            "badge": "Best value",
+            "units": 3,
+            "savings_override": "",
+            "preselect": false
+          }
         }
       },
       "block_order": [
@@ -112,6 +148,9 @@
         "judge_me_reviews_preview_badge_WRUjdU",
         "price",
         "bundle",
+        "pack_1",
+        "pack_2",
+        "pack_3",
         "buy_buttons",
         "description",
         "trust",
