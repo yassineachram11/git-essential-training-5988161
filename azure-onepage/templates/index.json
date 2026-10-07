@@ -2,34 +2,8 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "blocks": {
-        "t1": {
-          "type": "trust",
-          "settings": {
-            "icon": "truck",
-            "text": "Free delivery, 1–5 days"
-          }
-        },
-        "t2": {
-          "type": "trust",
-          "settings": {
-            "icon": "spark",
-            "text": "OEKO-TEX certified fabric"
-          }
-        },
-        "t3": {
-          "type": "trust",
-          "settings": {
-            "icon": "shield",
-            "text": "Cash on delivery"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "layout": "banner",
         "color_scheme": "dark",
@@ -126,7 +100,7 @@
           "type": "trust_item",
           "settings": {
             "icon": "check",
-            "text": "Cash on delivery available",
+            "text": "Pay cash on delivery or with Whish Money",
             "note": ""
           }
         },
@@ -549,16 +523,6 @@
         "footnote": ""
       }
     },
-    "designed": {
-      "type": "rich-text",
-      "settings": {
-        "eyebrow": "Protect your neck",
-        "heading": "Designed for your neck.",
-        "text": "<p>Experience perfect alignment with adaptive contour foam that relieves neck tension. Wrapped in a breathable cooling cover, the Pilo 1.0 keeps you comfortable and supported all night long. Free delivery across Lebanon, and you can pay cash on delivery.</p>",
-        "button_label": "Choose your pack",
-        "button_link": "/#buy"
-      }
-    },
     "faq": {
       "type": "faq",
       "blocks": {
@@ -586,8 +550,8 @@
         "q_cod": {
           "type": "question",
           "settings": {
-            "question": "Can I pay cash on delivery?",
-            "answer": "<p>Yes. Choose cash on delivery when you order and pay the courier when your Pilo arrives. No card needed.</p>"
+            "question": "How can I pay?",
+            "answer": "<p>Two ways, no card needed: pay the courier in <strong>cash on delivery</strong>, or pay with <strong>Whish Money</strong>.</p>"
           }
         },
         "q_adjust": {
@@ -632,7 +596,6 @@
     "comparison_table",
     "how_to_use",
     "specs",
-    "designed",
     "faq"
   ]
 }
