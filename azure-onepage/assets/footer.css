@@ -1,0 +1,143 @@
+/* Footer theming — loaded by sections/footer.liquid.
+   Every value falls back to the global token, so leaving the defaults alone
+   reproduces the original appearance exactly. */
+
+.footer {
+  background: var(--footer-bg, var(--color-surface));
+  padding-top: var(--footer-pt, var(--space-3xl));
+  padding-bottom: var(--footer-pb, 0px);
+  border-top: 1px solid var(--footer-border, var(--color-border));
+}
+
+.footer--no-top-border { border-top: 0; }
+
+/* Column layout.
+   The track lists are built in sections/footer.liquid from the section
+   settings and handed over as --footer-grid / --footer-grid-mobile, so the
+   "wider first column" option can be combined with a fixed column count
+   without needing calc() inside repeat(). */
+.footer__top {
+  grid-template-columns: var(--footer-grid-mobile, minmax(0, 1fr));
+}
+
+@media screen and (max-width: 749px) {
+  /* Brand, newsletter and text blocks keep the full width even when the
+     menus are laid out two-up. */
+  .footer__block--full { grid-column: 1 / -1; }
+}
+
+@media screen and (min-width: 750px) {
+  .footer__top {
+    grid-template-columns: var(--footer-grid, repeat(auto-fit, minmax(180px, 1fr)));
+  }
+}
+
+/* Headings and brand name */
+.footer__heading,
+.footer .header__logo-text {
+  color: var(--footer-heading, var(--color-text));
+}
+
+/* Body copy */
+.footer__brand-text,
+.footer__brand-text p,
+.newsletter-form__disclaimer,
+.footer__copyright {
+  color: var(--footer-text, var(--color-text-muted));
+}
+
+/* Menu + copyright links */
+.footer__menu a,
+.footer__copyright a {
+  color: var(--footer-text, var(--color-text-muted));
+}
+
+.footer__menu a:hover,
+.footer__copyright a:hover,
+.footer .header__logo:hover .header__logo-text {
+  color: var(--footer-accent, var(--color-primary));
+}
+
+/* Links inside footer text blocks (e.g. Contact us). Without this they pick up
+   the global link colour, which disappears on a dark footer. */
+.footer__brand-text a {
+  color: var(--footer-heading, var(--color-text));
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.footer__brand-text a:hover {
+  color: var(--footer-accent, var(--color-primary));
+  text-decoration-color: currentColor;
+}
+
+/* Dividers */
+.footer__bottom {
+  border-top: 1px solid var(--footer-border, var(--color-border));
+}
+
+/* Social icons */
+.footer .social-list a {
+  border-color: var(--footer-border, var(--color-border));
+  color: var(--footer-text, var(--color-text-muted));
+}
+
+.footer .social-list a:hover {
+  background: var(--footer-accent, var(--color-primary));
+  border-color: var(--footer-accent, var(--color-primary));
+  color: var(--footer-accent-contrast, #fff);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Newsletter field — needs its own colors so a dark footer stays readable */
+.footer .newsletter-form input[type="email"] {
+  background: var(--footer-input-bg, var(--color-background));
+  color: var(--footer-input-text, var(--color-text));
+  border-color: var(--footer-input-border, var(--footer-border, var(--color-border)));
+}
+
+.footer .newsletter-form input[type="email"]::placeholder {
+  color: var(--footer-input-placeholder, var(--color-text-muted));
+  opacity: 1;
+}
+
+.footer .newsletter-form input[type="email"]:focus {
+  border-color: var(--footer-accent, var(--color-primary));
+  box-shadow: 0 0 0 4px var(--footer-focus-ring, rgba(var(--color-primary-rgb), 0.18));
+}
+
+/* Newsletter button */
+.footer .newsletter-form .btn--primary {
+  background: var(--footer-button-bg, var(--color-primary));
+  color: var(--footer-button-text, #fff);
+}
+
+.footer .newsletter-form .btn--primary:hover:not([disabled]) {
+  background: var(--footer-button-bg-hover, var(--color-primary-hover));
+  color: var(--footer-button-text, #fff);
+}
+
+/* Payment placeholders */
+.footer .payment-placeholder {
+  background: var(--footer-input-bg, var(--color-background));
+  border-color: var(--footer-border, var(--color-border));
+  color: var(--footer-text, var(--color-text-muted));
+}
+
+/* Custom payment badges (Whish Money, cash on delivery, local gateways) */
+.footer .payment-badge {
+  height: 24px;
+  width: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.footer .payment-placeholder--wide {
+  width: auto;
+  height: 26px;
+  padding-inline: 9px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
