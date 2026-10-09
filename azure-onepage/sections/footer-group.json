@@ -28,11 +28,11 @@
             "menu": "main-menu"
           }
         },
-        "menu-2": {
-          "type": "menu",
+        "contact": {
+          "type": "text",
           "settings": {
-            "heading": "Help",
-            "menu": "footer"
+            "heading": "Contact us",
+            "text": "<p>WhatsApp: <a href=\"https://wa.me/96178953771\" title=\"Chat with Pilo on WhatsApp\">+961 78 953 771</a></p><p>Email: <a href=\"mailto:shoppiloco@gmail.com\" title=\"Email Pilo\">shoppiloco@gmail.com</a></p>"
           }
         },
         "menu-3": {
@@ -54,7 +54,7 @@
       "block_order": [
         "brand",
         "menu-1",
-        "menu-2",
+        "contact",
         "menu-3",
         "newsletter"
       ],
@@ -69,12 +69,12 @@
         "color_input_text": "#2c3845",
         "color_button_background": "#edf2f8",
         "color_button_text": "#2c3845",
+        "columns_desktop": "5",
+        "wide_first_column": true,
+        "columns_mobile": "2",
         "show_top_border": true,
         "padding_top": 72,
         "padding_bottom": 0,
-        "columns_desktop": "4",
-        "wide_first_column": true,
-        "columns_mobile": "2",
         "policy_menu": "policies",
         "show_payment_icons": false
       }
