@@ -431,3 +431,51 @@
   .hero__media-inner video,
   .hero__bg video { transition: none; }
 }
+
+/* --------------------------------------------------------------------------
+   Mobile "whole video" banner (below 750px)
+   The section adds hero--mobile-fullscreen too, so the text styling above
+   carries over; these rules only change the layout: the full video sits
+   uncropped across the top and the copy follows underneath on dark.
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .hero--banner.hero--mobile-whole {
+    display: flex;
+    flex-direction: column;
+    background: rgb(15, 23, 42);
+  }
+
+  .hero--banner.hero--mobile-whole .hero__bg {
+    order: 1;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: rgb(15, 23, 42);
+  }
+
+  .hero--banner.hero--mobile-whole .hero__bg > div { height: 100%; }
+
+  .hero--banner.hero--mobile-whole .hero__bg video,
+  .hero--banner.hero--mobile-whole .hero__bg img {
+    min-height: 0;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transform: none;
+  }
+
+  .hero--banner.hero--mobile-whole .hero__overlay { display: none; }
+
+  .hero--banner.hero--mobile-whole .hero__inner {
+    order: 2;
+    min-height: 0;
+    align-items: start;
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+
+  /* No fade needed: the copy already sits on solid dark. */
+  .hero--banner.hero--mobile-whole .hero__content::before { display: none; }
+}
+
+@media screen and (max-width: 749px) and (max-height: 720px) {
+  .hero--banner.hero--mobile-whole .hero__subtitle { display: block; }
+}

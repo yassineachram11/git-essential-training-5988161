@@ -45,6 +45,15 @@
   endif
 
   comment
+    Banner layout on mobile: 'whole' shows the entire video, uncropped,
+    across the top of the screen, with the copy underneath on dark. It reuses
+    the full screen text styling and overrides only the layout.
+  endcomment
+  if section.settings.layout == 'banner' and section.settings.mobile_banner_media == 'whole'
+    assign modifier = modifier | append: ' hero--mobile-fullscreen hero--mobile-whole'
+  endif
+
+  comment
     Mobile: 'side' keeps text and media beside each other below 750px
     instead of stacking them.
   endcomment
@@ -508,10 +517,11 @@
       "options": [
         { "value": "background", "label": "Behind the text (background)" },
         { "value": "fullscreen", "label": "Full screen behind the text, text at the bottom" },
+        { "value": "whole", "label": "Whole video on top, text below (no cropping)" },
         { "value": "below", "label": "Under the text" }
       ],
       "default": "background",
-      "info": "Banner layout only. 'Full screen' keeps the desktop look on phones: the video fills the screen and the text sits at the bottom over a dark fade. 'Under the text' drops the video below the copy."
+      "info": "Banner layout only. 'Full screen' keeps the desktop look on phones: the video fills the screen and the text sits at the bottom over a dark fade. 'Under the text' drops the video below the copy. 'Whole video on top' shows the full widescreen video uncropped, with the text underneath on dark."
     },
     {
       "type": "select",

@@ -31,7 +31,7 @@
         "video_zoom": 100,
         "image_position": "right",
         "mobile_layout": "side",
-        "mobile_banner_media": "fullscreen",
+        "mobile_banner_media": "whole",
         "mobile_video_focus": "50% 50%",
         "mobile_hero_height": 90,
         "mobile_video_height": 70,
@@ -47,7 +47,9 @@
         "overlay_opacity": 50,
         "overlay_style": "spotlight",
         "text_color": "light",
-        "show_badge": false
+        "show_badge": false,
+        "badge_title": "",
+        "badge_text": ""
       }
     },
     "buy": {
@@ -59,6 +61,10 @@
             "title": "",
             "subtitle": "The contour pillow that keeps your neck aligned all night."
           }
+        },
+        "judge_me_reviews_preview_badge_hEeaBQ": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
         },
         "price": {
           "type": "price",
@@ -128,6 +134,7 @@
       },
       "block_order": [
         "title",
+        "judge_me_reviews_preview_badge_hEeaBQ",
         "price",
         "bundle",
         "buy_buttons",
@@ -143,6 +150,17 @@
         "eyebrow": "",
         "heading": "",
         "background_style": "gradient"
+      }
+    },
+    "ugc": {
+      "type": "ugc-videos",
+      "settings": {
+        "eyebrow": "Real customers",
+        "heading": "Real people, real nights.",
+        "text": "",
+        "background": "surface",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy"
       }
     },
     "reviews": {
@@ -505,19 +523,6 @@
         "heading": "FAQ",
         "open_first": false,
         "enable_schema": true
-      }
-    },
-    "ugc": {
-      "type": "ugc-videos",
-      "blocks": {},
-      "block_order": [],
-      "settings": {
-        "eyebrow": "Real customers",
-        "heading": "Real people, real nights.",
-        "text": "",
-        "background": "surface",
-        "button_label": "Choose your pack",
-        "button_link": "/#buy"
       }
     }
   },
