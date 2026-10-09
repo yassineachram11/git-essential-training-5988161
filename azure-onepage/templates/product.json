@@ -428,40 +428,88 @@
     "faq_LiwbDR": {
       "type": "faq",
       "blocks": {
-        "question_bhBite": {
+        "q_made": {
           "type": "question",
           "settings": {
-            "question": "What is the return policy?",
-            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
+            "question": "What is Pilo made of?",
+            "answer": "<p>An <strong>adaptive contour memory foam</strong> core inside a <strong>breathable cooling cover</strong> that zips off. The fabric is <strong>OEKO-TEX® STANDARD 100</strong> certified.</p>"
           }
         },
-        "question_XqKWUL": {
+        "q_size": {
+          "type": "question",
+          "settings": {
+            "question": "How big is it?",
+            "answer": "<p>40 × 16 × 16 cm and 1.1 kg.</p>"
+          }
+        },
+        "q_position": {
+          "type": "question",
+          "settings": {
+            "question": "Which sleeping positions is it for?",
+            "answer": "<p>Back and side sleepers.</p>"
+          }
+        },
+        "q_adjust": {
+          "type": "question",
+          "settings": {
+            "question": "Is it normal for it to feel different at first?",
+            "answer": "<p>Yes. A contour pillow holds your neck in a position it may not be used to. Give it three nights; most people settle in within a week.</p>"
+          }
+        },
+        "q_wash": {
+          "type": "question",
+          "settings": {
+            "question": "How do I wash it?",
+            "answer": "<p>Unzip the cover and put it in the washing machine. The foam core itself should not be washed.</p>"
+          }
+        },
+        "question_tB3gYX": {
+          "type": "question",
+          "settings": {
+            "question": "What does OEKO-TEX® certified mean?",
+            "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p>"
+          }
+        },
+        "q2": {
           "type": "question",
           "settings": {
             "question": "When will I get my order?",
             "answer": "<p>We confirm every order by phone or WhatsApp, then send it out. Delivery takes 1–5 days depending on where you are in Lebanon.</p>"
           }
         },
-        "question_hG7Xdb": {
+        "q3": {
           "type": "question",
           "settings": {
             "question": "How much does shipping cost?",
             "answer": "<p>It's FREE!</p>"
           }
         },
-        "question_E3kU6p": {
+        "q_cod": {
           "type": "question",
           "settings": {
-            "question": "What does OEKO-TEX® certified mean?",
-            "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p><p></p>"
+            "question": "How can I pay?",
+            "answer": "<p>Two ways, no card needed: pay the courier in <strong>cash on delivery</strong>, or pay with <strong>Whish Money</strong> before delivery.</p>"
+          }
+        },
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
           }
         }
       },
       "block_order": [
-        "question_bhBite",
-        "question_XqKWUL",
-        "question_hG7Xdb",
-        "question_E3kU6p"
+        "q_made",
+        "q_size",
+        "q_position",
+        "q_adjust",
+        "q_wash",
+        "question_tB3gYX",
+        "q2",
+        "q3",
+        "q_cod",
+        "q1"
       ],
       "settings": {
         "eyebrow": "",
