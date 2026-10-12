@@ -42,6 +42,42 @@
             "badge": "Best value"
           }
         },
+        "pack_1": {
+          "type": "bundle_option",
+          "settings": {
+            "variant_index": 1,
+            "label": "",
+            "note": "",
+            "badge": "",
+            "units": 1,
+            "savings_override": "",
+            "preselect": false
+          }
+        },
+        "pack_2": {
+          "type": "bundle_option",
+          "settings": {
+            "variant_index": 2,
+            "label": "",
+            "note": "",
+            "badge": "Most popular",
+            "units": 2,
+            "savings_override": "",
+            "preselect": false
+          }
+        },
+        "pack_3": {
+          "type": "bundle_option",
+          "settings": {
+            "variant_index": 3,
+            "label": "",
+            "note": "",
+            "badge": "Best value",
+            "units": 3,
+            "savings_override": "",
+            "preselect": false
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -103,42 +139,6 @@
             "icon": "spark",
             "text": "OEKO-TEX certified fabric",
             "note": ""
-          }
-        },
-        "pack_1": {
-          "type": "bundle_option",
-          "settings": {
-            "variant_index": 1,
-            "label": "",
-            "note": "",
-            "badge": "",
-            "units": 1,
-            "savings_override": "",
-            "preselect": false
-          }
-        },
-        "pack_2": {
-          "type": "bundle_option",
-          "settings": {
-            "variant_index": 2,
-            "label": "",
-            "note": "",
-            "badge": "Most popular",
-            "units": 2,
-            "savings_override": "",
-            "preselect": false
-          }
-        },
-        "pack_3": {
-          "type": "bundle_option",
-          "settings": {
-            "variant_index": 3,
-            "label": "",
-            "note": "",
-            "badge": "Best value",
-            "units": 3,
-            "savings_override": "",
-            "preselect": false
           }
         }
       },
@@ -258,128 +258,6 @@
         "button_link": "",
         "max_width": 820,
         "background": "#ffffff"
-      }
-    },
-    "specs": {
-      "type": "specs-table",
-      "blocks": {
-        "g1": {
-          "type": "group",
-          "settings": {
-            "title": "Construction"
-          }
-        },
-        "r1": {
-          "type": "row",
-          "settings": {
-            "label": "Fill",
-            "value": "Adaptive contour memory foam",
-            "note": ""
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "label": "Cover",
-            "value": "Breathable cooling cover, zips off",
-            "note": ""
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "label": "Certification",
-            "value": "OEKO-TEX® STANDARD 100",
-            "note": ""
-          }
-        },
-        "g2": {
-          "type": "group",
-          "settings": {
-            "title": "Fit"
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "label": "Sleeping position",
-            "value": "Back and side",
-            "note": ""
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "label": "Dimensions",
-            "value": "40 × 16 × 16 cm",
-            "note": ""
-          }
-        },
-        "r7": {
-          "type": "row",
-          "settings": {
-            "label": "Weight",
-            "value": "1.1 kg",
-            "note": ""
-          }
-        },
-        "g3": {
-          "type": "group",
-          "settings": {
-            "title": "Care and delivery"
-          }
-        },
-        "r8": {
-          "type": "row",
-          "settings": {
-            "label": "Washing",
-            "value": "Cover is machine washable",
-            "note": ""
-          }
-        },
-        "r9": {
-          "type": "row",
-          "settings": {
-            "label": "Delivery",
-            "value": "Free across Lebanon, 1–5 days",
-            "note": ""
-          }
-        },
-        "r10": {
-          "type": "row",
-          "settings": {
-            "label": "Returns",
-            "value": "Unopened and sealed only",
-            "note": ""
-          }
-        }
-      },
-      "block_order": [
-        "g1",
-        "r1",
-        "r2",
-        "r3",
-        "g2",
-        "r4",
-        "r5",
-        "r7",
-        "g3",
-        "r8",
-        "r9",
-        "r10"
-      ],
-      "settings": {
-        "eyebrow": "The details",
-        "heading": "Specifications",
-        "text": "",
-        "collapsible": "group",
-        "toggle_label": "Specifications",
-        "open_first": false,
-        "columns": "1",
-        "label_width": 4,
-        "max_width": 860,
-        "background": "#ffffff",
-        "footnote": ""
       }
     },
     "17897286630ec8f0d3": {
@@ -517,13 +395,48 @@
         "open_first": false,
         "enable_schema": true
       }
+    },
+    "ugc": {
+      "type": "ugc-videos",
+      "settings": {
+        "eyebrow": "Real customers",
+        "heading": "Real people, real nights.",
+        "text": "",
+        "background": "surface",
+        "button_label": "",
+        "button_link": ""
+      },
+      "blocks": {
+        "video_review_1": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-captioned.mp4",
+            "name": "",
+            "handle": "",
+            "quote": "I thought I was sleeping on a good pillow. Turns out no!"
+          }
+        },
+        "video_review_2": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-2-captioned.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_review_1",
+        "video_review_2"
+      ]
     }
   },
   "order": [
     "main",
+    "ugc",
     "comparison",
     "comparison_table_Ain9g3",
-    "specs",
     "17897286630ec8f0d3",
     "faq_LiwbDR"
   ]

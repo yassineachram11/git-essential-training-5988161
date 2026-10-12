@@ -25,7 +25,7 @@
         "button_link_2": "",
         "sticky_cta": true,
         "sticky_cta_label": "Order now · Cash or Whish",
-        "video": "shopify://files/videos/pilo-hero-clean.mp4",
+        "video": "shopify://files/videos/watermark-removed-videopilo.mp4",
         "video_fit": "cover",
         "video_ratio": "16 / 9",
         "video_zoom": 100,
@@ -154,6 +154,30 @@
     },
     "ugc": {
       "type": "ugc-videos",
+      "blocks": {
+        "video_review_1": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-captioned.mp4",
+            "name": "",
+            "handle": "",
+            "quote": "I thought I was sleeping on a good pillow. Turns out no!"
+          }
+        },
+        "video_review_2": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-2-captioned.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_review_1",
+        "video_review_2"
+      ],
       "settings": {
         "eyebrow": "Real customers",
         "heading": "Real people, real nights.",
@@ -275,9 +299,9 @@
         "end_frame": 28,
         "frame_digits": 3,
         "frame_width": "1600",
-        "scroll_height": 250,
-        "smoothing": 12,
-        "crossfade": true,
+        "scroll_height": 180,
+        "smoothing": 32,
+        "crossfade": false,
         "eyebrow": "Inside Pilo",
         "heading": "Engineered Layer by Layer",
         "text": "<p>Discover the ergonomic core and breathable materials designed for restorative sleep.</p>",
@@ -400,7 +424,7 @@
         "step_fXi9FC": {
           "type": "step",
           "settings": {
-            "video": "shopify://files/videos/pilo-howto-step-2-unwrap-it.mp4",
+            "video": "shopify://files/videos/pilo-howto-step-2-unwrap-real.mp4",
             "title": "Unwrap the pillow",
             "text": "<p>Cut the seal and let it breathe. It takes a few seconds to expand to full shape.</p>"
           }
@@ -408,7 +432,7 @@
         "step_ChqiE6": {
           "type": "step",
           "settings": {
-            "video": "shopify://files/videos/pilo-howto-step-3-sleep-on-it.mp4",
+            "video": "shopify://files/videos/pilo-howto-step-3-sleep-real.mp4",
             "title": "Sleep on it",
             "text": "<p>Give it three nights. Your neck needs a few to unlearn the old pillow.</p>"
           }
