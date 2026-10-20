@@ -12,18 +12,33 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
+    {%- liquid
+      assign seo_title = page_title
+      assign seo_description = page_description
+      assign seo_custom_title = false
+      if request.page_type == 'index'
+        if settings.home_seo_title != blank
+          assign seo_title = settings.home_seo_title
+          assign seo_custom_title = true
+        endif
+        if settings.home_seo_description != blank
+          assign seo_description = settings.home_seo_description
+        endif
+      endif
+    -%}
+
     <title>
-      {{ page_title }}
+      {{ seo_title }}
       {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
       {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless seo_custom_title or seo_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {%- if page_description -%}
-      <meta name="description" content="{{ page_description | escape }}">
+    {%- if seo_description -%}
+      <meta name="description" content="{{ seo_description | escape }}">
     {%- endif -%}
 
-    {%- render 'meta-tags' -%}
+    {%- render 'meta-tags', seo_title: seo_title, seo_description: seo_description -%}
 
     {{ content_for_header }}
 
@@ -94,6 +109,12 @@
         --duration-fast: {{ d_fast }};
         --duration-base: {{ d_base }};
         --duration-slow: {{ d_slow }};
+      }
+
+      {%- comment -%} Phones get their own, tighter section spacing and a shorter gap under section headings. {%- endcomment -%}
+      @media screen and (max-width: 749px) {
+        :root { --section-padding-block: {{ settings.section_spacing_mobile | default: 32 }}px; }
+        .section-header { margin-bottom: var(--space-xl); }
       }
 
       {%- if settings.heading_uppercase -%}

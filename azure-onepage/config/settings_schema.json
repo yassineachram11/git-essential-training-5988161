@@ -1,0 +1,420 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Azure",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary / accent",
+        "info": "Used for buttons, links, badges and hover states.",
+        "default": "#2563eb"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_hover",
+        "label": "Primary hover",
+        "default": "#1d4ed8"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_soft",
+        "label": "Primary tint",
+        "info": "Subtle blue background used behind icons and hover states.",
+        "default": "#eff6ff"
+      },
+      {
+        "type": "header",
+        "content": "Text and background"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Headings and body text",
+        "default": "#0f172a"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Secondary text",
+        "default": "#64748b"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Page background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Surface",
+        "info": "Footer, cards and image placeholders.",
+        "default": "#f8fafc"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Borders and dividers",
+        "default": "#e2e8f0"
+      },
+      {
+        "type": "header",
+        "content": "Feedback"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale price",
+        "default": "#dc2626"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "assistant_n6"
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "label": "Heading size",
+        "min": 80,
+        "max": 130,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "heading_letter_spacing",
+        "label": "Heading letter spacing",
+        "options": [
+          { "value": "-0.04em", "label": "Tight" },
+          { "value": "-0.02em", "label": "Snug" },
+          { "value": "0", "label": "Normal" },
+          { "value": "0.02em", "label": "Wide" }
+        ],
+        "default": "-0.02em"
+      },
+      {
+        "type": "checkbox",
+        "id": "heading_uppercase",
+        "label": "Uppercase headings",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "body_scale",
+        "label": "Base font size",
+        "min": 14,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Layout and style",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1000,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1280
+      },
+      {
+        "type": "range",
+        "id": "section_spacing",
+        "label": "Space between sections (desktop)",
+        "info": "Added above and below every section, so the gap between two sections is double this.",
+        "min": 24,
+        "max": 128,
+        "step": 8,
+        "unit": "px",
+        "default": 48
+      },
+      {
+        "type": "range",
+        "id": "section_spacing_mobile",
+        "label": "Space between sections (mobile)",
+        "info": "Used on screens narrower than 750px.",
+        "min": 16,
+        "max": 96,
+        "step": 8,
+        "unit": "px",
+        "default": 32
+      },
+      {
+        "type": "header",
+        "content": "Corners"
+      },
+      {
+        "type": "range",
+        "id": "radius_button",
+        "label": "Button radius",
+        "min": 0,
+        "max": 32,
+        "step": 2,
+        "unit": "px",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "radius_card",
+        "label": "Card and image radius",
+        "min": 0,
+        "max": 32,
+        "step": 2,
+        "unit": "px",
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Motion is automatically disabled for visitors who ask for reduced motion in their system settings."
+      },
+      {
+        "type": "checkbox",
+        "id": "animations_reveal",
+        "label": "Fade sections in on scroll",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "animations_hover",
+        "label": "Button and card hover effects",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "animations_image_zoom",
+        "label": "Zoom product images on hover",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "animation_speed",
+        "label": "Animation speed",
+        "options": [
+          { "value": "fast", "label": "Fast" },
+          { "value": "normal", "label": "Normal" },
+          { "value": "relaxed", "label": "Relaxed" }
+        ],
+        "default": "normal"
+      }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Image ratio",
+        "options": [
+          { "value": "1", "label": "Square" },
+          { "value": "0.8", "label": "Portrait" },
+          { "value": "1.33", "label": "Landscape" }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_hover_image",
+        "label": "Show second image on hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_quick_add",
+        "label": "Show quick add button",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_sale_badge",
+        "label": "Show sale badge",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart behaviour",
+        "options": [
+          { "value": "drawer", "label": "Open a cart drawer" },
+          { "value": "page", "label": "Go to the cart page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_note",
+        "label": "Enable order notes",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Free shipping bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_shipping_bar",
+        "label": "Show free shipping progress",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "cart_shipping_threshold",
+        "label": "Free shipping threshold",
+        "info": "In your store currency, without decimals. Example: 75",
+        "default": 75
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https://instagram.com/shop"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "YouTube"
+      },
+      {
+        "type": "text",
+        "id": "social_x_link",
+        "label": "X (Twitter)"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest"
+      }
+    ]
+  },
+  {
+    "name": "Logo and favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 60,
+        "max": 260,
+        "step": 10,
+        "unit": "px",
+        "default": 130
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32 px recommended."
+      }
+    ]
+  },
+  {
+    "name": "Social sharing image",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Default share image",
+        "info": "1200 x 628 px recommended. Used when a page has no other image."
+      }
+    ]
+  },
+  {
+    "name": "Search engines",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "What Google shows for your homepage. Leave a field empty to use the title and description from Online Store > Preferences."
+      },
+      {
+        "type": "text",
+        "id": "home_seo_title",
+        "label": "Homepage title",
+        "info": "Keep it under 60 characters.",
+        "default": "Pilo | Contour Memory Foam Pillow in Lebanon"
+      },
+      {
+        "type": "textarea",
+        "id": "home_seo_description",
+        "label": "Homepage description",
+        "info": "Keep it under 160 characters.",
+        "default": "Pilo is a contour memory foam pillow that keeps your neck aligned while you sleep. Free delivery across Lebanon in 1–5 days. Pay cash on delivery or with Whish."
+      }
+    ]
+  }
+]
