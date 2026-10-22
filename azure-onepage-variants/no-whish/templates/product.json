@@ -426,6 +426,19 @@
         "video_review_1",
         "video_review_2"
       ]
+    },
+    "judgeme_review_widget": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -434,6 +447,7 @@
     "comparison",
     "comparison_table_Ain9g3",
     "17897286630ec8f0d3",
+    "judgeme_review_widget",
     "faq_LiwbDR"
   ]
 }
