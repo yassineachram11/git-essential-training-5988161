@@ -16,7 +16,7 @@
         "color_scheme": "dark",
         "eyebrow": "",
         "heading": "Wake up without <em>neck pain.</em>",
-        "subheading": "<p>The contour memory foam pillow that keeps your neck aligned all night, for back and side sleepers.</p>",
+        "subheading": "<p>It's not your mattress. It's not the physio. It's your pillow.</p>",
         "price": "",
         "price_note": "",
         "button_label": "Choose your pack",
@@ -52,6 +52,30 @@
         "badge_text": ""
       }
     },
+    "the-problem": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/pilo-neck-angle-real.png",
+        "image_position": "left",
+        "eyebrow": "The problem",
+        "heading": "It's probably not your mattress.",
+        "text": "<p>A flat pillow lets your head drop and your neck bend out of line — for seven or eight hours, every night. You wake up stiff, blame the desk, and book another physio session. The cause is under your head.</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "how-it-works": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/pilo-support-zones-v2.jpg",
+        "image_position": "right",
+        "eyebrow": "How it works",
+        "heading": "A contour that holds your neck where it should be.",
+        "text": "<p>Pilo is shaped in zones: a <strong>cervical extension zone</strong> that supports the curve of your neck, a lower <strong>head support zone</strong> so your head doesn't tip forward, and <strong>arm support zones</strong> at the sides for side sleepers. Adaptive memory foam holds the shape all night, under a breathable cooling cover.</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
     "buy": {
       "type": "onepage-buy",
       "blocks": {
@@ -59,7 +83,7 @@
           "type": "title",
           "settings": {
             "title": "",
-            "subtitle": "The contour pillow that keeps your neck aligned all night."
+            "subtitle": "Adaptive contour memory foam with a zip-off cooling cover. 40 × 16 × 16 cm."
           }
         },
         "judge_me_reviews_preview_badge_hEeaBQ": {
@@ -86,11 +110,14 @@
           "settings": {
             "show_quantity": false,
             "show_stock": true,
-            "stock_threshold": 10,
+            "stock_threshold": 35,
             "stock_in_label": "In stock",
             "stock_low_label": "Only [count] left",
             "stock_out_label": "Out of stock",
             "stock_backorder_label": "Available on backorder",
+            "stock_batch_total": 90,
+            "stock_bar_label": "[claimed] of [total] claimed",
+            "stock_bar_min": 10,
             "add_label": "",
             "show_buy_now": false,
             "buy_now_label": "Buy it now",
@@ -172,15 +199,45 @@
             "handle": "",
             "quote": ""
           }
+        },
+        "video_review_3": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-3.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        },
+        "video_review_4": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-meta-ad-cr005.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        },
+        "video_review_5": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-meta-ad-cr004-short.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
         }
       },
       "block_order": [
         "video_review_1",
-        "video_review_2"
+        "video_review_2",
+        "video_review_3",
+        "video_review_4",
+        "video_review_5"
       ],
       "settings": {
-        "eyebrow": "Real customers",
-        "heading": "Real people, real nights.",
+        "eyebrow": "See it",
+        "heading": "Pilo in action.",
         "text": "",
         "background": "surface",
         "button_label": "Choose your pack",
@@ -229,6 +286,7 @@
       "block_order": [
         "judge_me_reviews_cards_carousel_VFC89J"
       ],
+      "disabled": true,
       "settings": {}
     },
     "value-props": {
@@ -275,6 +333,7 @@
       ],
       "settings": {
         "heading": "Why Pilo?",
+        "icon_layout": "beside",
         "background": "#f8fafc"
       }
     },
@@ -319,7 +378,7 @@
       "settings": {
         "before_image": "shopify://shop_images/watermark-removed-Gemini_Generated_Image_n3ua8zn3ua8zn3ua.png",
         "before_label": "Normal pillow",
-        "after_image": "shopify://shop_images/image1.png",
+        "after_image": "shopify://shop_images/after.jpg",
         "after_label": "Pilo 1.0",
         "eyebrow": "See the difference",
         "heading": "Normal pillow vs Pilo 1.0",
@@ -329,6 +388,52 @@
         "max_width": 900,
         "show_hint": true,
         "background": "#ffffff"
+      }
+    },
+    "how_to_use": {
+      "type": "how-to-use",
+      "blocks": {
+        "step_9W6FQE": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-1-open-v2.mp4",
+            "title": "Open the box",
+            "text": "<p>Your Pilo ships compressed and sealed, so the box is smaller than you expect. Slide it out and cut the tape.</p>"
+          }
+        },
+        "step_fXi9FC": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-2-unwrap-real.mp4",
+            "title": "Unwrap the pillow",
+            "text": "<p>Cut the seal and let it breathe. It takes a few seconds to expand to full shape.</p>"
+          }
+        },
+        "step_ChqiE6": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-3-sleep-real.mp4",
+            "title": "Sleep on it",
+            "text": "<p>Give it three nights. Your neck needs a few to unlearn the old pillow.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_9W6FQE",
+        "step_fXi9FC",
+        "step_ChqiE6"
+      ],
+      "name": "How to use",
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "Three steps to a better night.",
+        "text": "",
+        "media_ratio": "1 / 1",
+        "show_numbers": true,
+        "mobile_display": "swipe",
+        "background": "#ffffff",
+        "button_label": "Choose your pack",
+        "button_link": "/#buy"
       }
     },
     "comparison_table": {
@@ -381,12 +486,12 @@
         "row_mNg7a3": {
           "type": "row",
           "settings": {
-            "label": "Delivered across Lebanon in 1–5 days",
+            "label": "Free delivery, no minimum spend",
             "note": "",
             "mine": "yes",
-            "mine_note": "",
-            "theirs": "no",
-            "theirs_note": "Often weeks by post"
+            "mine_note": "1–5 days across Lebanon",
+            "theirs": "partial",
+            "theirs_note": "Often only above a spend threshold"
           }
         }
       },
@@ -403,74 +508,35 @@
         "text": "<p>Plenty of pillows claim ergonomic support. Here is what you actually get, and where the category is split.</p>",
         "mine_label": "Pilo 1.0",
         "theirs_label": "Most ergonomic pillows",
-        "footnote": "",
+        "footnote": "Based on ergonomic and memory foam pillows sold online in Lebanon, October 2026.",
         "button_label": "Choose your pack",
         "button_link": "/#buy",
         "max_width": 820,
         "background": "#ffffff"
       }
     },
-    "how_to_use": {
-      "type": "how-to-use",
-      "blocks": {
-        "step_9W6FQE": {
-          "type": "step",
-          "settings": {
-            "video": "shopify://files/videos/pilo-howto-step-1-open-the-box.mp4",
-            "title": "Open the box",
-            "text": "<p>Your Pilo ships compressed and sealed, so the box is smaller than you expect. Slide it out and cut the tape.</p>"
-          }
-        },
-        "step_fXi9FC": {
-          "type": "step",
-          "settings": {
-            "video": "shopify://files/videos/pilo-howto-step-2-unwrap-real.mp4",
-            "title": "Unwrap the pillow",
-            "text": "<p>Cut the seal and let it breathe. It takes a few seconds to expand to full shape.</p>"
-          }
-        },
-        "step_ChqiE6": {
-          "type": "step",
-          "settings": {
-            "video": "shopify://files/videos/pilo-howto-step-3-sleep-real.mp4",
-            "title": "Sleep on it",
-            "text": "<p>Give it three nights. Your neck needs a few to unlearn the old pillow.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "step_9W6FQE",
-        "step_fXi9FC",
-        "step_ChqiE6"
-      ],
-      "name": "How to use",
-      "settings": {
-        "eyebrow": "How it works",
-        "heading": "Three steps to a better night.",
-        "text": "",
-        "media_ratio": "1 / 1",
-        "show_numbers": true,
-        "mobile_display": "swipe",
-        "background": "#ffffff",
-        "button_label": "Choose your pack",
-        "button_link": "/#buy"
-      }
-    },
     "faq": {
       "type": "faq",
       "blocks": {
-        "q_made": {
+        "q_cod": {
           "type": "question",
           "settings": {
-            "question": "What is Pilo made of?",
-            "answer": "<p>An <strong>adaptive contour memory foam</strong> core inside a <strong>breathable cooling cover</strong> that zips off. The fabric is <strong>OEKO-TEX® STANDARD 100</strong> certified.</p>"
+            "question": "How can I pay?",
+            "answer": "<p>Two ways, no card needed: pay the courier in <strong>cash on delivery</strong>, or pay with <strong>Whish Money</strong> before delivery.</p>"
           }
         },
-        "q_size": {
+        "q2": {
           "type": "question",
           "settings": {
-            "question": "How big is it?",
-            "answer": "<p>40 × 16 × 16 cm and 1.1 kg.</p>"
+            "question": "How long does delivery take, and what does it cost?",
+            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by message or email, then send it out — it reaches you in 1–5 days depending on where you are.</p>"
+          }
+        },
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
           }
         },
         "q_position": {
@@ -487,6 +553,20 @@
             "answer": "<p>Yes. A contour pillow holds your neck in a position it may not be used to. Give it three nights; most people settle in within a week.</p>"
           }
         },
+        "q_made": {
+          "type": "question",
+          "settings": {
+            "question": "What is Pilo made of?",
+            "answer": "<p>An <strong>adaptive contour memory foam</strong> core inside a <strong>breathable cooling cover</strong> that zips off. The fabric is <strong>OEKO-TEX® STANDARD 100</strong> certified.</p>"
+          }
+        },
+        "q_size": {
+          "type": "question",
+          "settings": {
+            "question": "How big is it?",
+            "answer": "<p>40 × 16 × 16 cm and 1.1 kg.</p>"
+          }
+        },
         "q_wash": {
           "type": "question",
           "settings": {
@@ -500,47 +580,18 @@
             "question": "What does OEKO-TEX® certified mean?",
             "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p>"
           }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "When will I get my order?",
-            "answer": "<p>We confirm every order by phone or WhatsApp, then send it out. Delivery takes 1–5 days depending on where you are in Lebanon.</p>"
-          }
-        },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "How much does shipping cost?",
-            "answer": "<p>It's FREE!</p>"
-          }
-        },
-        "q_cod": {
-          "type": "question",
-          "settings": {
-            "question": "How can I pay?",
-            "answer": "<p>Two ways, no card needed: pay the courier in <strong>cash on delivery</strong>, or pay with <strong>Whish Money</strong> before delivery.</p>"
-          }
-        },
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "What is the return policy?",
-            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
-          }
         }
       },
       "block_order": [
-        "q_made",
-        "q_size",
+        "q_cod",
+        "q2",
+        "q1",
         "q_position",
         "q_adjust",
+        "q_made",
+        "q_size",
         "q_wash",
-        "question_tB3gYX",
-        "q2",
-        "q3",
-        "q_cod",
-        "q1"
+        "question_tB3gYX"
       ],
       "settings": {
         "eyebrow": "",
@@ -552,6 +603,8 @@
   },
   "order": [
     "hero",
+    "the-problem",
+    "how-it-works",
     "buy",
     "ugc",
     "reviews",
@@ -559,8 +612,8 @@
     "who-is-it-for",
     "sequence",
     "comparison",
-    "comparison_table",
     "how_to_use",
+    "comparison_table",
     "faq"
   ]
 }

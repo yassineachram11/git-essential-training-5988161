@@ -83,7 +83,7 @@
           "settings": {
             "show_quantity": false,
             "show_stock": true,
-            "stock_threshold": 10,
+            "stock_threshold": 35,
             "stock_in_label": "In stock",
             "stock_low_label": "Only [count] left",
             "stock_out_label": "Out of stock",
@@ -99,7 +99,10 @@
             "add_bg": "#385e88",
             "add_text": "",
             "now_bg": "",
-            "now_text": ""
+            "now_text": "",
+            "stock_batch_total": 90,
+            "stock_bar_label": "[claimed] of [total] claimed",
+            "stock_bar_min": 10
           }
         },
         "description": {
@@ -230,12 +233,12 @@
         "row_mNg7a3": {
           "type": "row",
           "settings": {
-            "label": "",
+            "label": "Free delivery, no minimum spend",
             "note": "",
             "mine": "yes",
-            "mine_note": "",
-            "theirs": "no",
-            "theirs_note": "Often weeks by post"
+            "mine_note": "1–5 days across Lebanon",
+            "theirs": "partial",
+            "theirs_note": "Often only above a spend threshold"
           }
         }
       },
@@ -253,7 +256,7 @@
         "text": "<p>Plenty of pillows claim ergonomic support. Here is what you actually get, and where the category is split.</p>",
         "mine_label": "Pilo 1.0",
         "theirs_label": "Most ergonomic pillows",
-        "footnote": "",
+        "footnote": "Based on ergonomic and memory foam pillows sold online in Lebanon, October 2026.",
         "button_label": "",
         "button_link": "",
         "max_width": 820,
@@ -301,7 +304,8 @@
       "block_order": [
         "judge_me_reviews_testimonials_carousel_dprnYN"
       ],
-      "settings": {}
+      "settings": {},
+      "disabled": true
     },
     "faq_LiwbDR": {
       "type": "faq",
@@ -351,15 +355,8 @@
         "q2": {
           "type": "question",
           "settings": {
-            "question": "When will I get my order?",
-            "answer": "<p>We confirm every order by phone or WhatsApp, then send it out. Delivery takes 1–5 days depending on where you are in Lebanon.</p>"
-          }
-        },
-        "q3": {
-          "type": "question",
-          "settings": {
-            "question": "How much does shipping cost?",
-            "answer": "<p>It's FREE!</p>"
+            "question": "How long does delivery take, and what does it cost?",
+            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by message or email, then send it out — it reaches you in 1–5 days depending on where you are.</p>"
           }
         },
         "q_cod": {
@@ -378,16 +375,15 @@
         }
       },
       "block_order": [
-        "q_made",
-        "q_size",
+        "q_cod",
+        "q2",
+        "q1",
         "q_position",
         "q_adjust",
+        "q_made",
+        "q_size",
         "q_wash",
-        "question_tB3gYX",
-        "q2",
-        "q3",
-        "q_cod",
-        "q1"
+        "question_tB3gYX"
       ],
       "settings": {
         "eyebrow": "",

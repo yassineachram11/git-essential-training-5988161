@@ -356,7 +356,7 @@
           "type": "question",
           "settings": {
             "question": "How long does delivery take, and what does it cost?",
-            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by phone or WhatsApp, then send it out — it reaches you in 1–5 days depending on where you are.</p>"
+            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by message or email, then send it out — it reaches you in 1–5 days depending on where you are.</p>"
           }
         },
         "q_cod": {
