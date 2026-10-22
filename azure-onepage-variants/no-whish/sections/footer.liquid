@@ -1,0 +1,527 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign border_class = ''
+  unless section.settings.show_top_border
+    assign border_class = ' footer--no-top-border'
+  endunless
+
+  comment
+    A colour picker cleared in the editor renders as an empty string, which
+    would set the custom property to empty and defeat the var() fallback.
+    Resolving each one here keeps every value concrete.
+  endcomment
+  assign c_bg = section.settings.color_background | default: '#f8fafc'
+  assign c_heading = section.settings.color_heading | default: '#0f172a'
+  assign c_text = section.settings.color_text | default: '#64748b'
+  assign c_accent = section.settings.color_accent | default: '#0171E3'
+  assign c_accent_contrast = section.settings.color_accent_contrast | default: '#ffffff'
+  assign c_border = section.settings.color_border | default: '#e2e8f0'
+  assign c_input_bg = section.settings.color_input_background | default: '#ffffff'
+  assign c_input_text = section.settings.color_input_text | default: '#0f172a'
+  assign c_btn = section.settings.color_button_background | default: '#0171E3'
+  assign c_btn_text = section.settings.color_button_text | default: '#ffffff'
+
+  assign c_btn_hover = c_btn | color_darken: 8
+  assign c_ring = c_accent | color_to_rgb | replace: 'rgb(', 'rgba(' | replace: ')', ', 0.22)'
+
+  comment
+    Column layout. The grid track lists are assembled here rather than in CSS
+    so a fixed column count can be combined with a wider first column without
+    relying on calc() inside repeat(), which browsers support unevenly.
+
+    'auto' fits as many columns as the width allows. A fixed count emits one
+    track per column, optionally widening the first one for the brand block.
+  endcomment
+  assign columns_desktop = section.settings.columns_desktop | default: 'auto'
+  if columns_desktop == 'auto'
+    assign footer_grid = 'repeat(auto-fit, minmax(180px, 1fr))'
+  else
+    assign column_count = columns_desktop | plus: 0
+    assign track_list = ''
+    assign first_track = 1
+    if section.settings.wide_first_column
+      assign track_list = '1.4fr'
+      assign first_track = 2
+    endif
+    for i in (first_track..column_count)
+      assign track_list = track_list | append: ' minmax(0, 1fr)'
+    endfor
+    assign footer_grid = track_list | strip
+  endif
+
+  assign columns_mobile = section.settings.columns_mobile | default: '1'
+  assign footer_grid_mobile = 'repeat(' | append: columns_mobile | append: ', minmax(0, 1fr))'
+-%}
+
+<footer
+  class="footer{{ border_class }}"
+  style="
+    --footer-bg: {{ c_bg }};
+    --footer-heading: {{ c_heading }};
+    --footer-text: {{ c_text }};
+    --footer-accent: {{ c_accent }};
+    --footer-accent-contrast: {{ c_accent_contrast }};
+    --footer-border: {{ c_border }};
+    --footer-input-bg: {{ c_input_bg }};
+    --footer-input-text: {{ c_input_text }};
+    --footer-input-placeholder: {{ c_text }};
+    --footer-button-bg: {{ c_btn }};
+    --footer-button-bg-hover: {{ c_btn_hover }};
+    --footer-button-text: {{ c_btn_text }};
+    --footer-focus-ring: {{ c_ring }};
+    --footer-grid: {{ footer_grid }};
+    --footer-grid-mobile: {{ footer_grid_mobile }};
+    --footer-pt: {{ section.settings.padding_top }}px;
+    --footer-pb: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="page-width">
+    <div class="footer__top">
+      {%- for block in section.blocks -%}
+        {%- comment -%}
+          Payment badges are drawn in the payment row below. Skipping them here
+          keeps them from taking an empty column in the grid above.
+        {%- endcomment -%}
+        {%- if block.type == 'payment_badge' -%}
+          {%- continue -%}
+        {%- endif -%}
+
+        {%- liquid
+          comment
+            Menus are narrow enough to sit side by side on a phone. Everything
+            else keeps the full width when the mobile layout is set to 2.
+          endcomment
+          assign width_class = 'footer__block--full'
+          if block.type == 'menu'
+            assign width_class = 'footer__block--menu'
+          endif
+        -%}
+
+        <div class="footer__block {{ width_class }} reveal reveal--up" style="--reveal-delay: {{ forloop.index0 | times: 80 }}ms;" {{ block.shopify_attributes }}>
+          {%- case block.type -%}
+
+            {%- when 'brand' -%}
+              {%- if settings.logo != blank -%}
+                <a href="{{ routes.root_url }}" class="header__logo" style="margin-bottom: var(--space-md);">
+                  {{
+                    settings.logo
+                    | image_url: width: 400
+                    | image_tag:
+                      class: 'header__logo-image',
+                      widths: '100, 200, 300, 400',
+                      alt: shop.name,
+                      style: 'width: 130px;'
+                  }}
+                </a>
+              {%- else -%}
+                <div class="header__logo-text" style="margin-bottom: var(--space-sm);">{{ shop.name }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.text != blank -%}
+                <div class="footer__brand-text rte">{{ block.settings.text }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.show_social -%}
+                {%- render 'social-icons' -%}
+              {%- endif -%}
+
+            {%- when 'menu' -%}
+              {%- if block.settings.heading != blank -%}
+                <h3 class="footer__heading">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              {%- if block.settings.menu != blank -%}
+                <ul class="footer__menu" role="list">
+                  {%- for link in block.settings.menu.links -%}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+
+            {%- when 'newsletter' -%}
+              {%- if block.settings.heading != blank -%}
+                <h3 class="footer__heading">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="footer__brand-text rte">{{ block.settings.text }}</div>
+              {%- endif -%}
+
+              {%- form 'customer', class: 'newsletter-form' -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+
+                {%- if form.posted_successfully? -%}
+                  <p class="form-status form-status--success">
+                    {{ 'newsletter.success' | t }}
+                  </p>
+                {%- elsif form.errors -%}
+                  <p class="form-status form-status--error">
+                    {{ form.errors.messages.email }}
+                  </p>
+                {%- endif -%}
+
+                <div class="newsletter-form__field">
+                  <label class="visually-hidden" for="newsletter-email">{{ 'newsletter.label' | t }}</label>
+                  <input
+                    id="newsletter-email"
+                    type="email"
+                    name="contact[email]"
+                    value="{{ form.email }}"
+                    placeholder="{{ 'newsletter.placeholder' | t }}"
+                    autocomplete="email"
+                    required
+                  >
+                  <button type="submit" class="btn btn--primary">{{ 'newsletter.button' | t }}</button>
+                </div>
+
+                {%- if block.settings.disclaimer != blank -%}
+                  <p class="newsletter-form__disclaimer">{{ block.settings.disclaimer }}</p>
+                {%- endif -%}
+              {%- endform -%}
+
+            {%- when 'text' -%}
+              {%- if block.settings.heading != blank -%}
+                <h3 class="footer__heading">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              <div class="footer__brand-text rte">{{ block.settings.text }}</div>
+
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}.
+        {%- if section.settings.policy_menu != blank -%}
+          {%- for link in section.settings.policy_menu.links -%}
+            <span aria-hidden="true"> · </span><a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      {%- liquid
+        comment
+          Local gateways and cash on delivery never appear in
+          shop.enabled_payment_types, which only covers card brands and
+          wallets. Payment badge blocks cover everything else.
+        endcomment
+        assign has_badges = false
+        for b in section.blocks
+          if b.type == 'payment_badge'
+            assign has_badges = true
+            break
+          endif
+        endfor
+      -%}
+
+      {%- if section.settings.show_payment_icons or has_badges -%}
+        <ul class="payment-list" role="list" aria-label="{{ 'sections.footer.payment_methods' | t }}">
+          {%- for b in section.blocks -%}
+            {%- if b.type == 'payment_badge' -%}
+              <li {{ b.shopify_attributes }}>
+                {%- if b.settings.image != blank -%}
+                  {{
+                    b.settings.image
+                    | image_url: height: 60
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'payment-badge',
+                      alt: b.settings.label | default: 'Payment method'
+                  }}
+                {%- elsif b.settings.label != blank -%}
+                  <span class="payment-placeholder payment-placeholder--wide">{{ b.settings.label }}</span>
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if section.settings.show_payment_icons -%}
+            {%- if shop.enabled_payment_types.size > 0 -%}
+              {%- for type in shop.enabled_payment_types -%}
+                <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+              {%- endfor -%}
+            {%- elsif has_badges == false -%}
+              {%- comment -%} Placeholders until payment providers are enabled {%- endcomment -%}
+              {%- assign placeholders = 'VISA,MC,AMEX,PAYPAL,APPLE,GPAY' | split: ',' -%}
+              {%- for name in placeholders -%}
+                <li><span class="payment-placeholder">{{ name }}</span></li>
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#f8fafc"
+    },
+    {
+      "type": "color",
+      "id": "color_heading",
+      "label": "Headings and brand name",
+      "default": "#0f172a"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Body text and links",
+      "default": "#64748b"
+    },
+    {
+      "type": "color",
+      "id": "color_accent",
+      "label": "Link hover and social hover",
+      "default": "#0171E3"
+    },
+    {
+      "type": "color",
+      "id": "color_accent_contrast",
+      "label": "Text on accent",
+      "info": "Used for social icons on hover.",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_border",
+      "label": "Borders and dividers",
+      "default": "#e2e8f0"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter field"
+    },
+    {
+      "type": "paragraph",
+      "content": "Set these if you use a dark footer background, otherwise the input will stay white."
+    },
+    {
+      "type": "color",
+      "id": "color_input_background",
+      "label": "Field background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_input_text",
+      "label": "Field text",
+      "default": "#0f172a"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "Button background",
+      "default": "#0171E3"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Columns"
+    },
+    {
+      "type": "paragraph",
+      "content": "Controls how the blocks above the copyright row are arranged. Payment badges are not affected."
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "auto", "label": "Auto (fit to width)" },
+        { "value": "2", "label": "2 columns" },
+        { "value": "3", "label": "3 columns" },
+        { "value": "4", "label": "4 columns" },
+        { "value": "5", "label": "5 columns" }
+      ],
+      "default": "auto",
+      "info": "Auto fits as many columns as the screen allows, and wraps to fewer on narrow windows."
+    },
+    {
+      "type": "checkbox",
+      "id": "wide_first_column",
+      "label": "Make the first column wider",
+      "info": "Gives the brand block extra room. Has no effect when columns are set to Auto.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
+      ],
+      "default": "1",
+      "info": "With 2 columns, menus sit side by side while the brand and newsletter blocks stay full width."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": "Show top border",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 24,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "link_list",
+      "id": "policy_menu",
+      "label": "Policy links",
+      "info": "Shown next to the copyright notice.",
+      "default": "footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Premium essentials designed in-house and made to last. Shipped carbon neutral from our own warehouse.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show social icons",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Join the list"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Early access to new drops and 10% off your first order.</p>"
+        },
+        {
+          "type": "text",
+          "id": "disclaimer",
+          "label": "Disclaimer",
+          "default": "Unsubscribe any time. We never share your email."
+        }
+      ]
+    },
+    {
+      "type": "payment_badge",
+      "name": "Payment badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo",
+          "info": "Shown at 24px tall. Leave empty to show the label as a text pill instead."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Cash on delivery",
+          "info": "Also used as the image's alt text."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Need help?"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Our team replies within one business day.</p>"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}
