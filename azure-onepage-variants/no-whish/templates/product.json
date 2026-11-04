@@ -170,7 +170,8 @@
       ],
       "settings": {
         "show_buy_bar": true,
-        "background_style": "none"
+        "background_style": "none",
+        "gallery_video": "shopify://files/videos/pilo-meta-ad-cr005.mp4"
       }
     },
     "ugc_videos_NeLwQr": {
@@ -223,10 +224,10 @@
         }
       },
       "block_order": [
+        "video_PjWmbV",
         "video_9A4qaJ",
         "video_9H6miM",
         "video_inFChB",
-        "video_PjWmbV",
         "video_MKQCqR"
       ],
       "settings": {

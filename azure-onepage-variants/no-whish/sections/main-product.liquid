@@ -21,6 +21,19 @@
 -%}
 
 {{ 'product-page.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  comment
+    An extra video from Files, shown as the second thumbnail without adding it
+    to the product. Phone videos are tall, so it is letterboxed rather than
+    cropped to the square frame, which would cut off burned-in captions.
+  endcomment
+  assign featured_video = section.settings.gallery_video
+-%}
+{%- if featured_video != blank -%}
+  {{ 'gallery-video.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'gallery-video.js' | asset_url }}" defer="defer"></script>
+  <style>.gallery-video--featured video { object-fit: contain; }</style>
+{%- endif -%}
 <script src="{{ 'bundle.js' | asset_url }}" defer="defer"></script>
 
 <section class="section product-page product-page--{{ section.settings.background_style }}">
@@ -51,6 +64,15 @@
             {{ 'product-apparel-1' | placeholder_svg_tag }}
           {%- endif -%}
           {%- render 'gallery-video', product: product -%}
+          {%- if featured_video != blank -%}
+            <div class="gallery-video gallery-video--featured" data-gallery-video="featured-video" hidden>
+              {{ featured_video | video_tag: muted: true, loop: true, playsinline: true, preload: 'none', image_size: '1200x' }}
+              <button type="button" class="gallery-video__sound" data-gallery-sound aria-pressed="false">
+                <span data-sound-off>Tap for sound</span>
+                <span data-sound-on hidden>Sound on</span>
+              </button>
+            </div>
+          {%- endif -%}
         </div>
 
         {%- if product.media.size > 1 -%}
@@ -74,6 +96,26 @@
                   >
                 </button>
               </li>
+              {%- if forloop.first and featured_video != blank -%}
+                <li>
+                  <button
+                    type="button"
+                    class="product__thumb product__thumb--video"
+                    data-gallery-thumb
+                    data-media-id="featured-video"
+                    aria-label="Play video"
+                  >
+                    <img
+                      src="{{ featured_video.preview_image | image_url: width: 200, height: 200, crop: 'center' }}"
+                      data-full="{{ featured_video.preview_image | image_url: width: 1200 }}"
+                      alt="{{ featured_video.alt | default: 'Pilo in use' | escape }}"
+                      loading="lazy"
+                      width="200"
+                      height="200"
+                    >
+                  </button>
+                </li>
+              {%- endif -%}
             {%- endfor -%}
           </ul>
         {%- endif -%}
@@ -571,6 +613,12 @@
       "label": "Sticky add to cart bar",
       "info": "Slides up once the main buy button scrolls out of view.",
       "default": true
+    },
+    {
+      "type": "video",
+      "id": "gallery_video",
+      "label": "Extra gallery video",
+      "info": "Shown as the second thumbnail, next to the photos. Plays only when tapped, so it does not slow the page."
     },
     {
       "type": "select",
