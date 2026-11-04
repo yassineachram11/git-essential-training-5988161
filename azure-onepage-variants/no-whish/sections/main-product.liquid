@@ -27,11 +27,19 @@
   <div class="page-width">
     <div class="product">
       {%- comment -%} Gallery {%- endcomment -%}
-      <div class="product__media reveal reveal--up" data-gallery>
+      {%- comment -%}
+        No scroll reveal on the gallery or the buy box: they are the first
+        thing on screen, and .reveal keeps them invisible until theme.js has
+        loaded and run, which pushed the main photo (the LCP) back by seconds
+        on slow connections.
+      {%- endcomment -%}
+      <div class="product__media" data-gallery>
         <div class="product__media-main">
           {%- if product.featured_media -%}
             <img
               src="{{ product.featured_media | image_url: width: 1200 }}"
+              srcset="{{ product.featured_media | image_url: width: 400 }} 400w, {{ product.featured_media | image_url: width: 600 }} 600w, {{ product.featured_media | image_url: width: 800 }} 800w, {{ product.featured_media | image_url: width: 1000 }} 1000w, {{ product.featured_media | image_url: width: 1200 }} 1200w"
+              sizes="(min-width: 990px) 50vw, 100vw"
               alt="{{ product.featured_media.alt | escape }}"
               width="{{ product.featured_media.width }}"
               height="{{ product.featured_media.height }}"
@@ -72,7 +80,7 @@
       </div>
 
       {%- comment -%} Buy box {%- endcomment -%}
-      <div class="product__info reveal reveal--up" style="--reveal-delay: 100ms;">
+      <div class="product__info">
         {%- for block in section.blocks -%}
           {%- case block.type -%}
 
