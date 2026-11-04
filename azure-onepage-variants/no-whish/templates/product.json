@@ -25,6 +25,12 @@
           "type": "title",
           "settings": {}
         },
+        "subtitle": {
+          "type": "subtitle",
+          "settings": {
+            "text": "Contour memory foam pillow that holds your neck in line — for back and side sleepers."
+          }
+        },
         "judge_me_reviews_preview_badge_WRUjdU": {
           "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
@@ -59,11 +65,11 @@
           "settings": {
             "variant_index": 2,
             "label": "",
-            "note": "",
+            "note": "Most people choose 2: one for you, one for your partner",
             "badge": "Most popular",
             "units": 2,
             "savings_override": "",
-            "preselect": false
+            "preselect": true
           }
         },
         "pack_3": {
@@ -88,6 +94,9 @@
             "stock_low_label": "Only [count] left",
             "stock_out_label": "Out of stock",
             "stock_backorder_label": "Available on backorder",
+            "stock_batch_total": 90,
+            "stock_bar_label": "[claimed] of [total] claimed",
+            "stock_bar_min": 10,
             "add_label": "",
             "soldout_label": "",
             "show_buy_now": false,
@@ -99,10 +108,7 @@
             "add_bg": "#385e88",
             "add_text": "",
             "now_bg": "",
-            "now_text": "",
-            "stock_batch_total": 90,
-            "stock_bar_label": "[claimed] of [total] claimed",
-            "stock_bar_min": 10
+            "now_text": ""
           }
         },
         "description": {
@@ -148,6 +154,7 @@
       "block_order": [
         "judge_me_reviews_trust_badge_iJqVcR",
         "title",
+        "subtitle",
         "judge_me_reviews_preview_badge_WRUjdU",
         "price",
         "bundle",
@@ -166,12 +173,77 @@
         "background_style": "none"
       }
     },
-    "comparison": {
+    "ugc_videos_NeLwQr": {
+      "type": "ugc-videos",
+      "blocks": {
+        "video_9A4qaJ": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-captioned.mp4",
+            "name": "",
+            "handle": "",
+            "quote": "I thought I was sleeping on a good pillow. Turns out no!"
+          }
+        },
+        "video_9H6miM": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-2-captioned.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        },
+        "video_inFChB": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-customer-review-3.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        },
+        "video_PjWmbV": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-meta-ad-cr005.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        },
+        "video_MKQCqR": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/pilo-meta-ad-cr004-short.mp4",
+            "name": "",
+            "handle": "",
+            "quote": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_9A4qaJ",
+        "video_9H6miM",
+        "video_inFChB",
+        "video_PjWmbV",
+        "video_MKQCqR"
+      ],
+      "settings": {
+        "eyebrow": "See it",
+        "heading": "Pilo in action.",
+        "text": "",
+        "background": "surface",
+        "button_label": "Choose your pack",
+        "button_link": "shopify://products/pilo-1-0"
+      }
+    },
+    "comparison_slider_DqMA4C": {
       "type": "comparison-slider",
       "settings": {
         "before_image": "shopify://shop_images/watermark-removed-Gemini_Generated_Image_n3ua8zn3ua8zn3ua.png",
         "before_label": "Normal pillow",
-        "after_image": "shopify://shop_images/image1.png",
+        "after_image": "shopify://shop_images/after.jpg",
         "after_label": "Pilo 1.0",
         "eyebrow": "See the difference",
         "heading": "Normal pillow vs Pilo 1.0",
@@ -183,10 +255,10 @@
         "background": "#ffffff"
       }
     },
-    "comparison_table_Ain9g3": {
+    "comparison_table_xnV4gp": {
       "type": "comparison-table",
       "blocks": {
-        "row_ndMYX3": {
+        "row_YQfyMq": {
           "type": "row",
           "settings": {
             "label": "Adaptive contour foam",
@@ -197,7 +269,7 @@
             "theirs_note": ""
           }
         },
-        "row_9LMV7f": {
+        "row_Nixhzb": {
           "type": "row",
           "settings": {
             "label": "OEKO-TEX® STANDARD 100 certified",
@@ -208,7 +280,7 @@
             "theirs_note": ""
           }
         },
-        "row_JXjyh7": {
+        "row_R6H7xk": {
           "type": "row",
           "settings": {
             "label": "Cover zips off and machine washes",
@@ -219,7 +291,7 @@
             "theirs_note": ""
           }
         },
-        "row_iTUQY4": {
+        "row_xUPqzP": {
           "type": "row",
           "settings": {
             "label": "Works for back and side sleepers",
@@ -230,7 +302,7 @@
             "theirs_note": ""
           }
         },
-        "row_mNg7a3": {
+        "row_BjJDmA": {
           "type": "row",
           "settings": {
             "label": "Free delivery, no minimum spend",
@@ -243,13 +315,12 @@
         }
       },
       "block_order": [
-        "row_ndMYX3",
-        "row_9LMV7f",
-        "row_JXjyh7",
-        "row_iTUQY4",
-        "row_mNg7a3"
+        "row_YQfyMq",
+        "row_Nixhzb",
+        "row_R6H7xk",
+        "row_xUPqzP",
+        "row_BjJDmA"
       ],
-      "name": "Comparison table",
       "settings": {
         "eyebrow": "How we compare",
         "heading": "Pilo 1.0 vs other ergonomic pillows",
@@ -257,10 +328,56 @@
         "mine_label": "Pilo 1.0",
         "theirs_label": "Most ergonomic pillows",
         "footnote": "Based on ergonomic and memory foam pillows sold online in Lebanon, October 2026.",
-        "button_label": "",
-        "button_link": "",
+        "button_label": "Choose your pack",
+        "button_link": "shopify://products/pilo-1-0",
         "max_width": 820,
         "background": "#ffffff"
+      }
+    },
+    "how_to_use_raXPnL": {
+      "type": "how-to-use",
+      "blocks": {
+        "step_YRBqUm": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-1-open-v2.mp4",
+            "title": "Open the box",
+            "text": "<p>Your Pilo ships compressed and sealed, so the box is smaller than you expect. Slide it out and cut the tape.</p>"
+          }
+        },
+        "step_mGEYxd": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-2-unwrap-real.mp4",
+            "title": "Unwrap the pillow",
+            "text": "<p>Cut the seal and let it breathe. It takes a few seconds to expand to full shape.</p>"
+          }
+        },
+        "step_hdwYgT": {
+          "type": "step",
+          "settings": {
+            "video": "shopify://files/videos/pilo-howto-step-3-sleep-real.mp4",
+            "title": "Sleep on it",
+            "text": "<p>Give it three nights. Your neck needs a few to unlearn the old pillow.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_YRBqUm",
+        "step_mGEYxd",
+        "step_hdwYgT"
+      ],
+      "name": "How to use",
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "Three steps to a better night.",
+        "text": "",
+        "media_ratio": "1 / 1",
+        "show_numbers": true,
+        "mobile_display": "swipe",
+        "background": "#ffffff",
+        "button_label": "Choose your pack",
+        "button_link": "shopify://products/pilo-1-0"
       }
     },
     "17897286630ec8f0d3": {
@@ -304,24 +421,58 @@
       "block_order": [
         "judge_me_reviews_testimonials_carousel_dprnYN"
       ],
-      "settings": {},
-      "disabled": true
+      "disabled": true,
+      "settings": {}
+    },
+    "reviews_heading": {
+      "type": "section-heading",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Reviews",
+        "text": "",
+        "space_below": 0
+      }
+    },
+    "judgeme_review_widget": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1100,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget"
+      ],
+      "settings": {}
     },
     "faq_LiwbDR": {
       "type": "faq",
       "blocks": {
-        "q_made": {
+        "q_cod": {
           "type": "question",
           "settings": {
-            "question": "What is Pilo made of?",
-            "answer": "<p>An <strong>adaptive contour memory foam</strong> core inside a <strong>breathable cooling cover</strong> that zips off. The fabric is <strong>OEKO-TEX® STANDARD 100</strong> certified.</p>"
+            "question": "How can I pay?",
+            "answer": "<p>No card needed: you pay the courier in <strong>cash on delivery</strong> when your Pilo arrives.</p>"
           }
         },
-        "q_size": {
+        "q2": {
           "type": "question",
           "settings": {
-            "question": "How big is it?",
-            "answer": "<p>40 × 16 × 16 cm and 1.1 kg.</p>"
+            "question": "How long does delivery take, and what does it cost?",
+            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by message or email, then send it out — it reaches you in 1–5 days depending on where you are.</p>"
+          }
+        },
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
           }
         },
         "q_position": {
@@ -338,6 +489,20 @@
             "answer": "<p>Yes. A contour pillow holds your neck in a position it may not be used to. Give it three nights; most people settle in within a week.</p>"
           }
         },
+        "q_made": {
+          "type": "question",
+          "settings": {
+            "question": "What is Pilo made of?",
+            "answer": "<p>An <strong>adaptive contour memory foam</strong> core inside a <strong>breathable cooling cover</strong> that zips off. The fabric is <strong>OEKO-TEX® STANDARD 100</strong> certified.</p>"
+          }
+        },
+        "q_size": {
+          "type": "question",
+          "settings": {
+            "question": "How big is it?",
+            "answer": "<p>40 × 16 × 16 cm and 1.1 kg.</p>"
+          }
+        },
         "q_wash": {
           "type": "question",
           "settings": {
@@ -350,27 +515,6 @@
           "settings": {
             "question": "What does OEKO-TEX® certified mean?",
             "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p>"
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "How long does delivery take, and what does it cost?",
-            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by message or email, then send it out — it reaches you in 1–5 days depending on where you are.</p>"
-          }
-        },
-        "q_cod": {
-          "type": "question",
-          "settings": {
-            "question": "How can I pay?",
-            "answer": "<p>No card needed: you pay the courier in <strong>cash on delivery</strong> when your Pilo arrives.</p>"
-          }
-        },
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "What is the return policy?",
-            "answer": "<p>For health, safety, and hygienic reasons, Pilo pillows can only be returned if they are unopened, unused, and in their original, sealed packaging.</p>"
           }
         }
       },
@@ -391,62 +535,16 @@
         "open_first": false,
         "enable_schema": true
       }
-    },
-    "ugc": {
-      "type": "ugc-videos",
-      "settings": {
-        "eyebrow": "Real customers",
-        "heading": "Real people, real nights.",
-        "text": "",
-        "background": "surface",
-        "button_label": "",
-        "button_link": ""
-      },
-      "blocks": {
-        "video_review_1": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/pilo-customer-review-captioned.mp4",
-            "name": "",
-            "handle": "",
-            "quote": "I thought I was sleeping on a good pillow. Turns out no!"
-          }
-        },
-        "video_review_2": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/pilo-customer-review-2-captioned.mp4",
-            "name": "",
-            "handle": "",
-            "quote": ""
-          }
-        }
-      },
-      "block_order": [
-        "video_review_1",
-        "video_review_2"
-      ]
-    },
-    "judgeme_review_widget": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_review_widget": {
-          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_review_widget"
-      ],
-      "settings": {}
     }
   },
   "order": [
     "main",
-    "ugc",
-    "comparison",
-    "comparison_table_Ain9g3",
+    "ugc_videos_NeLwQr",
+    "comparison_slider_DqMA4C",
+    "comparison_table_xnV4gp",
+    "how_to_use_raXPnL",
     "17897286630ec8f0d3",
+    "reviews_heading",
     "judgeme_review_widget",
     "faq_LiwbDR"
   ]
