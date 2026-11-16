@@ -3,7 +3,7 @@
 
 {%- assign zone_count = section.blocks.size | at_least: 1 -%}
 
-<section class="pn pn-zones" data-pn-track="sticky" data-pn-zones="{{ section.id }}" style="--count: {{ zone_count }};">
+<section class="pn pn--cream pn-zones" data-pn-track="sticky" data-pn-zones="{{ section.id }}" style="--count: {{ zone_count }};">
   <div class="pn__wrap pn-zones__stage">
     <div class="pn-zones__head">
       {%- if section.settings.eyebrow != blank -%}<span class="pn-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
@@ -13,7 +13,17 @@
     <div class="pn-zones__body">
       <div class="pn-zones__figure">
         {%- if section.settings.image != blank -%}
-          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200', sizes: '(min-width: 900px) 55vw, 92vw', alt: section.settings.image.alt | default: section.settings.heading | strip_html }}
+          {%- liquid
+            comment
+              Work the alt text out first: a filter after image_tag's last
+              argument applies to the whole <img>, not to the argument.
+            endcomment
+            assign zones_alt = section.settings.image.alt
+            if zones_alt == blank
+              assign zones_alt = section.settings.heading | strip_html
+            endif
+          -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200', sizes: '(min-width: 900px) 55vw, 92vw', alt: zones_alt }}
         {%- endif -%}
         {%- for block in section.blocks -%}
           <span class="pn-zones__dot" style="--x: {{ block.settings.x }}%; --y: {{ block.settings.y }}%;" aria-hidden="true"></span>
