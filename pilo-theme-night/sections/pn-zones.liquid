@@ -1,0 +1,89 @@
+{{ 'pilo-night.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pilo-night.js' | asset_url }}" defer="defer"></script>
+
+{%- assign zone_count = section.blocks.size | at_least: 1 -%}
+
+<section class="pn pn-zones" data-pn-track="sticky" data-pn-zones="{{ section.id }}" style="--count: {{ zone_count }};">
+  <div class="pn__wrap pn-zones__stage">
+    <div class="pn-zones__head">
+      {%- if section.settings.eyebrow != blank -%}<span class="pn-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="pn-h2">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="pn-zones__body">
+      <div class="pn-zones__figure">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200', sizes: '(min-width: 900px) 55vw, 92vw', alt: section.settings.image.alt | default: section.settings.heading | strip_html }}
+        {%- endif -%}
+        {%- for block in section.blocks -%}
+          <span class="pn-zones__dot" style="--x: {{ block.settings.x }}%; --y: {{ block.settings.y }}%;" aria-hidden="true"></span>
+        {%- endfor -%}
+      </div>
+
+      <div>
+        <div class="pn-zones__cards">
+          {%- for block in section.blocks -%}
+            <article class="pn-zones__card" {{ block.shopify_attributes }}>
+              <small>{{ forloop.index }} / {{ zone_count }}</small>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </article>
+          {%- endfor -%}
+        </div>
+        <div class="pn-zones__pips" aria-hidden="true">
+          {%- for block in section.blocks -%}<i></i>{%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-pn-zones="{{ section.id }}"]');
+    if (!root) return;
+    function boot() {
+      if (!window.PiloNight) return;
+      var dots = root.querySelectorAll('.pn-zones__dot');
+      var cards = root.querySelectorAll('.pn-zones__card');
+      var pips = root.querySelectorAll('.pn-zones__pips i');
+      var n = cards.length;
+      window.PiloNight.on(root, function (p) {
+        var active = Math.min(n - 1, Math.floor(p * n * 0.999));
+        for (var i = 0; i < n; i++) {
+          var on = i === active;
+          cards[i].classList.toggle('is-on', on);
+          if (dots[i]) dots[i].classList.toggle('is-on', on);
+          if (pips[i]) pips[i].classList.toggle('is-on', i <= active);
+        }
+      });
+    }
+    if (document.readyState === 'complete' || document.readyState === 'interactive' && window.PiloNight) boot();
+    else document.addEventListener('DOMContentLoaded', boot);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pilo · Support zones",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inside the shape" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Every curve has <em>a job.</em>" },
+    { "type": "image_picker", "id": "image", "label": "Pillow from the front (transparent PNG)" }
+  ],
+  "blocks": [
+    {
+      "type": "zone",
+      "name": "Zone",
+      "settings": [
+        { "type": "range", "id": "x", "label": "Dot across (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "range", "id": "y", "label": "Dot down (%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+        { "type": "text", "id": "title", "label": "Title", "default": "Cervical support" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "A raised edge that fills the curve of your neck." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Pilo · Support zones" }]
+}
+{% endschema %}

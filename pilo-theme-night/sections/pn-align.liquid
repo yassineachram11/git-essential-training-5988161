@@ -1,0 +1,115 @@
+{{ 'pilo-night.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pilo-night.js' | asset_url }}" defer="defer"></script>
+
+<section class="pn pn-align" data-pn-track="sticky" data-pn-align="{{ section.id }}">
+  <div class="pn__wrap pn-align__stage">
+    <div class="pn-align__head">
+      {%- if section.settings.eyebrow != blank -%}<span class="pn-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="pn-h2">{{ section.settings.heading }}</h2>
+    </div>
+
+    {%- comment -%}
+      A side sleeper seen from behind. Flat pillow: the head sits lower than
+      the spine, so the neck bends. Pilo: the contour lifts the head until
+      head, neck and spine share one line. The script interpolates between
+      the two drawings as the visitor scrolls.
+    {%- endcomment -%}
+    <svg class="pn-align__svg" viewBox="0 0 420 230" role="img" aria-label="{{ section.settings.before_title | escape }}: {{ section.settings.before_text | escape }} {{ section.settings.after_title | escape }}: {{ section.settings.after_text | escape }}">
+      <defs>
+        <linearGradient id="pn-mat-{{ section.id }}" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#f4ede3" stop-opacity="0.16"/>
+          <stop offset="1" stop-color="#f4ede3" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="190" width="420" height="40" fill="url(#pn-mat-{{ section.id }})"/>
+      <line x1="0" y1="190" x2="420" y2="190" stroke="#f4ede3" stroke-opacity="0.35" stroke-width="1.5"/>
+
+      <line data-guide x1="20" y1="110" x2="410" y2="110" stroke="#9db8d9" stroke-width="1.5" stroke-dasharray="3 7" stroke-linecap="round" opacity="0.2"/>
+
+      <polygon data-pillow points="" fill="#f4ede3" fill-opacity="0.12" stroke="#f4ede3" stroke-opacity="0.85" stroke-width="2.5" stroke-linejoin="round"/>
+
+      <rect x="172" y="32" width="236" height="158" rx="72" fill="#1b2a41" stroke="#f4ede3" stroke-opacity="0.85" stroke-width="2.5"/>
+
+      <line data-neck x1="180" y1="110" x2="112" y2="138" stroke="#f0a08f" stroke-width="22" stroke-linecap="round"/>
+      <line data-spine x1="398" y1="110" x2="180" y2="110" stroke="#9db8d9" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+
+      <g data-head>
+        <circle cx="112" cy="138" r="34" fill="#1b2a41" stroke="#f4ede3" stroke-opacity="0.85" stroke-width="2.5"/>
+        <path d="M100 128 q-8 10 0 20" fill="none" stroke="#f4ede3" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </svg>
+
+    <div class="pn-align__labels">
+      <p data-before><span>{{ section.settings.before_title }}</span>{{ section.settings.before_text }}</p>
+      <p data-after style="opacity: 0;"><span>{{ section.settings.after_title }}</span>{{ section.settings.after_text }}</p>
+    </div>
+
+    <div class="pn-align__meter" aria-hidden="true"><span>{{ section.settings.meter_left }}</span><i></i><span>{{ section.settings.meter_right }}</span></div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-pn-align="{{ section.id }}"]');
+    if (!root) return;
+
+    var FLAT = [[40,190],[40,174],[62,172],[110,172],[150,172],[172,173],[188,177],[188,190]];
+    var PILO = [[40,190],[40,152],[62,146],[106,144],[148,126],[170,132],[186,158],[186,190]];
+    var SPINE = 110, HEAD_LOW = 138;
+
+    function boot() {
+      if (!window.PiloNight) return;
+      var pillow = root.querySelector('[data-pillow]');
+      var neck = root.querySelector('[data-neck]');
+      var head = root.querySelector('[data-head]');
+      var guide = root.querySelector('[data-guide]');
+      var before = root.querySelector('[data-before]');
+      var after = root.querySelector('[data-after]');
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+      function mix(c1, c2, t) {
+        var out = [];
+        for (var i = 0; i < 3; i++) out.push(Math.round(lerp(c1[i], c2[i], t)));
+        return 'rgb(' + out.join(',') + ')';
+      }
+
+      function draw(p) {
+        // Hold the "before" drawing for a moment, then straighten.
+        var t = ease(Math.min(1, Math.max(0, (p - 0.18) / 0.55)));
+        var pts = FLAT.map(function (a, i) { return lerp(a[0], PILO[i][0], t).toFixed(1) + ',' + lerp(a[1], PILO[i][1], t).toFixed(1); });
+        pillow.setAttribute('points', pts.join(' '));
+        var cy = lerp(HEAD_LOW, SPINE, t);
+        head.setAttribute('transform', 'translate(0 ' + (cy - HEAD_LOW).toFixed(2) + ')');
+        neck.setAttribute('y2', cy.toFixed(2));
+        neck.setAttribute('stroke', mix([240,160,143], [157,184,217], t));
+        guide.setAttribute('opacity', (0.2 + t * 0.6).toFixed(2));
+        before.style.opacity = Math.max(0, 1 - t * 2.2).toFixed(2);
+        after.style.opacity = Math.max(0, t * 2.2 - 1.2).toFixed(2);
+      }
+
+      draw(0);
+      window.PiloNight.on(root, draw);
+    }
+    if (document.readyState === 'complete' || document.readyState === 'interactive' && window.PiloNight) boot();
+    else document.addEventListener('DOMContentLoaded', boot);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pilo · Neck alignment",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Keep scrolling" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Watch what happens to <em>your neck.</em>" },
+    { "type": "text", "id": "before_title", "label": "Before title", "default": "With a flat pillow" },
+    { "type": "text", "id": "before_text", "label": "Before text", "default": "Your head drops and your neck bends, for seven hours a night." },
+    { "type": "text", "id": "after_title", "label": "After title", "default": "With Pilo" },
+    { "type": "text", "id": "after_text", "label": "After text", "default": "Head, neck and spine rest in one straight line." },
+    { "type": "text", "id": "meter_left", "label": "Meter start", "default": "Bent" },
+    { "type": "text", "id": "meter_right", "label": "Meter end", "default": "Aligned" }
+  ],
+  "presets": [{ "name": "Pilo · Neck alignment" }]
+}
+{% endschema %}

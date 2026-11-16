@@ -1,0 +1,92 @@
+{{ 'pilo-night.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pilo-night.js' | asset_url }}" defer="defer"></script>
+
+<section class="pn pn--cream pn-fit pn__pad" data-pn-fit="{{ section.id }}">
+  <div class="pn__wrap">
+    <div class="pn-fit__head">
+      {%- if section.settings.eyebrow != blank -%}<span class="pn-eyebrow" data-pn-reveal>{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="pn-h2" data-pn-words>{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p class="pn-lead" data-pn-reveal style="--d: 200ms;">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+
+    <div class="pn-fit__options" role="group" aria-label="{{ section.settings.heading | strip_html | escape }}" data-pn-reveal style="--d: 300ms;">
+      {%- for block in section.blocks -%}
+        <button type="button" class="pn-fit__opt" aria-pressed="false" aria-controls="pn-fit-{{ block.id }}" data-fit="{{ block.id }}" {{ block.shopify_attributes }}>
+          {%- case block.settings.icon -%}
+            {%- when 'back' -%}
+              <svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 32h56"/><path d="M6 32v-6h12v6"/><circle cx="13" cy="19" r="5.5"/><path d="M19 22h36a4 4 0 0 1 4 4v6"/></svg>
+            {%- when 'side' -%}
+              <svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 32h56"/><path d="M6 32v-9h14v9"/><circle cx="14" cy="16" r="5.5"/><path d="M20 18c6-6 16-6 22-2l12 6a4 4 0 0 1 2 4v6"/></svg>
+            {%- when 'stomach' -%}
+              <svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 32h56"/><path d="M6 32v-3h12v3"/><circle cx="12" cy="23" r="5.5"/><path d="M18 28h36a4 4 0 0 0 4-4v-1"/></svg>
+            {%- else -%}
+              <svg viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 32h56"/><path d="M20 14a12 12 0 0 1 24 0M44 14l-4-3M44 14l-4 3"/><path d="M44 26a12 12 0 0 1-24 0M20 26l4-3M20 26l4 3"/></svg>
+          {%- endcase -%}
+          <span>{{ block.settings.label }}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+
+    <div class="pn-fit__result" aria-live="polite">
+      {%- for block in section.blocks -%}
+        <div class="pn-fit__answer" id="pn-fit-{{ block.id }}">
+          <span class="pn-fit__badge pn-fit__badge--{{ block.settings.verdict }}">{{ block.settings.badge }}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+          {%- if block.settings.verdict == 'no' -%}
+            {%- if section.settings.whatsapp != blank -%}
+              <a class="pn-btn pn-btn--wa" href="https://wa.me/{{ section.settings.whatsapp | remove: '+' | remove: ' ' | remove: '-' }}?text={{ 'Hi Pilo! I sleep mostly on my stomach. Is Pilo right for me?' | url_encode }}" target="_blank" rel="noopener">Ask us on WhatsApp</a>
+            {%- endif -%}
+          {%- else -%}
+            <a class="pn-btn pn-btn--ink" href="#buy">{{ section.settings.button_label }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-pn-fit="{{ section.id }}"]');
+    if (!root) return;
+    root.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-fit]');
+      if (!btn) return;
+      root.querySelectorAll('[data-fit]').forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      root.querySelectorAll('.pn-fit__answer').forEach(function (a) { a.classList.toggle('is-on', a.id === 'pn-fit-' + btn.getAttribute('data-fit')); });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pilo · Fit check",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "10-second check" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "How do <em>you</em> sleep?" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Pilo isn't for everyone. Tap the position you wake up in most." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Choose your pack" },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp number for the 'not for you' answer", "default": "+961 78 953 771" }
+  ],
+  "blocks": [
+    {
+      "type": "position",
+      "name": "Position",
+      "limit": 4,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [ { "value": "back", "label": "Back" }, { "value": "side", "label": "Side" }, { "value": "stomach", "label": "Stomach" }, { "value": "mixed", "label": "All over" } ], "default": "back" },
+        { "type": "text", "id": "label", "label": "Label", "default": "On my back" },
+        { "type": "select", "id": "verdict", "label": "Answer", "options": [ { "value": "yes", "label": "Made for you" }, { "value": "maybe", "label": "It depends" }, { "value": "no", "label": "Not for you" } ], "default": "yes" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Made for you" },
+        { "type": "text", "id": "title", "label": "Answer title", "default": "Pilo was shaped for back sleepers." },
+        { "type": "textarea", "id": "text", "label": "Answer text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Pilo · Fit check" }]
+}
+{% endschema %}

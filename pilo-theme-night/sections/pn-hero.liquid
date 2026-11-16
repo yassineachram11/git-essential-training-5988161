@@ -1,0 +1,111 @@
+{%- liquid
+  assign p = section.settings.product | default: product
+  assign serif = section.settings.display_font
+  assign serif_italic = serif | font_modify: 'style', 'italic'
+-%}
+
+{{ 'pilo-night.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pilo-night.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  {{ serif | font_face: font_display: 'swap' }}
+  {{ serif_italic | font_face: font_display: 'swap' }}
+  :root { --pn-serif-family: {{ serif.family }}; }
+</style>
+
+<section class="pn pn--night pn-hero" data-pn-hero data-pn-track="sticky" id="pn-top">
+  <div class="pn-stars" aria-hidden="true"></div>
+
+  <div class="pn__wrap pn-hero__grid">
+    <div class="pn-hero__text">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="pn-eyebrow" data-pn-reveal>{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      <h1 class="pn-display" data-pn-words>{{ section.settings.heading }}</h1>
+
+      {%- if section.settings.text != blank -%}
+        <p class="pn-lead" data-pn-reveal style="--d: 450ms;">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      {%- comment -%}
+        Prices come from the product, so a price change in the admin shows
+        here without editing the section. Units are read from the variant
+        title ("2-pack" → 2), the same rule the stock bar uses.
+      {%- endcomment -%}
+      {%- if p != blank and section.settings.show_prices -%}
+        <p class="pn-hero__offer" data-pn-reveal style="--d: 560ms;">
+          {%- for v in p.variants limit: 3 -%}
+            {%- assign units = v.title | times: 1 -%}
+            {%- if units < 1 -%}{%- assign units = 1 -%}{%- endif -%}
+            <span><strong>{{ v.price | money_without_trailing_zeros }}</strong> for {{ units }}</span>
+          {%- endfor -%}
+        </p>
+      {%- endif -%}
+
+      <div class="pn-hero__actions" data-pn-reveal style="--d: 650ms;">
+        <a href="{{ section.settings.button_link | default: '#buy' }}" class="pn-btn pn-btn--moon">
+          {{ section.settings.button_label }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        {%- if section.settings.secondary_label != blank -%}
+          <a href="{{ section.settings.secondary_link | default: '#pn-story' }}" class="pn-btn pn-btn--ghost">{{ section.settings.secondary_label }}</a>
+        {%- endif -%}
+      </div>
+
+      <ul class="pn-hero__trust" data-pn-reveal style="--d: 760ms;">
+        {%- for i in (1..3) -%}
+          {%- assign key = 'trust_' | append: i -%}
+          {%- if section.settings[key] != blank -%}
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>{{ section.settings[key] }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="pn-hero__stage" aria-hidden="true">
+      <div class="pn-hero__moon"></div>
+      <div class="pn-hero__glow"></div>
+      {%- if section.settings.image != blank -%}
+        <div class="pn-hero__pillow">
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'eager',
+              fetchpriority: 'high',
+              widths: '480, 720, 960, 1200',
+              sizes: '(min-width: 900px) 45vw, 92vw',
+              alt: ''
+          }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="pn-hero__cue" aria-hidden="true"><span>Scroll</span><i></i></div>
+</section>
+
+{% schema %}
+{
+  "name": "Pilo · Night hero",
+  "tag": "div",
+  "settings": [
+    { "type": "font_picker", "id": "display_font", "label": "Display serif (used by every Pilo Night section)", "default": "playfair_display_n4" },
+    { "type": "product", "id": "product", "label": "Product for the prices", "info": "Leave empty on the product page." },
+    { "type": "image_picker", "id": "image", "label": "Pillow (transparent PNG)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pilo · For all your dreams" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Wake up without <em>neck pain.</em>" },
+    { "type": "text", "id": "text", "label": "Text", "default": "The contour pillow that holds your neck in line all night, for back and side sleepers." },
+    { "type": "checkbox", "id": "show_prices", "label": "Show pack prices", "default": true },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Choose your pack" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "#buy" },
+    { "type": "text", "id": "secondary_label", "label": "Second link", "default": "See how it works" },
+    { "type": "text", "id": "secondary_link", "label": "Second link target", "default": "#pn-story" },
+    { "type": "text", "id": "trust_1", "label": "Trust point 1", "default": "Free delivery · 1–5 days" },
+    { "type": "text", "id": "trust_2", "label": "Trust point 2", "default": "Pay cash on delivery" },
+    { "type": "text", "id": "trust_3", "label": "Trust point 3", "default": "OEKO-TEX® certified fabric" }
+  ],
+  "presets": [{ "name": "Pilo · Night hero" }]
+}
+{% endschema %}

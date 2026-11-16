@@ -1,0 +1,39 @@
+{{ 'pilo-night.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pilo-night.js' | asset_url }}" defer="defer"></script>
+
+<section class="pn pn--cream pn-moments pn__pad">
+  <div class="pn__wrap">
+    <div class="pn-moments__head">
+      {%- if section.settings.eyebrow != blank -%}<span class="pn-eyebrow" data-pn-reveal>{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="pn-h2" data-pn-words>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="pn-moments__grid">
+      {%- for block in section.blocks limit: 4 -%}
+        <figure class="pn-moments__item" data-pn-track="pass" data-pn-reveal style="--d: {{ forloop.index0 | times: 120 }}ms;" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100', sizes: '(min-width: 750px) 50vw, 50vw', alt: block.settings.caption }}
+          {%- endif -%}
+          {%- if block.settings.caption != blank -%}<figcaption>{{ block.settings.caption }}</figcaption>{%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pilo · Moments",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real nights" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "The pillow you'll <em>hug back.</em>" }
+  ],
+  "blocks": [
+    { "type": "photo", "name": "Photo", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Photo" },
+      { "type": "text", "id": "caption", "label": "Caption" }
+    ] }
+  ],
+  "presets": [{ "name": "Pilo · Moments" }]
+}
+{% endschema %}

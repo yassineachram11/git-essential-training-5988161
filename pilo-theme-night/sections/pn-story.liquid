@@ -1,0 +1,86 @@
+{{ 'pilo-night.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pilo-night.js' | asset_url }}" defer="defer"></script>
+
+{%- assign line_count = section.blocks.size | at_least: 1 -%}
+
+<section
+  class="pn pn-story"
+  id="pn-story"
+  data-pn-track="sticky"
+  data-pn-story="{{ section.id }}"
+  style="--lines: {{ line_count }};"
+>
+  <div class="pn-stars" aria-hidden="true"></div>
+  <div class="pn__wrap pn-story__stage">
+    {%- if section.settings.show_clock -%}
+      <div class="pn-story__clock" aria-hidden="true"><b data-pn-clock>23:30</b><span>{{ section.settings.clock_label }}</span></div>
+    {%- endif -%}
+
+    <ol class="pn-story__lines">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if section.settings.note != blank -%}
+      <p class="pn-story__note">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+  <div class="pn-story__bar" aria-hidden="true"></div>
+</section>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-pn-story="{{ section.id }}"]');
+    if (!root) return;
+    function boot() {
+      if (!window.PiloNight) return;
+      var lines = root.querySelectorAll('.pn-story__lines li');
+      var clock = root.querySelector('[data-pn-clock]');
+      var n = lines.length;
+      // 23:30 → 07:00: the night the copy is talking about.
+      var start = 23 * 60 + 30, span = 7.5 * 60;
+      window.PiloNight.on(root, function (p) {
+        // Leave the last stretch for the closing note.
+        var k = Math.min(1, p / 0.85);
+        var active = Math.min(n - 1, Math.floor(k * n * 0.999));
+        for (var i = 0; i < n; i++) {
+          lines[i].classList.toggle('is-on', i === active);
+          lines[i].classList.toggle('is-past', i < active);
+        }
+        root.classList.toggle('is-done', p > 0.86);
+        if (clock) {
+          var m = Math.round(start + span * p) % (24 * 60);
+          var hh = Math.floor(m / 60), mm = m % 60;
+          clock.textContent = (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+        }
+      });
+    }
+    if (document.readyState === 'complete' || document.readyState === 'interactive' && window.PiloNight) boot();
+    else document.addEventListener('DOMContentLoaded', boot);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pilo · Night story",
+  "tag": "div",
+  "settings": [
+    { "type": "checkbox", "id": "show_clock", "label": "Show the night clock", "default": true },
+    { "type": "text", "id": "clock_label", "label": "Clock label", "default": "Another night" },
+    { "type": "textarea", "id": "note", "label": "Closing note", "default": "A flat pillow lets your head drop and your neck bend out of line, for seven or eight hours, every night. The cause is under your head." }
+  ],
+  "blocks": [
+    { "type": "line", "name": "Line", "settings": [ { "type": "text", "id": "text", "label": "Line", "default": "You go to bed tired." } ] }
+  ],
+  "presets": [{
+    "name": "Pilo · Night story",
+    "blocks": [
+      { "type": "line", "settings": { "text": "You go to bed tired." } },
+      { "type": "line", "settings": { "text": "You turn. You fold the pillow." } },
+      { "type": "line", "settings": { "text": "You wake up stiff, and blame the mattress." } },
+      { "type": "line", "settings": { "text": "It's your pillow." } }
+    ]
+  }]
+}
+{% endschema %}

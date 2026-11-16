@@ -1,0 +1,25 @@
+{{ 'pilo-night.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pilo-night.js' | asset_url }}" defer="defer"></script>
+
+<section class="pn pn-sunrise" data-pn-track="pass">
+  <div class="pn-stars" aria-hidden="true" style="opacity: calc(1 - var(--p, 0) * 2.2);"></div>
+  <div class="pn-sunrise__sun" aria-hidden="true"></div>
+  <div class="pn__wrap pn-sunrise__text">
+    {%- if section.settings.eyebrow != blank -%}<span class="pn-eyebrow" style="color: var(--pn-ink);" data-pn-reveal>{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h2 class="pn-h2" data-pn-words>{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}<p class="pn-lead" data-pn-reveal style="--d: 300ms;">{{ section.settings.text }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pilo · Sunrise",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "07:00" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Then morning comes, and you wake up <em>rested.</em>" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Fewer mornings rubbing a stiff neck on the way to the kitchen. More mornings that start well." }
+  ],
+  "presets": [{ "name": "Pilo · Sunrise" }]
+}
+{% endschema %}
