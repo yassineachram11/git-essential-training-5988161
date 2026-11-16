@@ -56,7 +56,7 @@
             "badge": "",
             "units": 1,
             "savings_override": "",
-            "preselect": true
+            "preselect": false
           }
         },
         "pack_2": {
@@ -64,11 +64,11 @@
           "settings": {
             "variant_index": 2,
             "label": "",
-            "note": "Most people choose 2: one for you, one for your partner",
-            "badge": "Most popular",
+            "note": "One for you, one for your partner, or keep one as a gift",
+            "badge": "For couples",
             "units": 2,
             "savings_override": "",
-            "preselect": false
+            "preselect": true
           }
         },
         "pack_3": {
