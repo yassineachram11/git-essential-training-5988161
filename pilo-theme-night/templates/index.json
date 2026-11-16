@@ -410,7 +410,7 @@
             "buy_now_label": "Buy it now",
             "show_dynamic_checkout": true,
             "full_width": false,
-            "radius": 999,
+            "radius": 8,
             "add_bg": "#1b2a41"
           }
         },
