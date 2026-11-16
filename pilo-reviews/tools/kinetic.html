@@ -1,0 +1,88 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'PF'; src: url('fonts/PlayfairDisplay[wght].ttf'); font-weight: 400 900; }
+@font-face { font-family: 'PF'; src: url('fonts/PlayfairDisplay-Italic[wght].ttf'); font-style: italic; font-weight: 400 900; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 540px; height: 960px; overflow: hidden; }
+body { position: relative; color: #fbf7f0; font-family: 'PF', Georgia, serif;
+  background: radial-gradient(80% 55% at 55% 42%, #13294b 0%, #0b1a31 50%, #060e1a 100%); }
+canvas { position: absolute; inset: 0; width: 540px; height: 960px; }
+#stage { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+#lead { font-size: 44px; line-height: 1; letter-spacing: -0.01em; }
+#slot { position: relative; height: 92px; margin-top: 14px; }
+.word { position: absolute; left: 0; right: 0; top: 0; font-size: 72px; font-style: italic; line-height: 1.2; color: #8fc6ff; will-change: transform, opacity, filter; }
+#strike { position: absolute; left: 50%; top: 46px; height: 3px; background: #e58a76; border-radius: 3px; transform-origin: left; }
+#final { position: absolute; left: 0; right: 0; top: 300px; text-align: center; font-size: 66px; line-height: 1.08; letter-spacing: -0.015em; }
+#final em { color: #e9c79c; }
+#pillow { position: absolute; left: 70px; width: 400px; top: 520px; filter: drop-shadow(0 0 2px rgba(170,215,255,.9)) drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
+#logo { position: absolute; left: 50%; bottom: 236px; width: 70px; margin-left: -35px; opacity: .9; }
+#glow { position: absolute; left: 50%; top: 600px; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(233,199,156,.35) 0%, rgba(143,198,255,.08) 45%, transparent 68%); }
+</style>
+<script>
+// Same seeded particle field as the gallery set, drawn once.
+function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+</script>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div id="glow"></div>
+<div id="stage">
+  <div id="lead">It's not your</div>
+  <div id="slot"></div>
+</div>
+<div id="final">It's your<br><em>pillow.</em></div>
+<img id="pillow" src="angle-n.png">
+<img id="logo" src="logo-white.png">
+<script>
+var WORDS = ['mattress.', 'age.', 'desk job.', 'stress.'];
+var slot = document.getElementById('slot');
+var els = WORDS.map(function (w) { var d = document.createElement('div'); d.className = 'word'; d.textContent = w; slot.appendChild(d); return d; });
+
+// Background: drifting particles, positions are a pure function of time so the loop is seamless.
+var cv = document.getElementById('bg'), ctx = cv.getContext('2d'), r = rng(7), P = [];
+for (var i = 0; i < 260; i++) P.push({ x: r(), y: r(), s: 0.6 + Math.pow(r(), 3) * 3, a: 0.2 + r() * 0.6, ph: r() * 6.283, sp: 0.4 + r() });
+var DUR = 6.0;
+function ease(t) { return 1 - Math.pow(1 - t, 3); }
+function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+window.renderAt = function (t) {
+  var k = (t % DUR) / DUR;
+  ctx.clearRect(0, 0, 1080, 1920);
+  for (var i = 0; i < P.length; i++) {
+    var p = P[i];
+    var y = p.y + Math.cos(k * 6.283 + p.ph) * 0.012 * p.sp;
+    var x = p.x + Math.sin(k * 6.283 + p.ph) * 0.01;
+    var tw = 0.6 + 0.4 * Math.sin(k * 6.283 * 2 + p.ph);
+    ctx.shadowColor = 'rgba(140,200,255,' + p.a * tw + ')'; ctx.shadowBlur = p.s * 5;
+    ctx.fillStyle = 'rgba(210,235,255,' + p.a * tw + ')';
+    ctx.beginPath(); ctx.arc(x * 1080, y * 1920, p.s, 0, 6.283); ctx.fill();
+  }
+
+  // Timeline (seconds): words 0–3.0 (0.75 each), "It's your pillow." 3.0–5.6, fade back 5.6–6.0
+  var lead = document.getElementById('lead'), fin = document.getElementById('final');
+  var pil = document.getElementById('pillow'), glow = document.getElementById('glow');
+  var W = 0.75;
+  for (var j = 0; j < els.length; j++) {
+    var s = j * W, local = t - s, o = 0, ty = 40, bl = 8;
+    if (local >= 0 && local < W) {
+      var inn = clamp(local / 0.22), out = clamp((local - (W - 0.18)) / 0.18);
+      o = ease(inn) * (1 - out); ty = (1 - ease(inn)) * 40 - out * 40; bl = (1 - inn) * 8 + out * 8;
+    }
+    els[j].style.opacity = o; els[j].style.transform = 'translateY(' + ty + 'px)'; els[j].style.filter = 'blur(' + bl + 'px)';
+  }
+  var stageOut = clamp((t - 2.85) / 0.25), stageIn = clamp(t / 0.25), loopOut = clamp((t - 5.4) / 0.35);
+  lead.style.opacity = stageIn * (1 - stageOut);
+  // The final line arrives, the pillow rises into the glow, then all fades for the loop.
+  var fi = clamp((t - 3.0) / 0.45);
+  fin.style.opacity = ease(fi) * (1 - loopOut);
+  fin.style.transform = 'translateY(' + ((1 - ease(fi)) * 30) + 'px) scale(' + (0.96 + 0.04 * ease(fi)) + ')';
+  fin.style.filter = 'blur(' + ((1 - fi) * 10) + 'px)';
+  var pi = clamp((t - 3.25) / 0.7);
+  pil.style.opacity = ease(pi) * (1 - loopOut);
+  pil.style.transform = 'translateY(' + ((1 - ease(pi)) * 160 + Math.sin(t * 2.2) * 6) + 'px) rotate(' + (-4 + ease(pi) * 2) + 'deg)';
+  glow.style.opacity = ease(pi) * (1 - loopOut);
+  document.getElementById('logo').style.opacity = 0.9 * (1 - clamp((t - 2.85) / 0.25)) + 0.9 * clamp((t - 5.85) / 0.15);
+};
+renderAt(0);
+</script>
+</body></html>
