@@ -1,0 +1,16 @@
+{%- comment -%}
+  One row of the product trust list.
+  Accepts: icon, text, note, attrs
+{%- endcomment -%}
+
+{%- if text != blank -%}
+  <div class="product__meta-item" {{ attrs }}>
+    {%- render 'icon', name: icon -%}
+    <span class="product__meta-text">
+      {{ text }}
+      {%- if note != blank -%}
+        <span class="product__meta-note">{{ note }}</span>
+      {%- endif -%}
+    </span>
+  </div>
+{%- endif -%}
