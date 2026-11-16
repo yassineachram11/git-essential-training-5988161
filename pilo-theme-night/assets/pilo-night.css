@@ -26,6 +26,10 @@
 
 /* --- Shared building blocks ---------------------------------------------- */
 
+/* The theme's base styles give every heading the dark text colour. Inside
+   these sections a heading takes the colour of its background instead. */
+.pn h1, .pn h2, .pn h3, .pn p, .pn li, .pn figcaption { color: inherit; }
+
 .pn { position: relative; overflow: clip; }
 .pn *, .pn *::before, .pn *::after { box-sizing: border-box; }
 .pn--night { background: var(--pn-night); color: var(--pn-on-night); }
