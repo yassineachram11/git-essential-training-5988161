@@ -23,7 +23,7 @@
 {{ 'product-page.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'bundle.js' | asset_url }}" defer="defer"></script>
 
-<section class="section product-page product-page--{{ section.settings.background_style }}">
+<section id="buy" class="section product-page product-page--{{ section.settings.background_style }}">
   <div class="page-width">
     <div class="product">
       {%- comment -%} Gallery {%- endcomment -%}
@@ -532,6 +532,42 @@
             {%- when 'trust_item' -%}
               {%- comment -%} Drawn by the trust block above, not on its own. {%- endcomment -%}
 
+            {%- when 'benefits' -%}
+              {%- comment -%}
+                What the pillow does for you, before the price asks for a
+                decision. Empty lines are skipped.
+              {%- endcomment -%}
+              <ul class="product__benefits" {{ block.shopify_attributes }}>
+                {%- for i in (1..4) -%}
+                  {%- assign key = 'item_' | append: i -%}
+                  {%- assign line = block.settings[key] -%}
+                  {%- if line != blank -%}
+                    <li>{%- render 'icon', name: 'check' -%}<span>{{ line }}</span></li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+
+            {%- when 'whatsapp' -%}
+              {%- liquid
+                assign wa_number = block.settings.phone | remove: '+' | remove: ' ' | remove: '-'
+                assign wa_text = block.settings.message | url_encode
+              -%}
+              {%- if wa_number != blank -%}
+                <a
+                  class="product__wa"
+                  href="https://wa.me/{{ wa_number }}{% if wa_text != blank %}?text={{ wa_text }}{% endif %}"
+                  target="_blank"
+                  rel="noopener"
+                  {{ block.shopify_attributes }}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>
+                  <span>
+                    <strong>{{ block.settings.label }}</strong>
+                    {%- if block.settings.note != blank -%}<small>{{ block.settings.note }}</small>{%- endif -%}
+                  </span>
+                </a>
+              {%- endif -%}
+
             {%- when 'collapsible' -%}
               <div class="accordion" style="margin-top: var(--space-lg);" {{ block.shopify_attributes }}>
                 <div class="accordion__item">
@@ -634,16 +670,33 @@
       "id": "background_style",
       "label": "Page background",
       "options": [
-        { "value": "none", "label": "White" },
-        { "value": "gradient", "label": "Soft blue wash" },
-        { "value": "tint", "label": "Flat surface" }
+        {
+          "value": "none",
+          "label": "White"
+        },
+        {
+          "value": "gradient",
+          "label": "Soft blue wash"
+        },
+        {
+          "value": "tint",
+          "label": "Flat surface"
+        }
       ],
       "default": "gradient"
     }
   ],
   "blocks": [
-    { "type": "vendor", "name": "Vendor", "limit": 1 },
-    { "type": "title", "name": "Title", "limit": 1 },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
     {
       "type": "subtitle",
       "name": "Subtitle",
@@ -654,33 +707,120 @@
           "id": "text",
           "label": "Text",
           "info": "One line under the title saying what the product is.",
-          "default": "Contour memory foam pillow that holds your neck in line \u2014 for back and side sleepers."
+          "default": "Contour memory foam pillow that holds your neck in line — for back and side sleepers."
         }
       ]
     },
-    { "type": "price", "name": "Price", "limit": 1 },
-    { "type": "countdown", "name": "Offer countdown", "limit": 1, "settings": [
-      { "type": "paragraph", "content": "A timer under the price, counting to one fixed moment. Place it directly after the Price block. Once the date passes it switches to the ended wording, or disappears if you leave that empty. It never restarts." },
-      { "type": "text", "id": "label", "label": "Label", "default": "Offer ends in" },
-      { "type": "text", "id": "date", "label": "Ends on", "info": "YYYY-MM-DD, read in your store's timezone (Settings \u2192 General). Leave empty to turn the countdown off." },
-      { "type": "range", "id": "hour", "label": "At this hour", "min": 0, "max": 23, "step": 1, "unit": "h", "default": 23 },
-      { "type": "text", "id": "expired_text", "label": "Wording once it has ended", "info": "Leave empty to hide the countdown entirely once the date passes." }
-    ] },
-    { "type": "variant_picker", "name": "Variant picker", "limit": 1 },
+    {
+      "type": "benefits",
+      "name": "Key benefits",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "A short checklist under the title. One benefit per line, a few words each."
+        },
+        {
+          "type": "text",
+          "id": "item_1",
+          "label": "Benefit 1",
+          "default": "Holds your neck in line all night"
+        },
+        {
+          "type": "text",
+          "id": "item_2",
+          "label": "Benefit 2",
+          "default": "Cooling cover that zips off and machine washes"
+        },
+        {
+          "type": "text",
+          "id": "item_3",
+          "label": "Benefit 3"
+        },
+        {
+          "type": "text",
+          "id": "item_4",
+          "label": "Benefit 4"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "countdown",
+      "name": "Offer countdown",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "A timer under the price, counting to one fixed moment. Place it directly after the Price block. Once the date passes it switches to the ended wording, or disappears if you leave that empty. It never restarts."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Offer ends in"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Ends on",
+          "info": "YYYY-MM-DD, read in your store's timezone (Settings → General). Leave empty to turn the countdown off."
+        },
+        {
+          "type": "range",
+          "id": "hour",
+          "label": "At this hour",
+          "min": 0,
+          "max": 23,
+          "step": 1,
+          "unit": "h",
+          "default": 23
+        },
+        {
+          "type": "text",
+          "id": "expired_text",
+          "label": "Wording once it has ended",
+          "info": "Leave empty to hide the countdown entirely once the date passes."
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1
+    },
     {
       "type": "bundle",
       "name": "Bundle selector",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Choose your pack" },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Choose your pack"
+        },
         {
           "type": "select",
           "id": "savings_style",
           "label": "Show savings as",
           "options": [
-            { "value": "amount", "label": "Amount saved" },
-            { "value": "percent", "label": "Percent saved" },
-            { "value": "none", "label": "Don't show savings" }
+            {
+              "value": "amount",
+              "label": "Amount saved"
+            },
+            {
+              "value": "percent",
+              "label": "Percent saved"
+            },
+            {
+              "value": "none",
+              "label": "Don't show savings"
+            }
           ],
           "default": "amount"
         },
@@ -717,9 +857,23 @@
           "default": 1,
           "info": "Which variant this row sells, counting from the top of your variant list."
         },
-        { "type": "text", "id": "label", "label": "Label", "info": "Leave blank to use the variant name." },
-        { "type": "text", "id": "note", "label": "Small note", "info": "Replaces the per-unit price on this row." },
-        { "type": "text", "id": "badge", "label": "Badge" },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "info": "Leave blank to use the variant name."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Small note",
+          "info": "Replaces the per-unit price on this row."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge"
+        },
         {
           "type": "range",
           "id": "units",
@@ -730,8 +884,17 @@
           "default": 0,
           "info": "0 reads the number from the variant name. Used for per-unit and savings maths."
         },
-        { "type": "text", "id": "savings_override", "label": "Savings text override" },
-        { "type": "checkbox", "id": "preselect", "label": "Selected by default", "default": false }
+        {
+          "type": "text",
+          "id": "savings_override",
+          "label": "Savings text override"
+        },
+        {
+          "type": "checkbox",
+          "id": "preselect",
+          "label": "Selected by default",
+          "default": false
+        }
       ]
     },
     {
@@ -739,8 +902,16 @@
       "name": "Buy buttons",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "show_quantity", "label": "Show quantity selector", "default": true },
-        { "type": "header", "content": "Stock level" },
+        {
+          "type": "checkbox",
+          "id": "show_quantity",
+          "label": "Show quantity selector",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Stock level"
+        },
         {
           "type": "checkbox",
           "id": "show_stock",
@@ -758,7 +929,12 @@
           "unit": "pcs",
           "default": 10
         },
-        { "type": "text", "id": "stock_in_label", "label": "In stock wording", "default": "In stock, ready to ship" },
+        {
+          "type": "text",
+          "id": "stock_in_label",
+          "label": "In stock wording",
+          "default": "In stock, ready to ship"
+        },
         {
           "type": "text",
           "id": "stock_low_label",
@@ -766,7 +942,12 @@
           "default": "Only [count] left",
           "info": "[count] is replaced by the number remaining. Leave it out to keep the number private."
         },
-        { "type": "text", "id": "stock_out_label", "label": "Out of stock wording", "default": "Out of stock" },
+        {
+          "type": "text",
+          "id": "stock_out_label",
+          "label": "Out of stock wording",
+          "default": "Out of stock"
+        },
         {
           "type": "text",
           "id": "stock_backorder_label",
@@ -798,7 +979,10 @@
           "default": 10,
           "info": "Stops an empty bar announcing that nobody has bought one yet."
         },
-        { "type": "header", "content": "Labels" },
+        {
+          "type": "header",
+          "content": "Labels"
+        },
         {
           "type": "text",
           "id": "add_label",
@@ -811,7 +995,10 @@
           "label": "Sold out label",
           "info": "Leave empty to use the theme's wording."
         },
-        { "type": "header", "content": "Buy now" },
+        {
+          "type": "header",
+          "content": "Buy now"
+        },
         {
           "type": "checkbox",
           "id": "show_buy_now",
@@ -819,7 +1006,12 @@
           "default": false,
           "info": "Adds to the cart and goes straight to checkout."
         },
-        { "type": "text", "id": "buy_now_label", "label": "Buy now label", "default": "Buy it now" },
+        {
+          "type": "text",
+          "id": "buy_now_label",
+          "label": "Buy now label",
+          "default": "Buy it now"
+        },
         {
           "type": "checkbox",
           "id": "show_dynamic_checkout",
@@ -827,14 +1019,23 @@
           "default": true,
           "info": "Shop Pay, PayPal and so on. Shopify controls its wording and colour — use the Buy now button above if you need those to match your brand."
         },
-        { "type": "header", "content": "Appearance" },
+        {
+          "type": "header",
+          "content": "Appearance"
+        },
         {
           "type": "select",
           "id": "size",
           "label": "Button size",
           "options": [
-            { "value": "large", "label": "Large" },
-            { "value": "regular", "label": "Regular" }
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value": "regular",
+              "label": "Regular"
+            }
           ],
           "default": "large"
         },
@@ -855,27 +1056,60 @@
           "unit": "px",
           "default": 8
         },
-        { "type": "color", "id": "add_bg", "label": "Add to cart background" },
-        { "type": "color", "id": "add_text", "label": "Add to cart text" },
-        { "type": "color", "id": "now_bg", "label": "Buy now background" },
-        { "type": "color", "id": "now_text", "label": "Buy now text" }
+        {
+          "type": "color",
+          "id": "add_bg",
+          "label": "Add to cart background"
+        },
+        {
+          "type": "color",
+          "id": "add_text",
+          "label": "Add to cart text"
+        },
+        {
+          "type": "color",
+          "id": "now_bg",
+          "label": "Buy now background"
+        },
+        {
+          "type": "color",
+          "id": "now_text",
+          "label": "Buy now text"
+        }
       ]
     },
-    { "type": "description", "name": "Description", "limit": 1 },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
     {
       "type": "trust",
       "name": "Trust points",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading" },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
         {
           "type": "select",
           "id": "layout",
           "label": "Layout",
           "options": [
-            { "value": "card", "label": "Boxed" },
-            { "value": "plain", "label": "Plain list" },
-            { "value": "grid", "label": "Two columns" }
+            {
+              "value": "card",
+              "label": "Boxed"
+            },
+            {
+              "value": "plain",
+              "label": "Plain list"
+            },
+            {
+              "value": "grid",
+              "label": "Two columns"
+            }
           ],
           "default": "card"
         },
@@ -884,8 +1118,14 @@
           "id": "icon_style",
           "label": "Icon style",
           "options": [
-            { "value": "soft", "label": "Tinted circle" },
-            { "value": "plain", "label": "Plain icon" }
+            {
+              "value": "soft",
+              "label": "Tinted circle"
+            },
+            {
+              "value": "plain",
+              "label": "Plain icon"
+            }
           ],
           "default": "soft"
         },
@@ -893,9 +1133,24 @@
           "type": "paragraph",
           "content": "Add Trust point blocks below to choose your own icons and add as many rows as you like. The three fields here are only used when you have not added any."
         },
-        { "type": "text", "id": "item_1", "label": "Fallback line 1", "default": "Free 2-day shipping over $75" },
-        { "type": "text", "id": "item_2", "label": "Fallback line 2", "default": "Free 30-day returns" },
-        { "type": "text", "id": "item_3", "label": "Fallback line 3", "default": "Covered by a 2-year warranty" }
+        {
+          "type": "text",
+          "id": "item_1",
+          "label": "Fallback line 1",
+          "default": "Free 2-day shipping over $75"
+        },
+        {
+          "type": "text",
+          "id": "item_2",
+          "label": "Fallback line 2",
+          "default": "Free 30-day returns"
+        },
+        {
+          "type": "text",
+          "id": "item_3",
+          "label": "Fallback line 3",
+          "default": "Covered by a 2-year warranty"
+        }
       ]
     },
     {
@@ -907,28 +1162,74 @@
           "id": "icon",
           "label": "Icon",
           "options": [
-            { "value": "truck", "label": "Delivery" },
-            { "value": "clock", "label": "Clock" },
-            { "value": "shield", "label": "Guarantee" },
-            { "value": "refresh", "label": "Returns" },
-            { "value": "check", "label": "Tick" },
-            { "value": "lock", "label": "Secure" },
-            { "value": "leaf", "label": "Sustainable" },
-            { "value": "spark", "label": "Quality" },
-            { "value": "star", "label": "Rated" }
+            {
+              "value": "truck",
+              "label": "Delivery"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "shield",
+              "label": "Guarantee"
+            },
+            {
+              "value": "refresh",
+              "label": "Returns"
+            },
+            {
+              "value": "check",
+              "label": "Tick"
+            },
+            {
+              "value": "lock",
+              "label": "Secure"
+            },
+            {
+              "value": "leaf",
+              "label": "Sustainable"
+            },
+            {
+              "value": "spark",
+              "label": "Quality"
+            },
+            {
+              "value": "star",
+              "label": "Rated"
+            }
           ],
           "default": "truck"
         },
-        { "type": "text", "id": "text", "label": "Text", "default": "Free delivery across Lebanon" },
-        { "type": "text", "id": "note", "label": "Small note" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Free delivery across Lebanon"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Small note"
+        }
       ]
     },
     {
       "type": "collapsible",
       "name": "Collapsible row",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Heading", "default": "Shipping and returns" },
-        { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Orders ship within one business day. Returns are free for 30 days.</p>" }
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shipping and returns"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Orders ship within one business day. Returns are free for 30 days.</p>"
+        }
       ]
     },
     {
@@ -958,7 +1259,40 @@
         }
       ]
     },
-    { "type": "@app" }
+    {
+      "type": "whatsapp",
+      "name": "WhatsApp question link",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "WhatsApp number",
+          "info": "With country code, e.g. +961 78 953 771"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Not sure it's for you? Ask us on WhatsApp"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Small text",
+          "default": "Real person, usually replies within the hour"
+        },
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Pre-filled message",
+          "default": "Hi Pilo! I have a question about the pillow."
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
   ]
 }
 {% endschema %}

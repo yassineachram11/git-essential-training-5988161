@@ -27,7 +27,7 @@
         "subtitle": {
           "type": "subtitle",
           "settings": {
-            "text": "Contour memory foam pillow that holds your neck in line — for back and side sleepers."
+            "text": "Wake up without neck pain. Contour memory foam for back and side sleepers."
           }
         },
         "judge_me_reviews_preview_badge_WRUjdU": {
@@ -110,10 +110,6 @@
             "now_text": ""
           }
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "trust": {
           "type": "trust",
           "settings": {
@@ -137,8 +133,8 @@
           "type": "trust_item",
           "settings": {
             "icon": "check",
-            "text": "Pay cash on delivery",
-            "note": ""
+            "text": "Pay cash when it's in your hands",
+            "note": "No card, nothing paid in advance"
           }
         },
         "trust_item_YyUrd3": {
@@ -164,6 +160,52 @@
             "hour": 23,
             "expired_text": "This offer has ended"
           }
+        },
+        "benefits": {
+          "type": "benefits",
+          "settings": {
+            "item_1": "Holds your neck in line all night",
+            "item_2": "Cooling cover that zips off and machine washes",
+            "item_3": "OEKO-TEX® certified fabric, lab-tested for harmful substances",
+            "item_4": ""
+          }
+        },
+        "whatsapp": {
+          "type": "whatsapp",
+          "settings": {
+            "phone": "+961 78 953 771",
+            "label": "Not sure it's for you? Ask us on WhatsApp",
+            "note": "We answer every message, 7 days a week",
+            "message": "Hi Pilo! I have a question about the pillow."
+          }
+        },
+        "c_fit": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Is Pilo right for me?",
+            "content": "<p><strong>Yes, if you</strong> sleep on your back or side, wake up with a stiff neck, or spend long days at a desk.</p><p><strong>Probably not, if you</strong> sleep mostly on your stomach. A contour pillow is made to support the neck from the back or side.</p><p>The first 2–3 nights can feel unfamiliar, because your neck is being held somewhere new. Most people settle in within a week.</p>"
+          }
+        },
+        "c_specs": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Size and materials",
+            "content": "<p><strong>61 × 41 × 10 cm</strong>, 1.1 kg.</p><p>Adaptive contour memory foam core, inside a breathable cooling cover that zips off and goes in the washing machine. The fabric is <strong>OEKO-TEX® STANDARD 100</strong> certified.</p><p>Ships compressed and sealed. It takes its full shape within seconds of unwrapping.</p>"
+          }
+        },
+        "c_delivery": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Delivery and payment",
+            "content": "<p><strong>Free delivery anywhere in Lebanon</strong>, in 1–5 days depending on where you are.</p><p>We confirm every order by message before sending it. You pay the courier <strong>in cash</strong> when the box is in your hands: no card needed, nothing paid in advance.</p>"
+          }
+        },
+        "c_returns": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Returns",
+            "content": "<p>Because a pillow rests against your face all night, we can only take back packs that are still sealed and unopened — the same rule any hygiene product follows. What protects you is that you pay nothing in advance: the courier takes the cash only once the box is in your hands. If what arrives is damaged or is not what you ordered, message us on WhatsApp and we will replace it.</p>"
+          }
         }
       },
       "block_order": [
@@ -171,9 +213,9 @@
         "title",
         "subtitle",
         "judge_me_reviews_preview_badge_WRUjdU",
+        "benefits",
         "price",
         "offer_countdown",
-        "review_strip",
         "bundle",
         "pack_1",
         "pack_2",
@@ -183,7 +225,12 @@
         "trust_item_JxBhxV",
         "trust_item_ePJUrT",
         "trust_item_YyUrd3",
-        "description"
+        "whatsapp",
+        "review_strip",
+        "c_fit",
+        "c_specs",
+        "c_delivery",
+        "c_returns"
       ],
       "settings": {
         "show_buy_bar": true,
@@ -248,11 +295,11 @@
       ],
       "settings": {
         "eyebrow": "See it",
-        "heading": "Pilo in action.",
+        "heading": "See Pilo in action.",
         "text": "",
         "background": "surface",
         "button_label": "Choose your pack",
-        "button_link": "shopify://products/pilo-1-0"
+        "button_link": "#buy"
       }
     },
     "comparison_slider_DqMA4C": {
@@ -346,7 +393,7 @@
         "theirs_label": "Most ergonomic pillows",
         "footnote": "Based on ergonomic and memory foam pillows sold online in Lebanon, October 2026.",
         "button_label": "Choose your pack",
-        "button_link": "shopify://products/pilo-1-0",
+        "button_link": "#buy",
         "max_width": 820,
         "background": "#ffffff"
       }
@@ -394,7 +441,7 @@
         "mobile_display": "swipe",
         "background": "#ffffff",
         "button_label": "Choose your pack",
-        "button_link": "shopify://products/pilo-1-0"
+        "button_link": "#buy"
       }
     },
     "17897286630ec8f0d3": {
@@ -533,36 +580,132 @@
             "question": "What does OEKO-TEX® certified mean?",
             "answer": "<p>OEKO-TEX® STANDARD 100 is an independent certification for textiles. Every component of a certified item is laboratory tested against a long list of substances known to be harmful to human health — not only the main fabric, but the threads, the zip, and any coatings or prints.</p>"
           }
+        },
+        "q_whatsapp": {
+          "type": "question",
+          "settings": {
+            "question": "Can I order or ask a question on WhatsApp?",
+            "answer": "<p>Yes. Message us on <a href=\"https://wa.me/96178953771\" target=\"_blank\" rel=\"noopener\">WhatsApp at +961 78 953 771</a> and we'll answer your questions or take your order directly.</p>"
+          }
         }
       },
       "block_order": [
         "q_cod",
         "q2",
-        "q1",
         "q_position",
         "q_adjust",
-        "q_made",
+        "q1",
         "q_size",
+        "q_made",
         "q_wash",
+        "q_whatsapp",
         "question_tB3gYX"
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "FAQ",
+        "heading": "Questions before you order",
         "open_first": false,
         "enable_schema": true
+      }
+    },
+    "the_problem": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/pilo-neck-angle-real.png",
+        "image_position": "left",
+        "eyebrow": "The problem",
+        "heading": "It's probably not your mattress.",
+        "text": "<p>A flat pillow lets your head drop and your neck bend out of line — for seven or eight hours, every night. You wake up stiff, blame the desk, and book another physio session. The cause is under your head.</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "how_it_works": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/pilo-support-zones-v2.jpg",
+        "image_position": "right",
+        "eyebrow": "How it works",
+        "heading": "A contour that holds your neck where it should be.",
+        "text": "<p>Pilo is shaped in zones: a <strong>cervical extension zone</strong> that supports the curve of your neck, a lower <strong>head support zone</strong> so your head doesn't tip forward, and <strong>arm support zones</strong> at the sides for side sleepers.</p>",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "who_for": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_t8lwbt8lwbt8lwbt_6477d86f-0538-446d-815b-77a392ca4581.png",
+        "image_position": "right",
+        "eyebrow": "Is it for you?",
+        "heading": "Made for back and side sleepers.",
+        "text": "<p>✓ You wake up with a stiff or sore neck<br>✓ You spend long days at a desk or on your phone<br>✓ You sleep on your back or your side</p><p>✗ If you sleep mostly on your stomach, Pilo isn't the right pillow for you, and we'd rather tell you now.</p>",
+        "button_label": "Choose your pack",
+        "button_link": "#buy"
+      }
+    },
+    "why_pilo": {
+      "type": "value-props",
+      "blocks": {
+        "v1": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Free delivery, 1–5 days",
+            "text": "Anywhere in Lebanon, with no minimum spend."
+          }
+        },
+        "v2": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "title": "Pay cash on delivery",
+            "text": "Nothing in advance. You pay only once the box is in your hands."
+          }
+        },
+        "v3": {
+          "type": "item",
+          "settings": {
+            "icon": "refresh",
+            "title": "Washable cover",
+            "text": "The cooling cover zips off and goes straight in the machine."
+          }
+        },
+        "v4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "title": "7/7 support on WhatsApp",
+            "text": "A real person answers, every day of the week."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4"
+      ],
+      "settings": {
+        "heading": "Why order from Pilo?",
+        "icon_layout": "beside",
+        "background": "#f8fafc"
       }
     }
   },
   "order": [
     "main",
-    "ugc_videos_NeLwQr",
+    "the_problem",
+    "how_it_works",
     "comparison_slider_DqMA4C",
-    "comparison_table_xnV4gp",
-    "how_to_use_raXPnL",
-    "17897286630ec8f0d3",
+    "ugc_videos_NeLwQr",
+    "who_for",
     "reviews_heading",
     "judgeme_review_widget",
+    "why_pilo",
+    "how_to_use_raXPnL",
+    "comparison_table_xnV4gp",
+    "17897286630ec8f0d3",
     "faq_LiwbDR"
   ]
 }

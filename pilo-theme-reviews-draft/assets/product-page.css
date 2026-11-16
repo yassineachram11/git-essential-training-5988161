@@ -628,3 +628,54 @@ body:has(.buy-bar.is-visible) .wa-preview-corner-button-container {
 .product__price:has(+ .offer-cd) + .offer-cd {
   margin-bottom: var(--space-md);
 }
+
+/* Anchor for "Choose your pack" buttons lower on the page: land on the
+   product, not under the sticky header. */
+#buy { scroll-margin-top: 72px; }
+
+/* Key benefits: three short lines under the title, so a visitor from an ad
+   knows what the pillow does before seeing the price. */
+.product__benefits {
+  list-style: none;
+  margin: 0 0 var(--space-md);
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.product__benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: var(--text-base);
+  line-height: 1.4;
+}
+.product__benefits svg {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  margin-top: 1px;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--color-primary);
+}
+
+/* WhatsApp question link: most hesitation in Lebanon is settled in a chat,
+   so offer one right under the buy button. */
+.product__wa {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: var(--space-md);
+  padding: 12px 14px;
+  border: 1px solid rgba(37, 211, 102, 0.35);
+  border-radius: 12px;
+  background: rgba(37, 211, 102, 0.07);
+  color: inherit;
+  text-decoration: none;
+  line-height: 1.3;
+}
+.product__wa:hover { border-color: rgba(37, 211, 102, 0.7); }
+.product__wa svg { flex: 0 0 28px; width: 28px; height: 28px; color: #1fa855; }
+.product__wa strong { display: block; font-size: 15px; font-weight: 600; }
+.product__wa small { display: block; margin-top: 2px; font-size: 13px; color: var(--color-text-muted); }
