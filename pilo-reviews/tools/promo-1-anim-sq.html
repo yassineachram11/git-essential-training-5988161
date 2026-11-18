@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family: 'PF'; src: url('file:///tmp/claude-0/-home-user-git-essential-training-5988161/716f1768-9e34-5eab-926f-497245f78b93/scratchpad/gal/fonts/PlayfairDisplay[wght].ttf'); font-weight: 400 900; }
+@font-face { font-family: 'PF'; src: url('file:///tmp/claude-0/-home-user-git-essential-training-5988161/716f1768-9e34-5eab-926f-497245f78b93/scratchpad/gal/fonts/PlayfairDisplay-Italic[wght].ttf'); font-style: italic; font-weight: 400 900; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 540px; height: 960px; overflow: hidden; }
+body { position: relative; font-family: Inter, sans-serif; color: #fbf7f0; text-align: center;
+  background: radial-gradient(80% 55% at 55% 45%, #13294b 0%, #0b1a31 50%, #060e1a 100%); }
+canvas { position: absolute; inset: 0; width: 540px; height: 960px; }
+.serif { font-family: 'PF', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+em { font-style: italic; color: #e9c79c; }
+.abs { position: absolute; left: 0; right: 0; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: #8fc6ff; }
+.pill { display: inline-block; padding: 8px 16px; border-radius: 999px; background: #e9c79c; color: #0b1422; font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+.old { position: relative; display: inline-block; font-size: 54px; color: #9fb0c6; }
+.old::after { content: ''; position: absolute; left: -6px; right: -6px; top: 52%; height: 4px; border-radius: 4px; background: #e58a76; transform-origin: left; transform: rotate(-8deg) scaleX(var(--strike, 1)); }
+.new { font-size: 132px; line-height: .95; }
+.pillow { position: absolute; filter: drop-shadow(0 0 2px rgba(170,215,255,.9)) drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
+.glow { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(233,199,156,.32) 0%, rgba(143,198,255,.08) 45%, transparent 68%); }
+.list { display: grid; gap: 12px; width: 330px; margin: 0 auto; text-align: left; font-size: 17px; }
+.list div::before { content: '✓'; color: #e9c79c; font-weight: 800; margin-right: 10px; }
+</style>
+<script>
+// Seeded particles and mist along a curved band. cfg: from/ctrl/to points (0..1),
+// spread, count, seed, mist (bool), size scale, alpha.
+function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function gauss(r){ var u = 1 - r(), v = r(); return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v); }
+function bez(a,b,c,t){ return (1-t)*(1-t)*a + 2*(1-t)*t*b + t*t*c; }
+function fx(id, cfg){
+  var cv = document.getElementById(id), ctx = cv.getContext('2d'), W = cv.width, H = cv.height, r = rng(cfg.seed||1);
+  var P = function(k,t){ return [bez(cfg.from[0],cfg.ctrl[0],cfg.to[0],t)*W, bez(cfg.from[1],cfg.ctrl[1],cfg.to[1],t)*H]; };
+  if (cfg.mist) {
+    ctx.filter = 'blur(' + (cfg.mistBlur||28) + 'px)';
+    for (var w = 0; w < (cfg.wisps||7); w++) {
+      ctx.beginPath();
+      var off = gauss(r) * cfg.spread * W * 0.6, ph = r() * 6.28;
+      for (var t = 0; t <= 1.0001; t += 0.02) {
+        var p = P(0,t), wob = Math.sin(t * 9 + ph) * 26 + off * t;
+        var x = p[0] + wob * 0.6, y = p[1] + wob;
+        t === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle = 'rgba(120,185,255,' + (0.05 + r()*0.07) + ')';
+      ctx.lineWidth = 30 + r() * 70;
+      ctx.stroke();
+    }
+    ctx.filter = 'none';
+  }
+  for (var i = 0; i < cfg.count; i++) {
+    var t = Math.pow(r(), cfg.bias || 1), p = P(0,t);
+    var sp = cfg.spread * W * (0.25 + t * 0.9);
+    var x = p[0] + gauss(r) * sp * 0.7, y = p[1] + gauss(r) * sp;
+    var s = (0.6 + Math.pow(r(), 3) * 3.2) * (cfg.size || 1);
+    var a = (0.25 + r() * 0.75) * (cfg.alpha || 1) * (1 - t * 0.55);
+    ctx.shadowColor = 'rgba(140,200,255,' + a + ')';
+    ctx.shadowBlur = s * 5;
+    ctx.fillStyle = 'rgba(' + (190 + r()*60|0) + ',' + (225 + r()*30|0) + ',255,' + a + ')';
+    ctx.beginPath(); ctx.arc(x, y, s, 0, 6.283); ctx.fill();
+  }
+}
+</script><style>
+html, body { width: 540px !important; height: 540px !important; }
+canvas { width: 540px !important; height: 540px !important; }
+img[src="logo-white.png"] { top: 26px !important; width: 54px !important; margin-left: -27px !important; }
+.abs:has(> .pill) { top: 74px !important; }
+.abs.serif { top: 108px !important; }
+.old { font-size: 40px !important; }
+.new { font-size: 96px !important; }
+.abs.serif > div:last-child { font-size: 17px !important; margin-top: 14px !important; }
+[data-pil] { left: 150px !important; top: 312px !important; width: 240px !important; }
+[data-glow] { top: 390px !important; width: 380px !important; height: 380px !important; margin: -190px 0 0 -190px !important; }
+[data-ends] { top: 490px !important; font-size: 14px !important; }
+</style></head><body><canvas id="back" width="1080" height="1080"></canvas><img src="logo-white.png" style="position:absolute;left:50%;top:132px;width:64px;margin-left:-32px;">
+<div class="abs" style="top:205px;"><span class="pill">Pre-Black Friday</span></div>
+<div class="abs serif" style="top:262px;">
+  <div class="old" data-old>$80</div>
+  <div class="new" data-new>$55</div>
+  <div style="font-size:22px;margin-top:6px;color:#d3dbe6;">for Pilo, the neck-support pillow</div>
+</div>
+<div class="glow" data-glow style="left:50%;top:650px;width:520px;height:520px;margin:-260px 0 0 -260px;"></div>
+<img class="pillow" src="angle-n.png" data-pil style="left:110px;top:505px;width:320px;">
+<div class="abs" data-ends style="top:722px;font-size:15px;font-weight:700;letter-spacing:.08em;">ENDS FRIDAY, NOV 27</div>
+<script>fx("back", {"from": [0.85, 1.0], "ctrl": [1.0, 0.6], "to": [0.75, 0.0], "spread": 0.07, "count": 800, "seed": 7, "mist": true, "wisps": 5, "alpha": 0.5});</script><script>
+function clamp(v){return v<0?0:v>1?1:v} function ease(t){return 1-Math.pow(1-t,3)}
+function back(t){var c=1.7;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)}
+window.renderAt=function(t){
+ var q=function(s){return document.querySelector(s)};
+ var o=q('[data-old]'),n=q('[data-new]'),p=q('[data-pil]'),g=q('[data-glow]'),e=q('[data-ends]');
+ o.style.opacity=clamp(t/0.3); o.style.setProperty('--strike',ease(clamp((t-0.6)/0.35)));
+ var a=clamp((t-1.05)/0.45); n.style.opacity=a; n.style.transform='scale('+(0.6+0.4*back(a))+')';
+ var b=clamp((t-1.6)/0.7); p.style.opacity=b; p.style.transform='translateY('+((1-ease(b))*120+Math.sin(t*2.4)*5)+'px) rotate(-3deg)'; g.style.opacity=b;
+ var c=clamp((t-2.3)/0.3); e.style.opacity=c; e.style.transform='translateY('+(1-c)*10+'px)';
+ var out=clamp((t-5.6)/0.4); document.body.style.opacity=1-out*0.999;
+};
+renderAt(0);
+</script></body></html>
