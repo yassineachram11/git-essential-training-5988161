@@ -1,0 +1,178 @@
+{%- comment -%}
+  Problem → Solution: one before/after photo you drag, and a list of what
+  changes, so a visitor sees the problem and the fix in one glance.
+  The photos fall back to the two neck photos in Files, so the section
+  works as soon as it is added.
+{%- endcomment -%}
+{%- liquid
+  assign before_img = section.settings.before_image | default: images['pilo-neck-angle-real.png']
+  assign after_img = section.settings.after_image | default: images['pilo-neck-supported-real.png']
+  assign sid = section.id
+-%}
+
+<style>
+  #ps-{{ sid }} { padding-block: clamp(48px, 9vw, 96px); background: {{ section.settings.background }}; }
+  #ps-{{ sid }} .ps__wrap { max-width: 980px; margin-inline: auto; padding-inline: 20px; }
+  #ps-{{ sid }} .ps__head { text-align: center; margin-bottom: 28px; }
+  #ps-{{ sid }} .ps__eyebrow { display: inline-block; padding: 6px 14px; border-radius: 999px; background: #fdecea; color: #b42318; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  #ps-{{ sid }} .ps__title { margin: 14px auto 0; max-width: 18ch; font-size: clamp(30px, 6.2vw, 52px); line-height: 1.08; letter-spacing: -0.02em; color: var(--color-text); }
+  #ps-{{ sid }} .ps__title em { font-style: normal; color: #b42318; }
+  #ps-{{ sid }} .ps__sub { margin: 12px auto 0; max-width: 46ch; color: var(--color-text-muted); font-size: 17px; line-height: 1.5; }
+
+  #ps-{{ sid }} .ps__compare { position: relative; overflow: hidden; border-radius: 22px; aspect-ratio: 6 / 5; background: #e9edf2; box-shadow: 0 20px 50px rgba(15, 23, 42, .12); touch-action: pan-y; user-select: none; }
+  #ps-{{ sid }} .ps__compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  #ps-{{ sid }} .ps__after { clip-path: inset(0 0 0 var(--pos, 50%)); }
+  #ps-{{ sid }} .ps__tag { position: absolute; top: 14px; z-index: 2; padding: 7px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: .04em; color: #fff; }
+  #ps-{{ sid }} .ps__tag--before { left: 14px; background: #d92d20; }
+  #ps-{{ sid }} .ps__tag--after { right: 14px; background: #12805c; }
+  #ps-{{ sid }} .ps__line { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 3px; margin-left: -1.5px; background: #fff; z-index: 3; pointer-events: none; }
+  #ps-{{ sid }} .ps__knob { position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,.25); display: grid; place-items: center; color: var(--color-text); font-weight: 800; font-size: 15px; }
+  #ps-{{ sid }} .ps__range { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; }
+  #ps-{{ sid }} .ps__hint { margin-top: 10px; text-align: center; font-size: 13px; color: var(--color-text-muted); }
+
+  #ps-{{ sid }} .ps__rows { display: grid; gap: 10px; margin-top: 22px; padding: 0; list-style: none; }
+  #ps-{{ sid }} .ps__row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 16px; background: #fff; border: 1px solid var(--color-border); font-size: 16px; line-height: 1.3; }
+  #ps-{{ sid }} .ps__bad, #ps-{{ sid }} .ps__good { display: flex; align-items: center; gap: 8px; transition: opacity .25s; }
+  #ps-{{ sid }} .ps__bad { color: #b42318; opacity: calc(.45 + var(--posn, 50) / 100 * .55); }
+  #ps-{{ sid }} .ps__good { color: #12805c; font-weight: 700; justify-content: flex-end; text-align: right; opacity: calc(.45 + (100 - var(--posn, 50)) / 100 * .55); }
+  #ps-{{ sid }} .ps__arrow { color: var(--color-text-muted); font-size: 18px; }
+  #ps-{{ sid }} .ps__ic { flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 13px; font-weight: 900; }
+  #ps-{{ sid }} .ps__bad .ps__ic { background: #d92d20; }
+  #ps-{{ sid }} .ps__good .ps__ic { background: #12805c; }
+
+  #ps-{{ sid }} .ps__close { margin-top: 28px; text-align: center; }
+  #ps-{{ sid }} .ps__close p { margin: 0 0 16px; font-size: clamp(22px, 4.4vw, 30px); font-weight: 700; letter-spacing: -0.01em; color: var(--color-text); }
+  #ps-{{ sid }} .ps__btn { display: inline-flex; align-items: center; gap: 10px; min-height: 54px; padding: 0 28px; border-radius: 999px; background: var(--color-primary); color: #fff; font-weight: 700; font-size: 16px; text-decoration: none; box-shadow: 0 10px 24px rgba(var(--color-primary-rgb), .3); }
+  #ps-{{ sid }} .ps__btn:hover { background: var(--color-primary-hover); }
+  #ps-{{ sid }} .ps__note { margin-top: 10px; font-size: 13px; color: var(--color-text-muted); }
+
+  @media (min-width: 900px) {
+    #ps-{{ sid }} .ps__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center; }
+    #ps-{{ sid }} .ps__rows { margin-top: 0; }
+  }
+  @media (max-width: 480px) {
+    #ps-{{ sid }} .ps__row { font-size: 15px; padding: 12px; gap: 6px; }
+  }
+</style>
+
+<section id="ps-{{ sid }}" class="ps" style="--pos: 50%; --posn: 50;">
+  <div class="ps__wrap">
+    <div class="ps__head">
+      {%- if section.settings.eyebrow != blank -%}<span class="ps__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      <h2 class="ps__title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.text != blank -%}<p class="ps__sub">{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+
+    <div class="ps__grid">
+      <div>
+        <div class="ps__compare">
+          {%- if before_img != blank -%}
+            {{ before_img | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '480, 720, 1100', sizes: '(min-width: 900px) 520px, 92vw', alt: before_img.alt }}
+          {%- endif -%}
+          {%- if after_img != blank -%}
+            {{ after_img | image_url: width: 1100 | image_tag: loading: 'lazy', class: 'ps__after', widths: '480, 720, 1100', sizes: '(min-width: 900px) 520px, 92vw', alt: after_img.alt }}
+          {%- endif -%}
+          <span class="ps__tag ps__tag--before">{{ section.settings.before_label }}</span>
+          <span class="ps__tag ps__tag--after">{{ section.settings.after_label }}</span>
+          <div class="ps__line" aria-hidden="true"><span class="ps__knob">⇆</span></div>
+          <input class="ps__range" type="range" min="0" max="100" value="50" aria-label="{{ section.settings.slider_label | escape }}">
+        </div>
+        {%- if section.settings.hint != blank -%}<p class="ps__hint">{{ section.settings.hint }}</p>{%- endif -%}
+      </div>
+
+      <ul class="ps__rows">
+        {%- for block in section.blocks -%}
+          <li class="ps__row" {{ block.shopify_attributes }}>
+            <span class="ps__bad"><span class="ps__ic" aria-hidden="true">✕</span>{{ block.settings.bad }}</span>
+            <span class="ps__arrow" aria-hidden="true">→</span>
+            <span class="ps__good">{{ block.settings.good }}<span class="ps__ic" aria-hidden="true">✓</span></span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="ps__close">
+      {%- if section.settings.closing != blank -%}<p>{{ section.settings.closing }}</p>{%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="ps__btn" href="{{ section.settings.button_link | default: '#buy' }}">{{ section.settings.button_label }} →</a>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}<div class="ps__note">{{ section.settings.note }}</div>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('ps-{{ sid }}');
+    if (!root) return;
+    var range = root.querySelector('.ps__range');
+    function set(v) { root.style.setProperty('--pos', v + '%'); root.style.setProperty('--posn', v); }
+    range.addEventListener('input', function () { set(range.value); touched = true; });
+    var touched = false;
+    // Once, when the section first comes into view, sweep the handle to show
+    // there is something to drag: before → after → middle.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      var keys = [[0, 50], [700, 18], [1600, 82], [2400, 50]], start = null;
+      function frame(t) {
+        if (touched) return;
+        if (!start) start = t;
+        var e = t - start, i = 1;
+        while (i < keys.length - 1 && e > keys[i][0]) i++;
+        var a = keys[i - 1], b = keys[i], k = Math.min(1, Math.max(0, (e - a[0]) / (b[0] - a[0])));
+        k = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        var v = a[1] + (b[1] - a[1]) * k;
+        set(v.toFixed(1)); range.value = v;
+        if (e < keys[keys.length - 1][0]) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }, { threshold: 0.5 });
+    io.observe(root.querySelector('.ps__compare'));
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Problem → Solution",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The problem" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "A flat pillow <em>bends your neck.</em> All night." },
+    { "type": "text", "id": "text", "label": "Text", "default": "Your head drops, your neck bends out of line, and you wake up stiff. It's probably not your mattress." },
+    { "type": "image_picker", "id": "before_image", "label": "Before photo", "info": "Leave empty to use pilo-neck-angle-real.png from Files." },
+    { "type": "image_picker", "id": "after_image", "label": "After photo", "info": "Leave empty to use pilo-neck-supported-real.png from Files." },
+    { "type": "text", "id": "before_label", "label": "Before label", "default": "✕ Your pillow now" },
+    { "type": "text", "id": "after_label", "label": "After label", "default": "✓ With Pilo" },
+    { "type": "text", "id": "slider_label", "label": "Slider label (screen readers)", "default": "Drag to compare a flat pillow with Pilo" },
+    { "type": "text", "id": "hint", "label": "Hint under the photo", "default": "⇆ Drag to see the difference" },
+    { "type": "text", "id": "closing", "label": "Closing line", "default": "It's not your mattress. It's your pillow." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Choose your pack" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "#buy" },
+    { "type": "text", "id": "note", "label": "Small text under the button", "default": "Free delivery across Lebanon · Pay cash on delivery" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#f6f8fb" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Before → after",
+      "limit": 5,
+      "settings": [
+        { "type": "text", "id": "bad", "label": "Before", "default": "Head drops" },
+        { "type": "text", "id": "good", "label": "After", "default": "Head held level" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problem → Solution",
+      "blocks": [
+        { "type": "row", "settings": { "bad": "Head drops", "good": "Head held level" } },
+        { "type": "row", "settings": { "bad": "Neck bent all night", "good": "Neck supported" } },
+        { "type": "row", "settings": { "bad": "You wake up stiff", "good": "You wake up rested" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
