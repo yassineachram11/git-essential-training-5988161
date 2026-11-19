@@ -240,50 +240,20 @@
         "background_style": "none"
       }
     },
-    "problem_solution": {
-      "type": "problem-solution",
-      "blocks": {
-        "r1": {
-          "type": "row",
-          "settings": {
-            "bad": "Head drops",
-            "good": "Head held level"
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "bad": "Neck bent all night",
-            "good": "Neck supported"
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "bad": "You wake up stiff",
-            "good": "You wake up rested"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3"
-      ],
+    "comparison_slider_DqMA4C": {
+      "type": "comparison-slider",
       "settings": {
-        "eyebrow": "The problem",
-        "heading": "A flat pillow <em>bends your neck.</em> All night.",
-        "text": "Your head drops, your neck bends out of line, and you wake up stiff. It's probably not your mattress.",
-        "before_image": "shopify://shop_images/pilo-neck-angle-real.png",
-        "after_image": "shopify://shop_images/pilo-neck-supported-real.png",
-        "before_label": "✕ Your pillow now",
-        "after_label": "✓ With Pilo",
-        "slider_label": "Drag to compare a flat pillow with Pilo",
-        "hint": "⇆ Drag to see the difference",
-        "closing": "It's not your mattress. It's your pillow.",
-        "button_label": "Choose your pack",
-        "button_link": "#buy",
-        "note": "Free delivery across Lebanon · Pay cash on delivery",
+        "before_image": "shopify://shop_images/watermark-removed-Gemini_Generated_Image_n3ua8zn3ua8zn3ua.png",
+        "before_label": "✕ Your neck tonight",
+        "after_image": "shopify://shop_images/after.jpg",
+        "after_label": "✓ Your neck on Pilo",
+        "eyebrow": "It's not your mattress. It's your pillow.",
+        "heading": "مش الفرشة… هي المخدة",
+        "text": "A flat pillow lets your head drop and your neck bend, all night. Drag to see what changes.",
+        "slider_label": "Drag to compare your neck on a flat pillow and on Pilo",
+        "image_ratio": "landscape",
+        "max_width": 900,
+        "show_hint": true,
         "background": "#f6f8fb"
       }
     },
@@ -312,23 +282,6 @@
         "button_link": ""
       },
       "disabled": true
-    },
-    "comparison_slider_DqMA4C": {
-      "type": "comparison-slider",
-      "settings": {
-        "before_image": "shopify://shop_images/watermark-removed-Gemini_Generated_Image_n3ua8zn3ua8zn3ua.png",
-        "before_label": "Normal pillow",
-        "after_image": "shopify://shop_images/after.jpg",
-        "after_label": "Pilo 1.0",
-        "eyebrow": "See the difference",
-        "heading": "Normal pillow vs Pilo 1.0",
-        "text": "Drag the handle to see what proper cervical support changes.",
-        "slider_label": "Drag to compare a normal pillow with the Pilo 1.0",
-        "image_ratio": "landscape",
-        "max_width": 900,
-        "show_hint": true,
-        "background": "#ffffff"
-      }
     },
     "ugc_videos_NeLwQr": {
       "type": "ugc-videos",
@@ -747,10 +700,9 @@
   },
   "order": [
     "main",
-    "problem_solution",
+    "comparison_slider_DqMA4C",
     "the_problem",
     "how_it_works",
-    "comparison_slider_DqMA4C",
     "ugc_videos_NeLwQr",
     "who_for",
     "reviews_heading",
