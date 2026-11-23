@@ -4,7 +4,6 @@
   same number also stands out right above the price.
   Keep the number true: round down and update it as orders grow.
 {%- endcomment -%}
-{%- if section.settings.text != blank -%}
 <style>
   #spb-{{ section.id }} {
     background: {{ section.settings.background }};
@@ -39,6 +38,7 @@
   {%- endif -%}
 </style>
 
+{%- if section.settings.text != blank -%}
 <div id="spb-{{ section.id }}" class="spb" role="note">
   <span class="spb__star" aria-hidden="true">★</span>{{ section.settings.text }}
   {%- if section.settings.subtext != blank -%}<span class="spb__sub"> · {{ section.settings.subtext }}</span>{%- endif -%}
@@ -50,7 +50,7 @@
   "name": "Social proof bar",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "text", "label": "Text", "default": "30+ Pilo pillows ordered across Lebanon", "info": "Use your real count, rounded down." },
+    { "type": "text", "id": "text", "label": "Text", "default": "30+ Pilo pillows ordered across Lebanon", "info": "Use your real count, rounded down. Leave empty to hide the bar and keep only the product badge." },
     { "type": "text", "id": "subtext", "label": "Small text after it", "default": "Free delivery · Cash on delivery" },
     { "type": "color", "id": "background", "label": "Bar background", "default": "#35608f" },
     { "type": "color", "id": "text_color", "label": "Bar text", "default": "#ffffff" },

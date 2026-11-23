@@ -14,7 +14,7 @@
       "type": "header",
       "settings": {
         "show_announcement": true,
-        "announcement_text": "FREE SHIPPING ALL OVER LEBANON — DELIVERED IN 1-5 DAYS",
+        "announcement_text": "30+ PILLOWS ORDERED ACROSS LEBANON · FREE DELIVERY IN 1–5 DAYS",
         "announcement_link": "",
         "announcement_icon": "truck",
         "announcement_background": "#2c3845",
@@ -46,7 +46,7 @@
     "social_proof_bar": {
       "type": "social-proof-bar",
       "settings": {
-        "text": "30+ Pilo pillows ordered across Lebanon",
+        "text": "",
         "subtext": "",
         "background": "#35608f",
         "text_color": "#ffffff",
