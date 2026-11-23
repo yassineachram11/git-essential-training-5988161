@@ -8,19 +8,6 @@
  * ------------------------------------------------------------
  */{
   "sections": {
-    "social_proof_bar": {
-      "type": "social-proof-bar",
-      "settings": {
-        "text": "30+ Pilo pillows ordered across Lebanon",
-        "subtext": "Free delivery · Cash on delivery",
-        "background": "#35608f",
-        "text_color": "#ffffff",
-        "accent": "#f5c451",
-        "highlight_benefit": true,
-        "badge_background": "#e8f5ee",
-        "badge_text": "#12805c"
-      }
-    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -710,7 +697,6 @@
     }
   },
   "order": [
-    "social_proof_bar",
     "main",
     "the_problem",
     "how_it_works",
