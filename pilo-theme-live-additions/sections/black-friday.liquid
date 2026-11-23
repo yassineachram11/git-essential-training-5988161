@@ -1,0 +1,132 @@
+{%- comment -%}
+  Black Friday skin for the product page: a scrolling ribbon at the top and a
+  black-and-gold restyle of the buy box (price, timer, packs, Add to cart).
+  It switches itself off at the deadline: Liquid stops rendering it once the
+  date has passed, and the script removes it from a page left open past it.
+  The date and hour are read in the shop's own timezone, like the header timer.
+{%- endcomment -%}
+{%- liquid
+  assign bf_on = false
+  assign bf_epoch = 0
+  if section.settings.end_date != blank
+    assign bf_hour = section.settings.end_hour | prepend: '0' | slice: -2, 2
+    assign bf_zone = 'now' | date: '%z'
+    assign bf_zone_h = bf_zone | slice: 0, 3
+    assign bf_zone_m = bf_zone | slice: 3, 2
+    assign bf_iso = section.settings.end_date | append: 'T' | append: bf_hour | append: ':00:00' | append: bf_zone_h | append: ':' | append: bf_zone_m
+    assign bf_epoch = bf_iso | date: '%s' | times: 1
+    assign bf_now = 'now' | date: '%s' | times: 1
+    if bf_epoch > 0 and bf_now < bf_epoch
+      assign bf_on = true
+    endif
+  endif
+-%}
+
+{%- if bf_on -%}
+<style id="bf-skin">
+  .bf-ribbon {
+    overflow: hidden;
+    background: {{ section.settings.black }};
+    color: {{ section.settings.gold }};
+    border-bottom: 2px solid {{ section.settings.gold }};
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .bf-ribbon__track { display: inline-flex; padding: 10px 0; animation: bf-scroll 22s linear infinite; }
+  .bf-ribbon__item { padding-right: 2.5em; }
+  .bf-ribbon__item b { color: #fff; }
+  @keyframes bf-scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .bf-ribbon__track { animation: none; } }
+
+  /* Discount flag on the main photo */
+  .product__media-main::before {
+    content: "{{ section.settings.photo_flag | escape }}";
+    position: absolute; z-index: 2; top: 14px; left: 14px;
+    padding: 8px 14px 7px; border-radius: 10px;
+    background: {{ section.settings.black }}; color: {{ section.settings.gold }};
+    font-weight: 900; font-size: 15px; letter-spacing: .06em;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    transform: rotate(-4deg);
+  }
+
+  /* Price: a Black Friday tag in front, the number in red */
+  .product__price { flex-wrap: wrap; }
+  .product__price::before {
+    content: "{{ section.settings.price_tag | escape }}";
+    align-self: center;
+    padding: 6px 12px 5px; border-radius: 999px;
+    background: {{ section.settings.black }}; color: {{ section.settings.gold }};
+    font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  }
+  .product__price .price__regular { color: {{ section.settings.red }}; font-size: calc(var(--text-2xl) * 1.15); }
+
+  /* The offer timer becomes a black pill */
+  .offer-cd { background: {{ section.settings.black }}; border-color: {{ section.settings.black }}; }
+  .offer-cd__label { color: {{ section.settings.gold }}; font-weight: 700; }
+  .offer-cd__part b { color: #fff; }
+  .offer-cd__part i { color: rgba(255,255,255,.6); }
+
+  /* Packs */
+  .bundle__option.is-selected { border-color: {{ section.settings.black }}; box-shadow: 0 0 0 3px {{ section.settings.gold }}55; }
+  .bundle__option.is-selected .bundle__radio { border-color: {{ section.settings.black }}; }
+  .bundle__radio::after { background: {{ section.settings.black }}; }
+  .bundle__badge { background: {{ section.settings.black }}; color: {{ section.settings.gold }}; }
+  .bundle__amount { color: {{ section.settings.red }}; }
+
+  /* Add to cart, on the page and in the sticky bar */
+  .product__buy .btn--primary,
+  .buy-bar .btn--primary {
+    background: {{ section.settings.black }} !important;
+    border-color: {{ section.settings.black }} !important;
+    color: {{ section.settings.gold }} !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.28);
+  }
+  .product__buy .btn--primary:hover:not([disabled]) { box-shadow: 0 16px 34px rgba(0,0,0,.34); }
+</style>
+
+<div class="bf-ribbon" id="bf-ribbon" data-bf-deadline="{{ bf_epoch }}" role="note">
+  <div class="bf-ribbon__track" aria-hidden="true">
+    {%- for i in (1..8) -%}
+      <span class="bf-ribbon__item">⚡ {{ section.settings.ribbon_text }}</span>
+    {%- endfor -%}
+  </div>
+  <span class="visually-hidden">{{ section.settings.ribbon_text }}</span>
+</div>
+
+<script>
+  (function () {
+    var r = document.getElementById('bf-ribbon');
+    if (!r) return;
+    var end = parseInt(r.getAttribute('data-bf-deadline'), 10) * 1000;
+    function off() {
+      var s = document.getElementById('bf-skin');
+      if (s) s.remove();
+      r.remove();
+    }
+    if (!end || Date.now() >= end) { off(); return; }
+    setTimeout(off, Math.min(end - Date.now(), 2147483647));
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Black Friday skin",
+  "tag": "div",
+  "settings": [
+    { "type": "paragraph", "content": "Restyles the buy box in black and gold and adds a scrolling ribbon. It turns itself off at the end date." },
+    { "type": "text", "id": "end_date", "label": "Ends on", "default": "2026-11-27", "info": "YYYY-MM-DD, in your store's timezone." },
+    { "type": "range", "id": "end_hour", "label": "Ends at hour", "min": 0, "max": 23, "step": 1, "default": 23 },
+    { "type": "text", "id": "ribbon_text", "label": "Ribbon text", "default": "Pre-Black Friday · $55 instead of $80 · Ends Friday 11 PM" },
+    { "type": "text", "id": "photo_flag", "label": "Flag on the photo", "default": "BLACK FRIDAY −31%" },
+    { "type": "text", "id": "price_tag", "label": "Tag before the price", "default": "BLACK FRIDAY" },
+    { "type": "color", "id": "black", "label": "Black", "default": "#0d0d12" },
+    { "type": "color", "id": "gold", "label": "Gold", "default": "#f5c451" },
+    { "type": "color", "id": "red", "label": "Price red", "default": "#e0483e" }
+  ],
+  "presets": [{ "name": "Black Friday skin" }]
+}
+{% endschema %}
