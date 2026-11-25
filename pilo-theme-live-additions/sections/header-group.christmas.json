@@ -1,0 +1,81 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "show_announcement": true,
+        "announcement_text": "30+ PILLOWS ORDERED ACROSS LEBANON · FREE DELIVERY IN 1–5 DAYS",
+        "announcement_link": "",
+        "announcement_icon": "truck",
+        "announcement_background": "#0d0d12",
+        "announcement_text_color": "#f5c451",
+        "show_countdown": true,
+        "countdown_label": "PRE-BLACK FRIDAY · $55 ENDS IN",
+        "countdown_date": "2026-11-27",
+        "countdown_hour": 23,
+        "countdown_expired_text": "🎄 CHRISTMAS GIFTS: ORDER BY DEC 20 · FREE DELIVERY · PAY ON DELIVERY",
+        "countdown_link": "/products/pilo-1-0",
+        "countdown_cta": "Shop",
+        "color_background": "#485868",
+        "color_text": "#edf2f8",
+        "color_accent": "#ffffff",
+        "color_border": "#3a4857",
+        "color_badge_background": "#edf2f8",
+        "color_badge_text": "#2c3845",
+        "sticky_background": "#485868",
+        "sticky_opacity": 92,
+        "header_height": 72,
+        "show_bottom_border": true,
+        "menu": "main-menu",
+        "logo_position": "left",
+        "sticky_header": true,
+        "show_search": false,
+        "show_account": false
+      }
+    },
+    "social_proof_bar": {
+      "type": "social-proof-bar",
+      "settings": {
+        "text": "",
+        "subtext": "",
+        "background": "#35608f",
+        "text_color": "#ffffff",
+        "accent": "#f5c451",
+        "highlight_benefit": true,
+        "badge_background": "#e8f5ee",
+        "badge_text": "#12805c"
+      }
+    },
+    "christmas_bar": {
+      "type": "christmas",
+      "settings": {
+        "start_date": "2026-11-27",
+        "start_hour": 23,
+        "end_date": "2026-12-25",
+        "end_hour": 23,
+        "ribbon_text": "🎄 The gift they'll use every night · Free delivery across Lebanon · Pay on delivery · Order by Dec 20 for Christmas 🎁",
+        "photo_flag": "🎁 CHRISTMAS GIFT",
+        "price_tag": "🎄 CHRISTMAS",
+        "bar_only": true,
+        "green": "#0f3d2e",
+        "red": "#b3262e",
+        "gold": "#f5c451"
+      }
+    }
+  },
+  "order": [
+    "header",
+    "social_proof_bar",
+    "christmas_bar"
+  ]
+}

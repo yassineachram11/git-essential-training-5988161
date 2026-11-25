@@ -1,0 +1,159 @@
+{%- comment -%}
+  Christmas skin for the product page: a snowy scrolling ribbon and a green,
+  red and gold restyle of the buy box. It switches itself on at the start date
+  and off at the end date, both read in the shop's own timezone, so it can sit
+  in the live theme next to the Black Friday skin and take over when that ends.
+{%- endcomment -%}
+{%- liquid
+  assign xm_zone = 'now' | date: '%z'
+  assign xm_zone_h = xm_zone | slice: 0, 3
+  assign xm_zone_m = xm_zone | slice: 3, 2
+  assign xm_now = 'now' | date: '%s' | times: 1
+
+  assign xm_sh = section.settings.start_hour | prepend: '0' | slice: -2, 2
+  assign xm_start_iso = section.settings.start_date | append: 'T' | append: xm_sh | append: ':00:00' | append: xm_zone_h | append: ':' | append: xm_zone_m
+  assign xm_start = xm_start_iso | date: '%s' | times: 1
+
+  assign xm_eh = section.settings.end_hour | prepend: '0' | slice: -2, 2
+  assign xm_end_iso = section.settings.end_date | append: 'T' | append: xm_eh | append: ':00:00' | append: xm_zone_h | append: ':' | append: xm_zone_m
+  assign xm_end = xm_end_iso | date: '%s' | times: 1
+
+  assign xm_on = false
+  if section.settings.start_date != blank and section.settings.end_date != blank
+    if xm_now >= xm_start and xm_now < xm_end
+      assign xm_on = true
+    endif
+  endif
+-%}
+
+{%- if xm_on and section.settings.bar_only -%}
+  {%- comment -%} Placed in the header group: only recolours the top bar, on every page. {%- endcomment -%}
+  <style>:root { --announce-bg: {{ section.settings.green }}; --announce-text: #ffffff; }</style>
+{%- elsif xm_on -%}
+<style id="xm-skin">
+  .xm-ribbon {
+    position: relative;
+    overflow: hidden;
+    background: {{ section.settings.green }};
+    color: #fff;
+    border-bottom: 2px solid {{ section.settings.gold }};
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  /* falling snow: two layers of dots drifting down behind the text */
+  .xm-ribbon::before, .xm-ribbon::after {
+    content: "";
+    position: absolute; inset: -40px 0 0 0;
+    background-image:
+      radial-gradient(2px 2px at 20px 10px, rgba(255,255,255,.9), transparent 60%),
+      radial-gradient(1.5px 1.5px at 75px 30px, rgba(255,255,255,.7), transparent 60%),
+      radial-gradient(2px 2px at 140px 18px, rgba(255,255,255,.8), transparent 60%),
+      radial-gradient(1.5px 1.5px at 190px 36px, rgba(255,255,255,.6), transparent 60%);
+    background-size: 220px 40px;
+    animation: xm-snow 6s linear infinite;
+    pointer-events: none;
+  }
+  .xm-ribbon::after { background-size: 300px 40px; animation-duration: 9s; opacity: .6; }
+  @keyframes xm-snow { to { transform: translateY(40px); } }
+  .xm-ribbon__track { position: relative; z-index: 1; display: inline-flex; padding: 10px 0; animation: xm-scroll 26s linear infinite; }
+  .xm-ribbon__item { padding-right: 2.5em; }
+  .xm-ribbon__item b { color: {{ section.settings.gold }}; }
+  @keyframes xm-scroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .xm-ribbon__track, .xm-ribbon::before, .xm-ribbon::after { animation: none; }
+  }
+
+  /* Gift flag on the main photo */
+  .product__media-main::before {
+    content: "{{ section.settings.photo_flag | escape }}";
+    position: absolute; z-index: 2; top: 14px; left: 14px;
+    padding: 8px 14px 7px; border-radius: 10px;
+    background: {{ section.settings.red }}; color: #fff;
+    border: 2px solid {{ section.settings.gold }};
+    font-weight: 900; font-size: 14px; letter-spacing: .06em;
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
+    transform: rotate(-4deg);
+  }
+
+  /* Price: a Christmas tag in front */
+  .product__price { flex-wrap: wrap; }
+  .product__price::before {
+    content: "{{ section.settings.price_tag | escape }}";
+    align-self: center;
+    padding: 6px 12px 5px; border-radius: 999px;
+    background: {{ section.settings.green }}; color: #fff;
+    font-size: 12px; font-weight: 800; letter-spacing: .12em;
+  }
+  .product__price .price__regular { color: {{ section.settings.red }}; }
+
+  /* Timer / delivery line under the price */
+  .offer-cd, .offer-cd--done { background: {{ section.settings.green }}; border-color: {{ section.settings.green }}; color: #fff; }
+  .offer-cd__label { color: {{ section.settings.gold }}; font-weight: 700; }
+  .offer-cd__part b { color: #fff; }
+  .offer-cd__part i { color: rgba(255,255,255,.65); }
+
+  /* Packs */
+  .bundle__option.is-selected { border-color: {{ section.settings.green }}; box-shadow: 0 0 0 3px {{ section.settings.gold }}66; }
+  .bundle__option.is-selected .bundle__radio { border-color: {{ section.settings.green }}; }
+  .bundle__radio::after { background: {{ section.settings.green }}; }
+  .bundle__badge { background: {{ section.settings.red }}; color: #fff; }
+
+  /* Add to cart, on the page and in the sticky bar */
+  .product__buy .btn--primary,
+  .buy-bar .btn--primary {
+    background: {{ section.settings.green }} !important;
+    border-color: {{ section.settings.green }} !important;
+    color: #fff !important;
+    box-shadow: 0 10px 24px rgba(15, 61, 46, .3);
+  }
+</style>
+
+<div class="xm-ribbon" id="xm-ribbon" data-xm-end="{{ xm_end }}" role="note">
+  <div class="xm-ribbon__track" aria-hidden="true">
+    {%- for i in (1..8) -%}
+      <span class="xm-ribbon__item">{{ section.settings.ribbon_text }}</span>
+    {%- endfor -%}
+  </div>
+  <span class="visually-hidden">{{ section.settings.ribbon_text }}</span>
+</div>
+
+<script>
+  (function () {
+    var r = document.getElementById('xm-ribbon');
+    if (!r) return;
+    var end = parseInt(r.getAttribute('data-xm-end'), 10) * 1000;
+    function off() {
+      var s = document.getElementById('xm-skin');
+      if (s) s.remove();
+      r.remove();
+    }
+    if (!end || Date.now() >= end) { off(); return; }
+    setTimeout(off, Math.min(end - Date.now(), 2147483647));
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Christmas skin",
+  "tag": "div",
+  "settings": [
+    { "type": "paragraph", "content": "Restyles the buy box in green, red and gold and adds a snowy ribbon. It turns itself on at the start and off at the end, in your store's timezone." },
+    { "type": "text", "id": "start_date", "label": "Starts on", "default": "2026-11-27", "info": "YYYY-MM-DD" },
+    { "type": "range", "id": "start_hour", "label": "Starts at hour", "min": 0, "max": 23, "step": 1, "default": 23 },
+    { "type": "text", "id": "end_date", "label": "Ends on", "default": "2026-12-25", "info": "YYYY-MM-DD" },
+    { "type": "range", "id": "end_hour", "label": "Ends at hour", "min": 0, "max": 23, "step": 1, "default": 23 },
+    { "type": "text", "id": "ribbon_text", "label": "Ribbon text", "default": "🎄 The gift they'll use every night · Free delivery across Lebanon · Pay on delivery · Order by Dec 20 for Christmas 🎁" },
+    { "type": "text", "id": "photo_flag", "label": "Flag on the photo", "default": "🎁 CHRISTMAS GIFT" },
+    { "type": "text", "id": "price_tag", "label": "Tag before the price", "default": "🎄 CHRISTMAS" },
+    { "type": "checkbox", "id": "bar_only", "label": "Only recolour the top bar", "info": "For the copy placed in the header, so the bar turns green on every page.", "default": false },
+    { "type": "color", "id": "green", "label": "Green", "default": "#0f3d2e" },
+    { "type": "color", "id": "red", "label": "Red", "default": "#b3262e" },
+    { "type": "color", "id": "gold", "label": "Gold", "default": "#f5c451" }
+  ],
+  "presets": [{ "name": "Christmas skin" }]
+}
+{% endschema %}
