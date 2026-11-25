@@ -56,7 +56,7 @@
         "subtitle": {
           "type": "subtitle",
           "settings": {
-            "text": "Wake up without neck pain. Contour memory foam for back and side sleepers."
+            "text": "Wake up without neck pain. Contour memory foam for back and side sleepers. · مخدة للرقبة، للنوم على الضهر أو الجنب"
           }
         },
         "judge_me_reviews_preview_badge_WRUjdU": {
@@ -131,11 +131,11 @@
             "stock_batch_total": 90,
             "stock_bar_label": "[claimed] of [total] claimed",
             "stock_bar_min": 10,
-            "add_label": "",
+            "add_label": "Order now · Pay on delivery",
             "soldout_label": "",
             "show_buy_now": false,
             "buy_now_label": "Buy it now",
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "size": "large",
             "full_width": false,
             "radius": 8,
@@ -160,7 +160,7 @@
             "heading": "",
             "layout": "card",
             "icon_style": "soft",
-            "item_1": "Free delivery across Lebanon · 1–5 days",
+            "item_1": "Free delivery across Lebanon · 4 days max",
             "item_2": "Pay cash on delivery",
             "item_3": "OEKO-TEX certified fabric"
           }
@@ -169,8 +169,8 @@
           "type": "trust_item",
           "settings": {
             "icon": "truck",
-            "text": "Free delivery across Lebanon · 1–5 days",
-            "note": "",
+            "text": "Free delivery anywhere in Lebanon",
+            "note": "Delivered in 4 days max",
             "link": ""
           }
         },
@@ -178,8 +178,8 @@
           "type": "trust_item",
           "settings": {
             "icon": "check",
-            "text": "Pay cash when it's in your hands",
-            "note": "No card, nothing paid in advance",
+            "text": "💵 Pay cash when it's in your hands",
+            "note": "No card needed · We call you to confirm before sending",
             "link": ""
           }
         },
@@ -217,7 +217,7 @@
           "type": "collapsible",
           "settings": {
             "heading": "Delivery and payment",
-            "content": "<p><strong>Free delivery anywhere in Lebanon</strong>, in 1–5 days depending on where you are.</p><p>We confirm every order by message before sending it. You pay the courier <strong>in cash</strong> when the box is in your hands: no card needed, nothing paid in advance.</p>"
+            "content": "<p><strong>Free delivery anywhere in Lebanon</strong>, in 4 days max, wherever you are.</p><p>We confirm every order by message before sending it. You pay the courier <strong>in cash</strong> when the box is in your hands: no card needed, nothing paid in advance.</p>"
           }
         },
         "c_returns": {
@@ -225,6 +225,15 @@
           "settings": {
             "heading": "Returns",
             "content": "<p>Because a pillow rests against your face all night, we can only take back packs that are still sealed and unopened — the same rule any hygiene product follows. What protects you is that you pay nothing in advance: the courier takes the cash only once the box is in your hands. If what arrives is damaged or is not what you ordered, message us on WhatsApp and we will replace it.</p>"
+          }
+        },
+        "trust_item_lb": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "star",
+            "text": "A small Lebanese brand 🇱🇧",
+            "note": "30+ pillows delivered across Lebanon",
+            "link": ""
           }
         }
       },
@@ -240,11 +249,12 @@
         "pack_1",
         "pack_2",
         "buy_buttons",
-        "whatsapp",
         "trust",
-        "trust_item_JxBhxV",
         "trust_item_ePJUrT",
+        "trust_item_JxBhxV",
+        "trust_item_lb",
         "trust_item_YyUrd3",
+        "whatsapp",
         "review_strip",
         "c_fit",
         "c_specs",
@@ -317,41 +327,11 @@
             "handle": "",
             "quote": ""
           }
-        },
-        "video_inFChB": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/pilo-customer-review-3.mp4",
-            "name": "",
-            "handle": "",
-            "quote": ""
-          }
-        },
-        "video_PjWmbV": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/pilo-meta-ad-cr005.mp4",
-            "name": "",
-            "handle": "",
-            "quote": ""
-          }
-        },
-        "video_MKQCqR": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/pilo-meta-ad-cr004-short.mp4",
-            "name": "",
-            "handle": "",
-            "quote": ""
-          }
         }
       },
       "block_order": [
         "video_9A4qaJ",
-        "video_9H6miM",
-        "video_inFChB",
-        "video_PjWmbV",
-        "video_MKQCqR"
+        "video_9H6miM"
       ],
       "settings": {
         "eyebrow": "See it",
@@ -408,7 +388,7 @@
           "type": "item",
           "settings": {
             "icon": "truck",
-            "title": "Free delivery, 1–5 days",
+            "title": "Free delivery, 4 days max",
             "text": "Anywhere in Lebanon, with no minimum spend."
           }
         },
@@ -548,7 +528,7 @@
             "label": "Free delivery, no minimum spend",
             "note": "",
             "mine": "yes",
-            "mine_note": "1–5 days across Lebanon",
+            "mine_note": "4 days max across Lebanon",
             "theirs": "partial",
             "theirs_note": "Often only above a spend threshold"
           }
@@ -632,7 +612,7 @@
           "type": "question",
           "settings": {
             "question": "How long does delivery take, and what does it cost?",
-            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by message or email, then send it out — it reaches you in 1–5 days depending on where you are.</p>"
+            "answer": "<p>Delivery is free anywhere in Lebanon. We confirm every order by message or email, then send it out — it reaches you in 4 days max.</p>"
           }
         },
         "q_position": {
